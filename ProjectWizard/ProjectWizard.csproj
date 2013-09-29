@@ -52,6 +52,39 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucAuthorBolck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucAuthorBolck.Designer.cs">
+      <DependentUpon>ucAuthorBolck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucConfirmation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucConfirmation.Designer.cs">
+      <DependentUpon>ucConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucProgress.Designer.cs">
+      <DependentUpon>ucProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucSubmodules.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSubmodules.Designer.cs">
+      <DependentUpon>ucSubmodules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucType.Designer.cs">
+      <DependentUpon>ucType.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ucAuthorBolck.resx">
+      <DependentUpon>ucAuthorBolck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -63,7 +96,20 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucConfirmation.resx">
+      <DependentUpon>ucConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucProgress.resx">
+      <DependentUpon>ucProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucSubmodules.resx">
+      <DependentUpon>ucSubmodules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucType.resx">
+      <DependentUpon>ucType.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -76,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\temp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
