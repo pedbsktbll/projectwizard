@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    public partial class Form1 : Form
+    public partial class fMain : Form
     {
-        public Form1()
+        public fMain()
         {
             InitializeComponent();
         }
