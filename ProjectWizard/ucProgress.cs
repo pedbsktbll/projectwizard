@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    public partial class ucProgress : UserControl
+    public partial class ucProgress : UserControlEx
     {
         public ucProgress()
         {
             InitializeComponent();
+        }
+
+        public override bool ValidateData()
+        {
+            return base.ValidateData();
         }
     }
 }

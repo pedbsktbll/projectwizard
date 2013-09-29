@@ -82,6 +82,9 @@
     <Compile Include="ucType.Designer.cs">
       <DependentUpon>ucType.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="ucAuthorBolck.resx">
       <DependentUpon>ucAuthorBolck.cs</DependentUpon>
     </EmbeddedResource>

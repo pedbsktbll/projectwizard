@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    public partial class ucAuthorBlock : UserControl
+    public partial class ucAuthorBlock : UserControlEx
     {
         public ucAuthorBlock()
         {
             InitializeComponent();
+        }
+
+        public override bool ValidateData()
+        {
+            return base.ValidateData();
         }
     }
 }
