@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label2
@@ -40,11 +41,22 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Type";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(330, 273);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Data Valid";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // ucType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ucType";
@@ -57,6 +69,7 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox1;
 
 
     }

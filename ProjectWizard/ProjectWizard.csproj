@@ -64,12 +64,6 @@
     <Compile Include="ucConfirmation.Designer.cs">
       <DependentUpon>ucConfirmation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucProgress.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucProgress.Designer.cs">
-      <DependentUpon>ucProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="ucSubmodules.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,9 +97,6 @@
     </Compile>
     <EmbeddedResource Include="ucConfirmation.resx">
       <DependentUpon>ucConfirmation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucProgress.resx">
-      <DependentUpon>ucProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSubmodules.resx">
       <DependentUpon>ucSubmodules.cs</DependentUpon>
