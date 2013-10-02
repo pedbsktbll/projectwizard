@@ -14,6 +14,7 @@ namespace ProjectWizard
     {
         private UserControlEx[] pucList;
         private int iCurIndex;
+        private bool bOverrideExit;
 
         public fMain()
         {
@@ -27,6 +28,7 @@ namespace ProjectWizard
             pucList[3] = ucConfirmation1;
 
             iCurIndex = 0;
+            bOverrideExit = true;
         }
 
         private void PaintPanels()
@@ -74,7 +76,10 @@ namespace ProjectWizard
             {
                 iCurIndex++;
                 if (iCurIndex == pucList.Length)
+                {
+                    bOverrideExit = false;
                     this.Close();
+                }
                 else
                     PaintPanels();
             }
@@ -97,7 +102,7 @@ namespace ProjectWizard
 
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && bOverrideExit)
             {
                 if (!CheckExit())
                     e.Cancel = true;

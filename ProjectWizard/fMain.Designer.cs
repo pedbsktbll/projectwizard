@@ -121,7 +121,7 @@
             // ucType1
             // 
             this.ucType1.BackColor = System.Drawing.Color.White;
-            this.ucType1.Enabled = false;
+            this.ucType1.Enabled = true;
             this.ucType1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucType1.Location = new System.Drawing.Point(150, 0);
             this.ucType1.Name = "ucType1";
