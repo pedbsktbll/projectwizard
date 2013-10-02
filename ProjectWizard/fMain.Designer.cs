@@ -32,7 +32,6 @@
             this.pBottom = new System.Windows.Forms.Panel();
             this.bPrevious = new System.Windows.Forms.Button();
             this.bNext = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
             this.pbLeftBanner = new System.Windows.Forms.PictureBox();
             this.ucAuthorBlock1 = new ProjectWizard.ucAuthorBlock();
@@ -46,9 +45,8 @@
             // pBottom
             // 
             this.pBottom.Controls.Add(this.bPrevious);
-            this.pBottom.Controls.Add(this.bNext);
-            this.pBottom.Controls.Add(this.button1);
             this.pBottom.Controls.Add(this.bCancel);
+            this.pBottom.Controls.Add(this.bNext);
             this.pBottom.Location = new System.Drawing.Point(150, 525);
             this.pBottom.Name = "pBottom";
             this.pBottom.Size = new System.Drawing.Size(685, 30);
@@ -75,15 +73,6 @@
             this.bNext.Text = "&Next";
             this.bNext.UseVisualStyleBackColor = true;
             this.bNext.Click += new System.EventHandler(this.bNext_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(518, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "C&reate";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // bCancel
             // 
@@ -185,7 +174,6 @@
         private System.Windows.Forms.Button bPrevious;
         private System.Windows.Forms.Button bNext;
         private System.Windows.Forms.Button bCancel;
-        private System.Windows.Forms.Button button1;
         private ucType ucType1;
         private ucSubmodules ucSubmodules1;
         private ucAuthorBlock ucAuthorBlock1;
