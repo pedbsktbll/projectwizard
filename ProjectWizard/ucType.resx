@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtWelcome.Text" xml:space="preserve">
+    <value>Welcome to the company's project creation wizard.  This wizard will walk you through the creation of a new project and simplifies the use of our submodules by automatically pulling down the desired ones and including them in the project. </value>
+  </data>
 </root>
