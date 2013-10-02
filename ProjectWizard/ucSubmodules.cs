@@ -19,7 +19,7 @@ namespace ProjectWizard
 
         public override bool ValidateData()
         {
-            return checkBox1.Checked;
+            return true;
         }
     }
 }
