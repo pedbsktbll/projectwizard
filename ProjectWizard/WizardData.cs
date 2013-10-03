@@ -8,7 +8,6 @@ namespace ProjectWizard
 {
     class WizardData
     {
-        //Added some comments to force a commit.
         public WizData_Type Type { get; set; }
         public WizData_Submodules Submodules { get; set; }
         public WizData_AuthorBlock Author { get; set; } 
