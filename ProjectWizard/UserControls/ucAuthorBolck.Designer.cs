@@ -43,6 +43,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,14 +175,50 @@
             this.textBox6.Location = new System.Drawing.Point(6, 191);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(676, 331);
+            this.textBox6.Size = new System.Drawing.Size(676, 282);
             this.textBox6.TabIndex = 14;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(6, 502);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(304, 20);
+            this.textBox7.TabIndex = 16;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 486);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Satus:";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(378, 502);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(304, 20);
+            this.textBox8.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(375, 486);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(79, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Employee ID:";
             // 
             // ucAuthorBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox5);
@@ -220,6 +260,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label10;
 
     }
 }
