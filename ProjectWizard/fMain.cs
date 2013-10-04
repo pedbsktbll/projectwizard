@@ -72,6 +72,8 @@ namespace ProjectWizard
               
         private void bNext_Click(object sender, EventArgs e)
         {
+            WizardData wz = new WizardData();
+            wz.Type = ucType1.GetData();
             if (ValidateUserControl())
             {
                 iCurIndex++;

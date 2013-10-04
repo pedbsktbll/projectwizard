@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucType));
             this.txtWelcome = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.lblStandardProject = new System.Windows.Forms.Label();
+            this.lblCustomProject = new System.Windows.Forms.Label();
+            this.rbEXE = new System.Windows.Forms.RadioButton();
+            this.rbDLL = new System.Windows.Forms.RadioButton();
+            this.rbLIB = new System.Windows.Forms.RadioButton();
+            this.rbSYS = new System.Windows.Forms.RadioButton();
+            this.rbCUS = new System.Windows.Forms.RadioButton();
+            this.lblMain = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.txtMain = new System.Windows.Forms.TextBox();
+            this.txtRemote = new System.Windows.Forms.TextBox();
+            this.lblRemote = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.clbCustomTemplates = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // txtWelcome
@@ -59,162 +59,169 @@
             this.txtWelcome.TabIndex = 0;
             this.txtWelcome.Text = resources.GetString("txtWelcome.Text");
             // 
-            // label1
+            // lblStandardProject
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Standard Project:";
+            this.lblStandardProject.AutoSize = true;
+            this.lblStandardProject.Location = new System.Drawing.Point(3, 61);
+            this.lblStandardProject.Name = "lblStandardProject";
+            this.lblStandardProject.Size = new System.Drawing.Size(109, 13);
+            this.lblStandardProject.TabIndex = 1;
+            this.lblStandardProject.Text = "Standard Project:";
             // 
-            // label2
+            // lblCustomProject
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Custom Project Templates:";
+            this.lblCustomProject.AutoSize = true;
+            this.lblCustomProject.Enabled = false;
+            this.lblCustomProject.Location = new System.Drawing.Point(257, 61);
+            this.lblCustomProject.Name = "lblCustomProject";
+            this.lblCustomProject.Size = new System.Drawing.Size(157, 13);
+            this.lblCustomProject.TabIndex = 2;
+            this.lblCustomProject.Text = "Custom Project Templates:";
             // 
-            // radioButton1
+            // rbEXE
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 78);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(121, 17);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Executable (exe)";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbEXE.AutoSize = true;
+            this.rbEXE.Checked = true;
+            this.rbEXE.Location = new System.Drawing.Point(6, 78);
+            this.rbEXE.Name = "rbEXE";
+            this.rbEXE.Size = new System.Drawing.Size(121, 17);
+            this.rbEXE.TabIndex = 3;
+            this.rbEXE.TabStop = true;
+            this.rbEXE.Text = "Executable (exe)";
+            this.rbEXE.UseVisualStyleBackColor = true;
+            this.rbEXE.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
             // 
-            // radioButton2
+            // rbDLL
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 101);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(151, 17);
-            this.radioButton2.TabIndex = 4;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Dynamic Library (dll)";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbDLL.AutoSize = true;
+            this.rbDLL.Location = new System.Drawing.Point(6, 101);
+            this.rbDLL.Name = "rbDLL";
+            this.rbDLL.Size = new System.Drawing.Size(151, 17);
+            this.rbDLL.TabIndex = 4;
+            this.rbDLL.TabStop = true;
+            this.rbDLL.Text = "Dynamic Library (dll)";
+            this.rbDLL.UseVisualStyleBackColor = true;
+            this.rbDLL.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
             // 
-            // radioButton3
+            // rbLIB
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 124);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(145, 17);
-            this.radioButton3.TabIndex = 5;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Static Library (lib)";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbLIB.AutoSize = true;
+            this.rbLIB.Location = new System.Drawing.Point(6, 124);
+            this.rbLIB.Name = "rbLIB";
+            this.rbLIB.Size = new System.Drawing.Size(145, 17);
+            this.rbLIB.TabIndex = 5;
+            this.rbLIB.TabStop = true;
+            this.rbLIB.Text = "Static Library (lib)";
+            this.rbLIB.UseVisualStyleBackColor = true;
+            this.rbLIB.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
             // 
-            // radioButton4
+            // rbSYS
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(6, 147);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(139, 17);
-            this.radioButton4.TabIndex = 6;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Native Driver (sys)";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rbSYS.AutoSize = true;
+            this.rbSYS.Location = new System.Drawing.Point(6, 147);
+            this.rbSYS.Name = "rbSYS";
+            this.rbSYS.Size = new System.Drawing.Size(139, 17);
+            this.rbSYS.TabIndex = 6;
+            this.rbSYS.TabStop = true;
+            this.rbSYS.Text = "Native Driver (sys)";
+            this.rbSYS.UseVisualStyleBackColor = true;
+            this.rbSYS.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
             // 
-            // radioButton5
+            // rbCUS
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 170);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(163, 17);
-            this.radioButton5.TabIndex = 7;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Custom Project Template";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.rbCUS.AutoSize = true;
+            this.rbCUS.Location = new System.Drawing.Point(6, 170);
+            this.rbCUS.Name = "rbCUS";
+            this.rbCUS.Size = new System.Drawing.Size(163, 17);
+            this.rbCUS.TabIndex = 7;
+            this.rbCUS.TabStop = true;
+            this.rbCUS.Text = "Custom Project Template";
+            this.rbCUS.UseVisualStyleBackColor = true;
+            this.rbCUS.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
             // 
-            // label3
+            // lblMain
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 435);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(163, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Name of the main cpp file:";
+            this.lblMain.AutoSize = true;
+            this.lblMain.Location = new System.Drawing.Point(3, 435);
+            this.lblMain.Name = "lblMain";
+            this.lblMain.Size = new System.Drawing.Size(163, 13);
+            this.lblMain.TabIndex = 10;
+            this.lblMain.Text = "Name of the main cpp file:";
             // 
-            // label5
+            // lblDescription
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 200);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(181, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Description of Selected Type:";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(3, 200);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(181, 13);
+            this.lblDescription.TabIndex = 10;
+            this.lblDescription.Text = "Description of Selected Type:";
             // 
-            // textBox1
+            // txtMain
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 452);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(278, 20);
-            this.textBox1.TabIndex = 12;
-            this.textBox1.Text = "ProjectName.cpp";
+            this.txtMain.Location = new System.Drawing.Point(6, 452);
+            this.txtMain.Name = "txtMain";
+            this.txtMain.Size = new System.Drawing.Size(278, 20);
+            this.txtMain.TabIndex = 12;
+            this.txtMain.Text = "ProjectName.cpp";
             // 
-            // textBox2
+            // txtRemote
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 502);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(675, 20);
-            this.textBox2.TabIndex = 14;
+            this.txtRemote.Location = new System.Drawing.Point(6, 502);
+            this.txtRemote.Name = "txtRemote";
+            this.txtRemote.Size = new System.Drawing.Size(675, 20);
+            this.txtRemote.TabIndex = 14;
             // 
-            // label4
+            // lblRemote
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 485);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(295, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Optional location of Origin remote (i.e. Stash):";
+            this.lblRemote.AutoSize = true;
+            this.lblRemote.Location = new System.Drawing.Point(3, 485);
+            this.lblRemote.Name = "lblRemote";
+            this.lblRemote.Size = new System.Drawing.Size(295, 13);
+            this.lblRemote.TabIndex = 13;
+            this.lblRemote.Text = "Optional location of Origin remote (i.e. Stash):";
             // 
-            // textBox3
+            // txtDescription
             // 
-            this.textBox3.BackColor = System.Drawing.Color.White;
-            this.textBox3.Enabled = false;
-            this.textBox3.ForeColor = System.Drawing.Color.Black;
-            this.textBox3.Location = new System.Drawing.Point(6, 216);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(675, 206);
-            this.textBox3.TabIndex = 15;
-            this.textBox3.Text = "Description goes here.";
+            this.txtDescription.BackColor = System.Drawing.Color.White;
+            this.txtDescription.Enabled = false;
+            this.txtDescription.ForeColor = System.Drawing.Color.Black;
+            this.txtDescription.Location = new System.Drawing.Point(6, 216);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(675, 206);
+            this.txtDescription.TabIndex = 15;
+            this.txtDescription.Text = "Description goes here.";
             // 
-            // checkedListBox1
+            // clbCustomTemplates
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(260, 78);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(421, 109);
-            this.checkedListBox1.TabIndex = 16;
+            this.clbCustomTemplates.Enabled = false;
+            this.clbCustomTemplates.FormattingEnabled = true;
+            this.clbCustomTemplates.Location = new System.Drawing.Point(260, 78);
+            this.clbCustomTemplates.Name = "clbCustomTemplates";
+            this.clbCustomTemplates.Size = new System.Drawing.Size(421, 109);
+            this.clbCustomTemplates.TabIndex = 16;
             // 
             // ucType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.checkedListBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.clbCustomTemplates);
+            this.Controls.Add(this.lblDescription);
+            this.Controls.Add(this.txtRemote);
+            this.Controls.Add(this.lblStandardProject);
+            this.Controls.Add(this.lblCustomProject);
+            this.Controls.Add(this.lblRemote);
+            this.Controls.Add(this.txtMain);
+            this.Controls.Add(this.rbEXE);
+            this.Controls.Add(this.lblMain);
+            this.Controls.Add(this.rbDLL);
             this.Controls.Add(this.txtWelcome);
-            this.Controls.Add(this.radioButton5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton4);
+            this.Controls.Add(this.rbCUS);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.rbLIB);
+            this.Controls.Add(this.rbSYS);
             this.Enabled = false;
             this.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ucType";
@@ -227,20 +234,20 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtWelcome;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label lblStandardProject;
+        private System.Windows.Forms.Label lblCustomProject;
+        private System.Windows.Forms.RadioButton rbEXE;
+        private System.Windows.Forms.RadioButton rbDLL;
+        private System.Windows.Forms.RadioButton rbLIB;
+        private System.Windows.Forms.RadioButton rbSYS;
+        private System.Windows.Forms.RadioButton rbCUS;
+        private System.Windows.Forms.Label lblMain;
+        private System.Windows.Forms.TextBox txtMain;
+        private System.Windows.Forms.TextBox txtRemote;
+        private System.Windows.Forms.Label lblRemote;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.CheckedListBox clbCustomTemplates;
 
 
 

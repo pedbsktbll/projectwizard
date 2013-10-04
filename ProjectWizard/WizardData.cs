@@ -6,28 +6,32 @@ using System.Threading.Tasks;
 
 namespace ProjectWizard
 {
-    class WizardData
+    [Serializable]
+    public class WizardData
     {
         public WizData_Type Type { get; set; }
-        public WizData_Submodules Submodules { get; set; }
+        public WizData_Submodules[] SubmodulesAr { get; set; }
         public WizData_AuthorBlock Author { get; set; } 
     }
 
-    class WizData_Type
+    [Serializable]
+    public class WizData_Type
     {
         public string ProjectTemplate { get; set; }
         public string MainLocation { get; set; }
         public string OriginLocation { get; set; }
     }
 
-    class WizData_Submodules
+    [Serializable]
+    public class WizData_Submodules
     {
         public string Name { get; set; }
         public string Location { get; set; }
-        public string IncludeStr { get; set; }
+        public string[] IncludeStrAr { get; set; }
     }
 
-    class WizData_AuthorBlock
+    [Serializable]
+    public class WizData_AuthorBlock
     {
         public string ProjectName { get; set; }
         public string RequirementNum { get; set; }
@@ -38,5 +42,25 @@ namespace ProjectWizard
         public string Description { get; set; }
         public string Status { get; set; }
         public string EmpId { get; set; }
+    }
+
+    [Serializable]
+    public class ProjectType_Data
+    {
+        public string Type { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+    }
+
+    [Serializable]
+    public class Submodules_Data
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string CheckoutCommand { get; set; }
+        public string[] IncludeStrAr { get; set; }
+        public string Stash { get; set; }
+        public string Jira { get; set; }
+        public string Confluence { get; set; }
     }
 }
