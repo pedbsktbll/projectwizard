@@ -78,6 +78,21 @@ namespace ProjectWizard
 
         public override bool ValidateData()
         {
+            string e = Path.GetExtension(txtMain.Text);
+            if (e != ".cpp")
+            {
+                MessageBox.Show("Error Parsing Main Project File: File must end in .cpp", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            e = Path.GetFileName(txtMain.Text);
+            if (e != txtMain.Text)
+            {
+                MessageBox.Show("Error Parsing Main Project File: Putting the main cpp file in a folder is not currently supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            //Do something here with git to test remote.
             return true;
         }
 
@@ -99,6 +114,7 @@ namespace ProjectWizard
             {
                 lblCustomProject.Enabled = true;
                 lvCustomTemplates.Enabled = true;
+                lvCustomTemplates.Focus();
             }
             else
             {

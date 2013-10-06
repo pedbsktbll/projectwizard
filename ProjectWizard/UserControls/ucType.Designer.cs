@@ -59,6 +59,7 @@
             this.txtWelcome.Name = "txtWelcome";
             this.txtWelcome.Size = new System.Drawing.Size(678, 46);
             this.txtWelcome.TabIndex = 0;
+            this.txtWelcome.TabStop = false;
             this.txtWelcome.Text = resources.GetString("txtWelcome.Text");
             // 
             // lblStandardProject
@@ -67,7 +68,7 @@
             this.lblStandardProject.Location = new System.Drawing.Point(6, 16);
             this.lblStandardProject.Name = "lblStandardProject";
             this.lblStandardProject.Size = new System.Drawing.Size(109, 13);
-            this.lblStandardProject.TabIndex = 1;
+            this.lblStandardProject.TabIndex = 0;
             this.lblStandardProject.Text = "Standard Project:";
             // 
             // lblCustomProject
@@ -77,7 +78,7 @@
             this.lblCustomProject.Location = new System.Drawing.Point(251, 16);
             this.lblCustomProject.Name = "lblCustomProject";
             this.lblCustomProject.Size = new System.Drawing.Size(157, 13);
-            this.lblCustomProject.TabIndex = 2;
+            this.lblCustomProject.TabIndex = 7;
             this.lblCustomProject.Text = "Custom Project Templates:";
             // 
             // rbCON
@@ -87,7 +88,7 @@
             this.rbCON.Location = new System.Drawing.Point(9, 32);
             this.rbCON.Name = "rbCON";
             this.rbCON.Size = new System.Drawing.Size(175, 17);
-            this.rbCON.TabIndex = 3;
+            this.rbCON.TabIndex = 1;
             this.rbCON.TabStop = true;
             this.rbCON.Text = "Console Application (exe)";
             this.rbCON.UseVisualStyleBackColor = true;
@@ -99,7 +100,7 @@
             this.rbDLL.Location = new System.Drawing.Point(9, 78);
             this.rbDLL.Name = "rbDLL";
             this.rbDLL.Size = new System.Drawing.Size(151, 17);
-            this.rbDLL.TabIndex = 4;
+            this.rbDLL.TabIndex = 3;
             this.rbDLL.Text = "Dynamic Library (dll)";
             this.rbDLL.UseVisualStyleBackColor = true;
             this.rbDLL.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
@@ -110,7 +111,7 @@
             this.rbLIB.Location = new System.Drawing.Point(9, 101);
             this.rbLIB.Name = "rbLIB";
             this.rbLIB.Size = new System.Drawing.Size(145, 17);
-            this.rbLIB.TabIndex = 5;
+            this.rbLIB.TabIndex = 4;
             this.rbLIB.Text = "Static Library (lib)";
             this.rbLIB.UseVisualStyleBackColor = true;
             this.rbLIB.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
@@ -121,7 +122,7 @@
             this.rbSYS.Location = new System.Drawing.Point(9, 124);
             this.rbSYS.Name = "rbSYS";
             this.rbSYS.Size = new System.Drawing.Size(139, 17);
-            this.rbSYS.TabIndex = 6;
+            this.rbSYS.TabIndex = 5;
             this.rbSYS.Text = "Native Driver (sys)";
             this.rbSYS.UseVisualStyleBackColor = true;
             this.rbSYS.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
@@ -132,7 +133,7 @@
             this.rbCUS.Location = new System.Drawing.Point(9, 147);
             this.rbCUS.Name = "rbCUS";
             this.rbCUS.Size = new System.Drawing.Size(163, 17);
-            this.rbCUS.TabIndex = 7;
+            this.rbCUS.TabIndex = 6;
             this.rbCUS.Text = "Custom Project Template";
             this.rbCUS.UseVisualStyleBackColor = true;
             this.rbCUS.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
@@ -143,7 +144,7 @@
             this.lblMain.Location = new System.Drawing.Point(3, 435);
             this.lblMain.Name = "lblMain";
             this.lblMain.Size = new System.Drawing.Size(163, 13);
-            this.lblMain.TabIndex = 10;
+            this.lblMain.TabIndex = 4;
             this.lblMain.Text = "Name of the main cpp file:";
             // 
             // lblDescription
@@ -152,7 +153,7 @@
             this.lblDescription.Location = new System.Drawing.Point(3, 242);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(181, 13);
-            this.lblDescription.TabIndex = 10;
+            this.lblDescription.TabIndex = 2;
             this.lblDescription.Text = "Description of Selected Type:";
             // 
             // txtMain
@@ -160,7 +161,7 @@
             this.txtMain.Location = new System.Drawing.Point(6, 452);
             this.txtMain.Name = "txtMain";
             this.txtMain.Size = new System.Drawing.Size(278, 20);
-            this.txtMain.TabIndex = 12;
+            this.txtMain.TabIndex = 5;
             this.txtMain.Text = "ProjectName.cpp";
             // 
             // txtRemote
@@ -168,7 +169,7 @@
             this.txtRemote.Location = new System.Drawing.Point(6, 502);
             this.txtRemote.Name = "txtRemote";
             this.txtRemote.Size = new System.Drawing.Size(675, 20);
-            this.txtRemote.TabIndex = 14;
+            this.txtRemote.TabIndex = 7;
             // 
             // lblRemote
             // 
@@ -176,7 +177,7 @@
             this.lblRemote.Location = new System.Drawing.Point(3, 485);
             this.lblRemote.Name = "lblRemote";
             this.lblRemote.Size = new System.Drawing.Size(295, 13);
-            this.lblRemote.TabIndex = 13;
+            this.lblRemote.TabIndex = 6;
             this.lblRemote.Text = "Optional location of Origin remote (i.e. Stash):";
             // 
             // txtDescription
@@ -188,7 +189,7 @@
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(675, 162);
-            this.txtDescription.TabIndex = 15;
+            this.txtDescription.TabIndex = 3;
             this.txtDescription.Text = "Description goes here.";
             // 
             // lvCustomTemplates
@@ -197,7 +198,7 @@
             this.lvCustomTemplates.Location = new System.Drawing.Point(254, 31);
             this.lvCustomTemplates.Name = "lvCustomTemplates";
             this.lvCustomTemplates.Size = new System.Drawing.Size(415, 133);
-            this.lvCustomTemplates.TabIndex = 16;
+            this.lvCustomTemplates.TabIndex = 8;
             this.lvCustomTemplates.UseCompatibleStateImageBehavior = false;
             this.lvCustomTemplates.View = System.Windows.Forms.View.List;
             this.lvCustomTemplates.SelectedIndexChanged += new System.EventHandler(this.lvCustomTemplates_SelectedIndexChanged);
@@ -208,7 +209,7 @@
             this.rbWIN.Location = new System.Drawing.Point(9, 55);
             this.rbWIN.Name = "rbWIN";
             this.rbWIN.Size = new System.Drawing.Size(175, 17);
-            this.rbWIN.TabIndex = 17;
+            this.rbWIN.TabIndex = 2;
             this.rbWIN.Text = "Windows Application (exe)";
             this.rbWIN.UseVisualStyleBackColor = true;
             this.rbWIN.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
@@ -227,7 +228,7 @@
             this.gbProject.Location = new System.Drawing.Point(6, 55);
             this.gbProject.Name = "gbProject";
             this.gbProject.Size = new System.Drawing.Size(675, 174);
-            this.gbProject.TabIndex = 18;
+            this.gbProject.TabIndex = 1;
             this.gbProject.TabStop = false;
             this.gbProject.Text = "Project Type";
             // 
