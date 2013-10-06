@@ -28,216 +28,225 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.lblIntro = new System.Windows.Forms.Label();
+            this.lblProjectName = new System.Windows.Forms.Label();
+            this.txtProjectName = new System.Windows.Forms.TextBox();
+            this.txtProjectNumber = new System.Windows.Forms.TextBox();
+            this.lblCustomer = new System.Windows.Forms.Label();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.lblProjectNumber = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.nudVersion = new System.Windows.Forms.NumericUpDown();
+            this.txtOffice = new System.Windows.Forms.TextBox();
+            this.lblOffice = new System.Windows.Forms.Label();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.lblAuthor = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.txtEmployeeID = new System.Windows.Forms.TextBox();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVersion)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblIntro
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(361, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Please fill out the below information for the author block:";
+            this.lblIntro.AutoSize = true;
+            this.lblIntro.Location = new System.Drawing.Point(3, 3);
+            this.lblIntro.Name = "lblIntro";
+            this.lblIntro.Size = new System.Drawing.Size(361, 13);
+            this.lblIntro.TabIndex = 0;
+            this.lblIntro.Text = "Please fill out the below information for the author block:";
             // 
-            // label2
+            // lblProjectName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Project Name:";
+            this.lblProjectName.AutoSize = true;
+            this.lblProjectName.Location = new System.Drawing.Point(3, 28);
+            this.lblProjectName.Name = "lblProjectName";
+            this.lblProjectName.Size = new System.Drawing.Size(85, 13);
+            this.lblProjectName.TabIndex = 1;
+            this.lblProjectName.Text = "Project Name:";
             // 
-            // textBox1
+            // txtProjectName
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(304, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtProjectName.Location = new System.Drawing.Point(6, 44);
+            this.txtProjectName.Name = "txtProjectName";
+            this.txtProjectName.Size = new System.Drawing.Size(304, 20);
+            this.txtProjectName.TabIndex = 2;
             // 
-            // textBox2
+            // txtProjectNumber
             // 
-            this.textBox2.Location = new System.Drawing.Point(378, 44);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(304, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtProjectNumber.Location = new System.Drawing.Point(378, 44);
+            this.txtProjectNumber.Name = "txtProjectNumber";
+            this.txtProjectNumber.Size = new System.Drawing.Size(304, 20);
+            this.txtProjectNumber.TabIndex = 4;
             // 
-            // label3
+            // lblCustomer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(375, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Customer:";
+            this.lblCustomer.AutoSize = true;
+            this.lblCustomer.Location = new System.Drawing.Point(375, 77);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(61, 13);
+            this.lblCustomer.TabIndex = 7;
+            this.lblCustomer.Text = "Customer:";
             // 
-            // textBox3
+            // txtCustomer
             // 
-            this.textBox3.Location = new System.Drawing.Point(378, 93);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(304, 20);
-            this.textBox3.TabIndex = 6;
+            this.txtCustomer.Location = new System.Drawing.Point(378, 93);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(304, 20);
+            this.txtCustomer.TabIndex = 8;
+            this.txtCustomer.Text = "NONE";
             // 
-            // label4
+            // lblProjectNumber
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(375, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Project Number:";
+            this.lblProjectNumber.AutoSize = true;
+            this.lblProjectNumber.Location = new System.Drawing.Point(375, 28);
+            this.lblProjectNumber.Name = "lblProjectNumber";
+            this.lblProjectNumber.Size = new System.Drawing.Size(97, 13);
+            this.lblProjectNumber.TabIndex = 3;
+            this.lblProjectNumber.Text = "Project Number:";
             // 
-            // label5
+            // lblVersion
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 77);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Version:";
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(3, 77);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(55, 13);
+            this.lblVersion.TabIndex = 5;
+            this.lblVersion.Text = "Version:";
             // 
-            // numericUpDown1
+            // nudVersion
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 93);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 8;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.nudVersion.DecimalPlaces = 1;
+            this.nudVersion.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudVersion.Location = new System.Drawing.Point(6, 93);
+            this.nudVersion.Name = "nudVersion";
+            this.nudVersion.Size = new System.Drawing.Size(120, 20);
+            this.nudVersion.TabIndex = 6;
+            this.nudVersion.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // textBox4
+            // txtOffice
             // 
-            this.textBox4.Location = new System.Drawing.Point(378, 142);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(304, 20);
-            this.textBox4.TabIndex = 10;
+            this.txtOffice.Location = new System.Drawing.Point(378, 142);
+            this.txtOffice.Name = "txtOffice";
+            this.txtOffice.Size = new System.Drawing.Size(304, 20);
+            this.txtOffice.TabIndex = 12;
+            this.txtOffice.Text = "STD";
             // 
-            // label6
+            // lblOffice
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(375, 126);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Office:";
+            this.lblOffice.AutoSize = true;
+            this.lblOffice.Location = new System.Drawing.Point(375, 126);
+            this.lblOffice.Name = "lblOffice";
+            this.lblOffice.Size = new System.Drawing.Size(49, 13);
+            this.lblOffice.TabIndex = 11;
+            this.lblOffice.Text = "Office:";
             // 
-            // textBox5
+            // txtAuthor
             // 
-            this.textBox5.Location = new System.Drawing.Point(6, 142);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(304, 20);
-            this.textBox5.TabIndex = 12;
+            this.txtAuthor.Location = new System.Drawing.Point(6, 142);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(304, 20);
+            this.txtAuthor.TabIndex = 10;
             // 
-            // label7
+            // lblAuthor
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 126);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(241, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Author(s) (Use comma if more than one):";
+            this.lblAuthor.AutoSize = true;
+            this.lblAuthor.Location = new System.Drawing.Point(3, 126);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(241, 13);
+            this.lblAuthor.TabIndex = 9;
+            this.lblAuthor.Text = "Author(s) (Use comma if more than one):";
             // 
-            // label8
+            // lblDescription
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 175);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Description:";
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(3, 175);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(79, 13);
+            this.lblDescription.TabIndex = 13;
+            this.lblDescription.Text = "Description:";
             // 
-            // textBox6
+            // txtDescription
             // 
-            this.textBox6.Location = new System.Drawing.Point(6, 191);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(676, 282);
-            this.textBox6.TabIndex = 14;
+            this.txtDescription.Location = new System.Drawing.Point(6, 191);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(676, 282);
+            this.txtDescription.TabIndex = 14;
             // 
-            // textBox7
+            // txtStatus
             // 
-            this.textBox7.Location = new System.Drawing.Point(6, 502);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(304, 20);
-            this.textBox7.TabIndex = 16;
+            this.txtStatus.Location = new System.Drawing.Point(6, 502);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(304, 20);
+            this.txtStatus.TabIndex = 16;
+            this.txtStatus.Text = "BETA";
             // 
-            // label9
+            // lblStatus
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 486);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 13);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Satus:";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(3, 486);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(43, 13);
+            this.lblStatus.TabIndex = 15;
+            this.lblStatus.Text = "Satus:";
             // 
-            // textBox8
+            // txtEmployeeID
             // 
-            this.textBox8.Location = new System.Drawing.Point(378, 502);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(304, 20);
-            this.textBox8.TabIndex = 18;
+            this.txtEmployeeID.Location = new System.Drawing.Point(378, 502);
+            this.txtEmployeeID.Name = "txtEmployeeID";
+            this.txtEmployeeID.Size = new System.Drawing.Size(304, 20);
+            this.txtEmployeeID.TabIndex = 18;
+            this.txtEmployeeID.Text = "0000000";
             // 
-            // label10
+            // lblEmployeeID
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(375, 486);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(79, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Employee ID:";
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Location = new System.Drawing.Point(375, 486);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(79, 13);
+            this.lblEmployeeID.TabIndex = 17;
+            this.lblEmployeeID.Text = "Employee ID:";
             // 
             // ucAuthorBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtEmployeeID);
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.lblDescription);
+            this.Controls.Add(this.txtAuthor);
+            this.Controls.Add(this.lblAuthor);
+            this.Controls.Add(this.txtOffice);
+            this.Controls.Add(this.lblOffice);
+            this.Controls.Add(this.nudVersion);
+            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.txtCustomer);
+            this.Controls.Add(this.lblProjectNumber);
+            this.Controls.Add(this.txtProjectNumber);
+            this.Controls.Add(this.lblCustomer);
+            this.Controls.Add(this.txtProjectName);
+            this.Controls.Add(this.lblProjectName);
+            this.Controls.Add(this.lblIntro);
             this.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.Name = "ucAuthorBlock";
             this.Size = new System.Drawing.Size(685, 525);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVersion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,25 +254,25 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblIntro;
+        private System.Windows.Forms.Label lblProjectName;
+        private System.Windows.Forms.TextBox txtProjectName;
+        private System.Windows.Forms.TextBox txtProjectNumber;
+        private System.Windows.Forms.Label lblCustomer;
+        private System.Windows.Forms.TextBox txtCustomer;
+        private System.Windows.Forms.Label lblProjectNumber;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.NumericUpDown nudVersion;
+        private System.Windows.Forms.TextBox txtOffice;
+        private System.Windows.Forms.Label lblOffice;
+        private System.Windows.Forms.TextBox txtAuthor;
+        private System.Windows.Forms.Label lblAuthor;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.TextBox txtEmployeeID;
+        private System.Windows.Forms.Label lblEmployeeID;
 
     }
 }

@@ -58,7 +58,7 @@
             this.bPrevious.Location = new System.Drawing.Point(437, 3);
             this.bPrevious.Name = "bPrevious";
             this.bPrevious.Size = new System.Drawing.Size(75, 23);
-            this.bPrevious.TabIndex = 2;
+            this.bPrevious.TabIndex = 0;
             this.bPrevious.Text = "&Previous";
             this.bPrevious.UseVisualStyleBackColor = true;
             this.bPrevious.Visible = false;
@@ -70,7 +70,7 @@
             this.bCancel.Location = new System.Drawing.Point(599, 3);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
-            this.bCancel.TabIndex = 0;
+            this.bCancel.TabIndex = 2;
             this.bCancel.Text = "&Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
@@ -121,11 +121,12 @@
             // ucType1
             // 
             this.ucType1.BackColor = System.Drawing.Color.White;
+            this.ucType1.Enabled = false;
             this.ucType1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ucType1.Location = new System.Drawing.Point(150, 0);
             this.ucType1.Name = "ucType1";
             this.ucType1.Size = new System.Drawing.Size(685, 525);
-            this.ucType1.TabIndex = 2;
+            this.ucType1.TabIndex = 0;
             // 
             // ucConfirmation1
             // 
