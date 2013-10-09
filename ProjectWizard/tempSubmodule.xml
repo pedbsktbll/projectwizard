@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSubmodules_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Submodules_Data>
+    <Name>Template 1</Name>
+    <Description>Template Description 1</Description>
+    <CheckoutCommand>Template Location 1</CheckoutCommand>
+	<Stash>Template Location 1</Stash>
+	<Jira>Template Location 1</Jira>
+	<Confluence>Template Location 1</Confluence>
+	<IncludeStrAr>Template Location 1</IncludeStrAr>
+  </Submodules_Data>
+</ArrayOfSubmodules_Data>

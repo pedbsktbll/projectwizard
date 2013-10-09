@@ -45,7 +45,9 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.pbAvailable = new ProjectWizard.PopBox();
+            this.Submodule = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pbSelected = new ProjectWizard.PopBox();
+            this.Submodules = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbAdditionalInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,24 +86,29 @@
             this.bSelect.Size = new System.Drawing.Size(40, 23);
             this.bSelect.TabIndex = 8;
             this.bSelect.UseVisualStyleBackColor = true;
+            this.bSelect.Click += new System.EventHandler(this.bSelect_Click);
             // 
             // bRemoveAll
             // 
+            this.bRemoveAll.Enabled = false;
             this.bRemoveAll.Image = global::ProjectWizard.Properties.Resources.Arrow_double_left_icon;
             this.bRemoveAll.Location = new System.Drawing.Point(320, 159);
             this.bRemoveAll.Name = "bRemoveAll";
             this.bRemoveAll.Size = new System.Drawing.Size(40, 23);
             this.bRemoveAll.TabIndex = 7;
             this.bRemoveAll.UseVisualStyleBackColor = true;
+            this.bRemoveAll.Click += new System.EventHandler(this.bRemoveAll_Click);
             // 
             // bRemove
             // 
+            this.bRemove.Enabled = false;
             this.bRemove.Image = global::ProjectWizard.Properties.Resources.Arrow_left_icon;
             this.bRemove.Location = new System.Drawing.Point(320, 130);
             this.bRemove.Name = "bRemove";
             this.bRemove.Size = new System.Drawing.Size(40, 23);
             this.bRemove.TabIndex = 6;
             this.bRemove.UseVisualStyleBackColor = true;
+            this.bRemove.Click += new System.EventHandler(this.bRemove_Click);
             // 
             // bSelectAll
             // 
@@ -111,6 +118,7 @@
             this.bSelectAll.Size = new System.Drawing.Size(40, 23);
             this.bSelectAll.TabIndex = 5;
             this.bSelectAll.UseVisualStyleBackColor = true;
+            this.bSelectAll.Click += new System.EventHandler(this.bSelectAll_Click);
             // 
             // gbAdditionalInfo
             // 
@@ -209,19 +217,39 @@
             // 
             // pbAvailable
             // 
-            this.pbAvailable.FormattingEnabled = true;
+            this.pbAvailable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Submodule});
+            this.pbAvailable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.pbAvailable.Location = new System.Drawing.Point(6, 48);
+            this.pbAvailable.MultiSelect = false;
             this.pbAvailable.Name = "pbAvailable";
             this.pbAvailable.Size = new System.Drawing.Size(291, 134);
             this.pbAvailable.TabIndex = 10;
+            this.pbAvailable.UseCompatibleStateImageBehavior = false;
+            this.pbAvailable.View = System.Windows.Forms.View.Details;
+            this.pbAvailable.SelectedIndexChanged += new System.EventHandler(this.pbAvailable_SelectedIndexChanged);
+            // 
+            // Submodule
+            // 
+            this.Submodule.Width = 260;
             // 
             // pbSelected
             // 
-            this.pbSelected.FormattingEnabled = true;
+            this.pbSelected.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Submodules});
+            this.pbSelected.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.pbSelected.Location = new System.Drawing.Point(386, 48);
+            this.pbSelected.MultiSelect = false;
             this.pbSelected.Name = "pbSelected";
             this.pbSelected.Size = new System.Drawing.Size(291, 134);
             this.pbSelected.TabIndex = 11;
+            this.pbSelected.UseCompatibleStateImageBehavior = false;
+            this.pbSelected.View = System.Windows.Forms.View.Details;
+            this.pbSelected.SelectedIndexChanged += new System.EventHandler(this.pbSelected_SelectedIndexChanged);
+            // 
+            // Submodules
+            // 
+            this.Submodules.Width = 260;
             // 
             // ucSubmodules
             // 
@@ -268,6 +296,8 @@
         private System.Windows.Forms.LinkLabel lnkJira;
         private PopBox pbAvailable;
         private PopBox pbSelected;
+        private System.Windows.Forms.ColumnHeader Submodule;
+        private System.Windows.Forms.ColumnHeader Submodules;
 
     }
 }

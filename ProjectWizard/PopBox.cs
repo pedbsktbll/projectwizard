@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    class PopBox : ListBox
+    class PopBox : ListView
     {
         public ListViewItem pop()
         {
@@ -15,8 +15,8 @@ namespace ProjectWizard
             if (this.SelectedItems.Count != 1)
                 return null;
 
-            ListViewItem poppedItem = (ListViewItem)this.SelectedItem;
-            int selIndex = this.SelectedIndex;
+            ListViewItem poppedItem = (ListViewItem)this.SelectedItems[0];
+            int selIndex = this.SelectedItems[0].Index;
             this.Items.RemoveAt(selIndex);
 
             //No other items in the index, we are done.
@@ -24,9 +24,9 @@ namespace ProjectWizard
                 return poppedItem;
 
             if (selIndex == this.Items.Count)
-                this.SelectedIndex = selIndex - 1;
+                this.Items[selIndex - 1].Selected = true;
             else
-                this.SelectedIndex = selIndex;
+                this.Items[selIndex].Selected = true;
 
             this.Select();
 
