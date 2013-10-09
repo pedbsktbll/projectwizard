@@ -1,12 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfSubmodules_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Submodules_Data>
-    <Name>Template 1</Name>
-    <Description>Template Description 1</Description>
-    <CheckoutCommand>Template Location 1</CheckoutCommand>
-	<Stash>Template Location 1</Stash>
-	<Jira>Template Location 1</Jira>
-	<Confluence>Template Location 1</Confluence>
-	<IncludeStrAr>Template Location 1</IncludeStrAr>
+    <Name>Submodule #1</Name>
+    <Description>Awesome description for Submodule #1</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 1"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule1</Stash>
+	<Jira>https://www.jira.net/submodule1</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule1</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule1.h"</string>
+		<string>#include "Submodule1a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #2</Name>
+    <Description>Awesome description for Submodule #2</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 2"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule2</Stash>
+	<Jira>https://www.jira.net/submodule2</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule2.h"</string>
+		<string>#include "Submodule2a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #3</Name>
+    <Description>Awesome description for Submodule #3</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 3"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule3</Stash>
+	<Jira>https://www.jira.net/submodule3</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule3</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule3.h"</string>
+		<string>#include "Submodule3a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #4</Name>
+    <Description>Awesome description for Submodule #4</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 4"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule4</Stash>
+	<Jira>https://www.jira.net/submodule4</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule4</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule4.h"</string>
+		<string>#include "Submodule4a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #5</Name>
+    <Description>Awesome description for Submodule #5</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 5"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule5</Stash>
+	<Jira>https://www.jira.net/submodule5</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule5</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule5.h"</string>
+		<string>#include "Submodule5a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #6</Name>
+    <Description>Awesome description for Submodule #6</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 6"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule6</Stash>
+	<Jira>https://www.jira.net/submodule6</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule6</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule6.h"</string>
+		<string>#include "Submodule6a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #7</Name>
+    <Description>Awesome description for Submodule #7</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 7"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule7</Stash>
+	<Jira>https://www.jira.net/submodule7</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule7</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule7.h"</string>
+		<string>#include "Submodule7a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #8</Name>
+    <Description>Awesome description for Submodule #8</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 8"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule8</Stash>
+	<Jira>https://www.jira.net/submodule8</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule8</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule8.h"</string>
+		<string>#include "Submodule8a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #9</Name>
+    <Description>Awesome description for Submodule #9</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 9"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule9</Stash>
+	<Jira>https://www.jira.net/submodule9</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule9</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule9.h"</string>
+		<string>#include "Submodule9a.h"</string>
+	</IncludeStrAr>
   </Submodules_Data>
 </ArrayOfSubmodules_Data>
