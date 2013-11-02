@@ -224,10 +224,11 @@
             this.pbAvailable.MultiSelect = false;
             this.pbAvailable.Name = "pbAvailable";
             this.pbAvailable.Size = new System.Drawing.Size(291, 134);
+            this.pbAvailable.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pbAvailable.TabIndex = 10;
             this.pbAvailable.UseCompatibleStateImageBehavior = false;
             this.pbAvailable.View = System.Windows.Forms.View.Details;
-            this.pbAvailable.SelectedIndexChanged += new System.EventHandler(this.pbAvailable_SelectedIndexChanged);
+            this.pbAvailable.SelectedIndexChanged += new System.EventHandler(this.PopBox_SelectedIndexChanged);
             // 
             // Submodule
             // 
@@ -242,10 +243,11 @@
             this.pbSelected.MultiSelect = false;
             this.pbSelected.Name = "pbSelected";
             this.pbSelected.Size = new System.Drawing.Size(291, 134);
+            this.pbSelected.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pbSelected.TabIndex = 11;
             this.pbSelected.UseCompatibleStateImageBehavior = false;
             this.pbSelected.View = System.Windows.Forms.View.Details;
-            this.pbSelected.SelectedIndexChanged += new System.EventHandler(this.pbSelected_SelectedIndexChanged);
+            this.pbSelected.SelectedIndexChanged += new System.EventHandler(this.PopBox_SelectedIndexChanged);
             // 
             // Submodules
             // 

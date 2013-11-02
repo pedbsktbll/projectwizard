@@ -65,9 +65,10 @@ namespace ProjectWizard
             pbAvailable.push(pbSelected.popall());
         }
 
-        private void pbAvailable_SelectedIndexChanged(object sender, EventArgs e)
+        private void PopBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (pbAvailable.SelectedItems.Count == 0)
+            PopBox pb = (PopBox)sender;
+            /*if (pbAvailable.SelectedItems.Count == 0)
             {
                 bSelect.Enabled = false;
                 if (pbAvailable.Items.Count == 0)
@@ -83,12 +84,36 @@ namespace ProjectWizard
                 }
                 return;
             }
+
             bSelect.Enabled = true;
-            bSelectAll.Enabled = true;
-            txtDescription.Text = ((Submodules_Data)pbAvailable.SelectedItems[0].Tag).Description;
-            lnkConf.Text = ((Submodules_Data)pbAvailable.SelectedItems[0].Tag).Confluence;
-            lnkJira.Text = ((Submodules_Data)pbAvailable.SelectedItems[0].Tag).Jira;
-            lnkStash.Text = ((Submodules_Data)pbAvailable.SelectedItems[0].Tag).Stash;
+            bSelectAll.Enabled = true;*/
+            if (pbAvailable.Items.Count == 0)
+                bSelectAll.Enabled = false;
+            else
+                bSelectAll.Enabled = true;
+
+            if (pbAvailable.SelectedItems.Count == 0)
+                bSelect.Enabled = false;
+            else
+                bSelect.Enabled = true;
+
+            if (pbSelected.Items.Count == 0)
+                bRemoveAll.Enabled = false;
+            else
+                bRemoveAll.Enabled = true;
+
+            if (pbSelected.SelectedItems.Count == 0)
+                bRemove.Enabled = false;
+            else
+                bRemove.Enabled = true;
+            
+            if (pb.SelectedItems.Count == 0)
+                return;
+
+            txtDescription.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Description;
+            lnkConf.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Confluence;
+            lnkJira.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Jira;
+            lnkStash.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Stash;
         }
 
         private void pbSelected_SelectedIndexChanged(object sender, EventArgs e)

@@ -43,6 +43,7 @@ namespace ProjectWizard
                 {
                     poppedItems[i] = item;
                     this.Items.Remove(item);
+                    i++;
                 }
                 return poppedItems;
             }
@@ -60,13 +61,13 @@ namespace ProjectWizard
             try
             {
                 this.Items.Add(toPush);
-                this.Sort();
             }
             catch
             {
                 return false;
             }
 
+            this.Sort();
             return true;
         }
 
@@ -81,13 +82,12 @@ namespace ProjectWizard
                 {
                     this.Items.Add(i);
                 }
-                this.Sort();
             }
             catch
             {
                 return false;
             }
-
+            this.Sort();
             return true;
         }
     }
