@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using System.IO;
 
 namespace ProjectWizard
 {
@@ -42,6 +35,7 @@ namespace ProjectWizard
 
         public override bool ValidateData()
         {
+            //Nothing for the user to screw up...
             return true;
         }
 
@@ -68,25 +62,6 @@ namespace ProjectWizard
         private void PopBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopBox pb = (PopBox)sender;
-            /*if (pbAvailable.SelectedItems.Count == 0)
-            {
-                bSelect.Enabled = false;
-                if (pbAvailable.Items.Count == 0)
-                {
-                    bSelectAll.Enabled = false;
-                }
-                if (pbSelected.SelectedItems.Count == 0)
-                {
-                    txtDescription.Text = "No SubModule Selected";
-                    lnkConf.Text = "";
-                    lnkJira.Text = "";
-                    lnkStash.Text = "";
-                }
-                return;
-            }
-
-            bSelect.Enabled = true;
-            bSelectAll.Enabled = true;*/
             if (pbAvailable.Items.Count == 0)
                 bSelectAll.Enabled = false;
             else
@@ -114,32 +89,6 @@ namespace ProjectWizard
             lnkConf.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Confluence;
             lnkJira.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Jira;
             lnkStash.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Stash;
-        }
-
-        private void pbSelected_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (pbSelected.SelectedItems.Count == 0)
-            {
-                bRemove.Enabled = false;
-                if (pbSelected.Items.Count == 0)
-                {
-                    bRemoveAll.Enabled = false;
-                }
-                if (pbAvailable.SelectedItems.Count == 0)
-                {
-                    txtDescription.Text = "No SubModule Selected";
-                    lnkConf.Text = "";
-                    lnkJira.Text = "";
-                    lnkStash.Text = "";
-                }
-                return;
-            }
-            bRemove.Enabled = true;
-            bRemoveAll.Enabled = true;
-            txtDescription.Text = ((Submodules_Data)pbSelected.SelectedItems[0].Tag).Description;
-            lnkConf.Text = ((Submodules_Data)pbSelected.SelectedItems[0].Tag).Confluence;
-            lnkJira.Text = ((Submodules_Data)pbSelected.SelectedItems[0].Tag).Jira;
-            lnkStash.Text = ((Submodules_Data)pbSelected.SelectedItems[0].Tag).Stash;
         }
     }
 }
