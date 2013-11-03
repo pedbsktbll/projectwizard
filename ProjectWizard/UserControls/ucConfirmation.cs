@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    public partial class ucType : UserControlEx
+    public partial class ucConfirmation : UserControlEx
     {
-        public ucType()
+        public ucConfirmation()
         {
             InitializeComponent();
         }
