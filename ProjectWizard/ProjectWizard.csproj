@@ -56,11 +56,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\ucAuthorBolck.cs">
+    <Compile Include="UserControls\ucAuthorBlock.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ucAuthorBolck.Designer.cs">
-      <DependentUpon>ucAuthorBolck.cs</DependentUpon>
+    <Compile Include="UserControls\ucAuthorBlock.Designer.cs">
+      <DependentUpon>ucAuthorBlock.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucConfirmation.cs">
       <SubType>UserControl</SubType>
@@ -84,8 +84,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WizardData.cs" />
-    <EmbeddedResource Include="UserControls\ucAuthorBolck.resx">
-      <DependentUpon>ucAuthorBolck.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ucAuthorBlock.resx">
+      <DependentUpon>ucAuthorBlock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
