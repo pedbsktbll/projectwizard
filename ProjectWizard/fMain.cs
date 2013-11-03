@@ -24,6 +24,7 @@ namespace ProjectWizard
             iCurIndex = 0;
             bOverrideExit = true;
             ucType1.Enabled = true;
+            wz = null;
         }
 
         private void PaintPanels()
@@ -44,6 +45,15 @@ namespace ProjectWizard
             {
                 pucList[i].Visible = false;
                 pucList[i].Enabled = false;
+            }
+
+            if (iCurIndex == (pucList.Length - 1))
+            {
+                WizardData wz = new WizardData();
+                wz.Type = ((ucType)pucList[0]).GetData();
+                wz.SubmodulesAr = ((ucSubmodules)pucList[1]).GetData();
+                wz.Author = ((ucAuthorBlock)pucList[2]).GetData();
+                ((ucConfirmation)pucList[iCurIndex]).PrintResults(wz);
             }
             pucList[iCurIndex].Visible = true;
             pucList[iCurIndex].Enabled = true;
@@ -67,7 +77,7 @@ namespace ProjectWizard
               
         private void bNext_Click(object sender, EventArgs e)
         {
-            WizardData wz = new WizardData();
+            wz = new WizardData();
             wz.Type = ucType1.GetData();
             if (ValidateUserControl())
             {
@@ -105,40 +115,5 @@ namespace ProjectWizard
                     e.Cancel = true;
             }
         }
-
-        /*private void button1_Click(object sender, EventArgs e)
-        {
-            ProjectType_Data[] temp = new ProjectType_Data[5];
-            temp[0] = new ProjectType_Data();
-            temp[0].Type = "Template 1";
-            temp[0].Location = "Template Location 1";
-            temp[0].Description = "Template Description 1";
-
-            temp[1] = new ProjectType_Data();
-            temp[1].Type = "Template 2";
-            temp[1].Location = "Template Location 2";
-            temp[1].Description = "Template Description 2";
-
-            temp[2] = new ProjectType_Data();
-            temp[2].Type = "Template 3";
-            temp[2].Location = "Template Location 3";
-            temp[2].Description = "Template Description 3";
-
-            temp[3] = new ProjectType_Data();
-            temp[3].Type = "Template 4";
-            temp[3].Location = "Template Location 4";
-            temp[3].Description = "Template Description 4";
-
-            temp[4] = new ProjectType_Data();
-            temp[4].Type = "Template 5";
-            temp[4].Location = "Template Location 5";
-            temp[4].Description = "Template Description 5";
-
-            XmlSerializer ser = new XmlSerializer(typeof(ProjectType_Data[]));
-            TextWriter writer = new StreamWriter("temp.xml");
-            ser.Serialize(writer, temp);
-            writer.Close();
-        }*/
-
     }
 }
