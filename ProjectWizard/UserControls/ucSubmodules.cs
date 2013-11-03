@@ -39,6 +39,20 @@ namespace ProjectWizard
             return true;
         }
 
+        public WizData_Submodules[] GetData()
+        {
+            WizData_Submodules[] wz = new WizData_Submodules[pbSelected.Items.Count];
+            int i = 0;
+            foreach (ListViewItem item in pbSelected.Items)
+            {
+                wz[i].Name = ((Submodules_Data)item.Tag).Name;
+                wz[i].Location = ((Submodules_Data)item.Tag).Stash;
+                wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
+                i++;
+            }
+            return wz;
+        }
+
         private void bSelectAll_Click(object sender, EventArgs e)
         {
             pbSelected.push(pbAvailable.popall());
