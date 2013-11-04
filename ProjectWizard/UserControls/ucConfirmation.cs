@@ -24,10 +24,15 @@ namespace ProjectWizard
             sb.Append("Location of Origin - " + wd.Type.OriginLocation + "\r\n");
 
             sb.Append("\r\nDesired Submodules:\r\n");
+            bool bHasSubmodule = false;
             foreach(WizData_Submodules i in wd.SubmodulesAr)
             {
+                bHasSubmodule = true;
                 sb.Append("- " + i.Name + "\r\n");
             }
+
+            if (!bHasSubmodule)
+                sb.Append("NONE\r\n");
 
             sb.Append("\r\nAuthor Block:\r\n");
             sb.Append("Project Name - " + wd.Author.ProjectName + "\r\n");
