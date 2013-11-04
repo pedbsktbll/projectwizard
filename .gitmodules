@@ -1,0 +1,3 @@
+[submodule "Project Templates/ConsoleAppTemplate"]
+	path = Project Templates/ConsoleAppTemplate
+	url = git@bitbucket.org:pedbsktbll/consoleapptemplate.git
