@@ -7,10 +7,15 @@ namespace ProjectWizard
 {
     public partial class ucSubmodules : UserControlEx
     {
+        //Hack, problem is we can't just watch for the selectedindexchanged event for the pop boxes
+        //because two change whenever a button was clicked and I didn't like how the descriptions were
+        //coming out after a click.  This fixes that by making sure only the first is updated.
+        bool bClick = true;
         public ucSubmodules()
         {
             InitializeComponent();
-
+            pbAvailable.Tag = pbSelected;
+            pbSelected.Tag = pbAvailable;
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Submodules_Data[]));
@@ -25,6 +30,13 @@ namespace ProjectWizard
                     pbAvailable.Items.Add(item);
                     bSelect.Enabled = true;
                     bSelectAll.Enabled = true;
+                }
+
+                if(pbAvailable.Items.Count > 0)
+                {
+                    pbAvailable.Items[0].Selected = true;
+                    pbAvailable.Select();
+                    pbAvailable.Focus();
                 }
             }
             catch (SystemException e)
@@ -56,27 +68,33 @@ namespace ProjectWizard
 
         private void bSelectAll_Click(object sender, EventArgs e)
         {
+            bClick = true;
             pbSelected.push(pbAvailable.popall());
         }
 
         private void bSelect_Click(object sender, EventArgs e)
         {
+            bClick = true;
             pbSelected.push(pbAvailable.pop());
         }
 
         private void bRemove_Click(object sender, EventArgs e)
         {
+            bClick = true;
             pbAvailable.push(pbSelected.pop());
         }
 
         private void bRemoveAll_Click(object sender, EventArgs e)
         {
+            bClick = true;
             pbAvailable.push(pbSelected.popall());
         }
 
         private void PopBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopBox pb = (PopBox)sender;
+            PopBox other = (PopBox)pb.Tag;
+            
             if (pbAvailable.Items.Count == 0)
                 bSelectAll.Enabled = false;
             else
@@ -99,11 +117,41 @@ namespace ProjectWizard
             
             if (pb.SelectedItems.Count == 0)
                 return;
+            
+            if (bClick)
+            {
+                txtDescription.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Description;
+                lnkConf.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Confluence;
+                lnkJira.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Jira;
+                lnkStash.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Stash;
+                bClick = false;
+            }            
+        }
 
-            txtDescription.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Description;
-            lnkConf.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Confluence;
-            lnkJira.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Jira;
-            lnkStash.Text = ((Submodules_Data)pb.SelectedItems[0].Tag).Stash;
+        //I probably don't need half of these, but meh, I'm tired and want to go to bed.
+        private void popHack_Click(object sender, EventArgs e)
+        {
+            bClick = true;
+        }
+
+        private void popHack_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bClick = true;
+        }
+
+        private void popHack_KeyPress(object sender, KeyEventArgs e)
+        {
+            bClick = true;
+        }
+
+        private void pbAvailable_MouseClick(object sender, MouseEventArgs e)
+        {
+            bClick = true;
+        }
+
+        private void pbAvailable_MouseDown(object sender, MouseEventArgs e)
+        {
+            bClick = true;
         }
     }
 }

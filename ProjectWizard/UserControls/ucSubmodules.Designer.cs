@@ -220,15 +220,22 @@
             this.pbAvailable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Submodule});
             this.pbAvailable.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.pbAvailable.HideSelection = false;
             this.pbAvailable.Location = new System.Drawing.Point(6, 48);
             this.pbAvailable.MultiSelect = false;
             this.pbAvailable.Name = "pbAvailable";
             this.pbAvailable.Size = new System.Drawing.Size(291, 134);
             this.pbAvailable.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pbAvailable.TabIndex = 10;
+            this.pbAvailable.Tag = "";
             this.pbAvailable.UseCompatibleStateImageBehavior = false;
             this.pbAvailable.View = System.Windows.Forms.View.Details;
             this.pbAvailable.SelectedIndexChanged += new System.EventHandler(this.PopBox_SelectedIndexChanged);
+            this.pbAvailable.Click += new System.EventHandler(this.popHack_Click);
+            this.pbAvailable.DoubleClick += new System.EventHandler(this.popHack_Click);
+            this.pbAvailable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.popHack_KeyPress);
+            this.pbAvailable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbAvailable_MouseClick);
+            this.pbAvailable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbAvailable_MouseDown);
             // 
             // Submodule
             // 
@@ -239,15 +246,22 @@
             this.pbSelected.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Submodules});
             this.pbSelected.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.pbSelected.HideSelection = false;
             this.pbSelected.Location = new System.Drawing.Point(386, 48);
             this.pbSelected.MultiSelect = false;
             this.pbSelected.Name = "pbSelected";
             this.pbSelected.Size = new System.Drawing.Size(291, 134);
             this.pbSelected.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pbSelected.TabIndex = 11;
+            this.pbSelected.Tag = "";
             this.pbSelected.UseCompatibleStateImageBehavior = false;
             this.pbSelected.View = System.Windows.Forms.View.Details;
             this.pbSelected.SelectedIndexChanged += new System.EventHandler(this.PopBox_SelectedIndexChanged);
+            this.pbSelected.Click += new System.EventHandler(this.popHack_Click);
+            this.pbSelected.DoubleClick += new System.EventHandler(this.popHack_Click);
+            this.pbSelected.KeyDown += new System.Windows.Forms.KeyEventHandler(this.popHack_KeyPress);
+            this.pbSelected.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbAvailable_MouseClick);
+            this.pbSelected.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbAvailable_MouseDown);
             // 
             // Submodules
             // 
