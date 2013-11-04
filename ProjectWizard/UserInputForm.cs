@@ -3,14 +3,14 @@ using System.Windows.Forms;
 
 namespace ProjectWizard
 {
-    public partial class fMain : Form
+    public partial class UserInputForm : Form
     {
         WizardData wz;
         private UserControlEx[] pucList;
         private int iCurIndex;
         private bool bOverrideExit;
 
-        public fMain()
+		public UserInputForm()
         {
             InitializeComponent();
 

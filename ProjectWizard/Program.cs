@@ -13,7 +13,7 @@ namespace ProjectWizard
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fMain());
+            Application.Run(new UserInputForm());
         }
     }
 }

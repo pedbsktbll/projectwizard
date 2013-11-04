@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7C68B641-40B7-4744-AA1A-BF42E04194DA}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectWizard</RootNamespace>
     <AssemblyName>ProjectWizard</AssemblyName>
@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
@@ -45,12 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fMain.cs">
+    <Compile Include="UserInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fMain.Designer.cs">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <Compile Include="UserInputForm.Designer.cs">
+      <DependentUpon>UserInputForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IWizardImplementation.cs" />
     <Compile Include="PopBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,8 +92,8 @@
     <EmbeddedResource Include="UserControls\ucAuthorBlock.resx">
       <DependentUpon>ucAuthorBlock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fMain.resx">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <EmbeddedResource Include="UserInputForm.resx">
+      <DependentUpon>UserInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -142,6 +147,28 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataClasses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

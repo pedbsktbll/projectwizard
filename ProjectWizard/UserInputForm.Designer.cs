@@ -1,6 +1,6 @@
 ﻿namespace ProjectWizard
 {
-    partial class fMain
+    partial class UserInputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInputForm));
             this.pBottom = new System.Windows.Forms.Panel();
             this.bPrevious = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TemplateWizard;
 using System.Windows.Forms;
 using EnvDTE;
 
-namespace CustomWizard
+namespace ProjectWizard
 {
 	public class IWizardImplementation : IWizard
 	{
@@ -44,7 +44,8 @@ namespace CustomWizard
 				inputForm = new UserInputForm();
 				inputForm.ShowDialog();
 
-				customMessage = inputForm.get_CustomMessage();
+//				customMessage = inputForm.get_CustomMessage();
+				customMessage = "Test";
 
 				// Add custom parameters.
 				replacementsDictionary.Add("$custommessage$",
