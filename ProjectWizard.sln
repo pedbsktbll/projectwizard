@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWizard", "ProjectWizard\ProjectWizard.csproj", "{7C68B641-40B7-4744-AA1A-BF42E04194DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSIXProject1", "VSIXProject1\VSIXProject1.csproj", "{6C3E8E6D-50A9-4280-9086-315D2D7B9B62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{7C68B641-40B7-4744-AA1A-BF42E04194DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C68B641-40B7-4744-AA1A-BF42E04194DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C68B641-40B7-4744-AA1A-BF42E04194DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3E8E6D-50A9-4280-9086-315D2D7B9B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3E8E6D-50A9-4280-9086-315D2D7B9B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3E8E6D-50A9-4280-9086-315D2D7B9B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3E8E6D-50A9-4280-9086-315D2D7B9B62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
