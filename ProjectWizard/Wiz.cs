@@ -26,11 +26,12 @@ namespace ProjectWizard
             {
                 WizardData wz = f.GetWizardData();
                 //Do stuff
-                return;
+                retval = wizardResult.wizardResultSuccess;
             }
             else
             {
-                return; //Handle canceling here....
+                //Causes our project not to be created.
+                retval = wizardResult.wizardResultCancel;   
             }
 
         }
