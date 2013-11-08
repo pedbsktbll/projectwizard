@@ -49,5 +49,17 @@ namespace ProjectWizard
 
             return wd;
         }
+
+        public void SetProjectName(string projName)
+        {
+            try
+            {
+                txtProjectName.Text = projName;
+            }
+            catch
+            {
+                txtProjectName.Text = "";
+            }
+        }
     }
 }

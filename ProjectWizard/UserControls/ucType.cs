@@ -125,5 +125,17 @@ namespace ProjectWizard
                 txtDescription.Text = ((ProjectType_Data)rbCUS.Tag).Description;
             }
         }
+
+        public void SetProjectName(string projName)
+        {
+            try
+            {
+                txtMain.Text = projName + ".cpp";
+            }
+            catch 
+            {
+                txtMain.Text = "ProjectMain.cpp";
+            }
+        }
     }
 }

@@ -5,14 +5,15 @@ namespace ProjectWizard
 {
     public partial class fMain : Form
     {
-        WizardData wz;
         private UserControlEx[] pucList;
         private int iCurIndex;
         private bool bOverrideExit;
 
-        public fMain()
+        public fMain(string ProjectName)
         {
             InitializeComponent();
+            ucType1.SetProjectName(ProjectName);
+            ucAuthorBlock1.SetProjectName(ProjectName);
 
             //Order the user controls will show up in.
             pucList = new UserControlEx[4];
@@ -24,7 +25,6 @@ namespace ProjectWizard
             iCurIndex = 0;
             bOverrideExit = true;
             ucType1.Enabled = true;
-            wz = null;
         }
 
         private void PaintPanels()
@@ -77,14 +77,13 @@ namespace ProjectWizard
               
         private void bNext_Click(object sender, EventArgs e)
         {
-            wz = new WizardData();
-            wz.Type = ucType1.GetData();
             if (ValidateUserControl())
             {
                 iCurIndex++;
                 if (iCurIndex == pucList.Length)
                 {
                     bOverrideExit = false;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
@@ -113,7 +112,19 @@ namespace ProjectWizard
             {
                 if (!CheckExit())
                     e.Cancel = true;
+                else
+                    this.DialogResult = DialogResult.Cancel;
             }
+        }
+
+        public WizardData GetWizardData()
+        {
+            WizardData wz = new WizardData();
+            wz.Type = ucType1.GetData();
+            wz.SubmodulesAr = ucSubmodules1.GetData();
+            wz.Author = ucAuthorBlock1.GetData();
+
+            return wz;
         }
     }
 }

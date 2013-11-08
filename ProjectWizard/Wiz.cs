@@ -21,18 +21,18 @@ namespace ProjectWizard
         /// <returns></returns>
         public void Execute(object Application, int hwndOwner, ref object[] contextParams, ref object[] customParams, ref EnvDTE.wizardResult retval)
         {
-            MessageBox.Show("The wizard is now running.");
+            fMain f = new fMain((string)contextParams[1]);
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                WizardData wz = f.GetWizardData();
+                //Do stuff
+                return;
+            }
+            else
+            {
+                return; //Handle canceling here....
+            }
+
         }
-//     //{
-//         /// <summary>
-//         /// The main entry point for the application.
-//         /// </summary>
-//        // [STAThread]
-//         static void Main()
-//         {
-//             Application.EnableVisualStyles();
-//             Application.SetCompatibleTextRenderingDefault(false);
-//             Application.Run(new fMain());
-//         }
     }
 }
