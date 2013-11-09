@@ -100,8 +100,9 @@ namespace ProjectWizard
 			// Create new solution if we need to....
 			if( this.createNewSolution )
 			{
+                Directory.CreateDirectory(solutionPath);
 				this.dte.Solution.Create(this.solutionPath, this.solutionName);
-				Directory.CreateDirectory(solutionPath);
+                this.dte.Solution.SaveAs(this.solutionName);
 			}
 
 			// Copy all the required property sheets into solutiondir/props
