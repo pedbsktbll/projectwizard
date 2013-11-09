@@ -30,20 +30,25 @@ namespace ProjectWizard
         /// <returns></returns>
         public void Execute(object Application, int hwndOwner, ref object[] contextParams, ref object[] customParams, ref EnvDTE.wizardResult retval)
         {
-			this.dte = (_DTE)Application;
-            fMain f = new fMain((string)contextParams[1]);
-            if (f.ShowDialog() == DialogResult.OK)
-            {
-                WizardData wz = f.GetWizardData();
-				this.createProject(wz, true, "solution", "project", "C:\\somewhere\\", ProjectType.ConsoleApp);
-                //Do stuff
-                return;
-            }
-            else
-            {
-                return; //Handle canceling here....
-            }
-
+			try
+			{
+				this.dte = (_DTE)Application;
+				fMain f = new fMain((string)contextParams[1]);
+				if( f.ShowDialog() == DialogResult.OK )
+				{
+					WizardData wz = f.GetWizardData();
+					this.createProject(wz, true, "solution", "project", "C:\\somewhere\\", ProjectType.ConsoleApp);
+					return;
+				}
+				else
+				{
+					return; //Handle canceling here....
+				}
+			}
+			catch (System.Exception ex)
+			{
+				MessageBox.Show("Error", "Exception: " + ex.Message);
+			}
         }
 
 		// Main function that does all the work of setting up the project....
@@ -64,8 +69,18 @@ namespace ProjectWizard
 			if( createNewSolution )
 				this.dte.Solution.Create(path, solutionName);
 
-//			CopyPropertySheets();
-//			AddProjectItems();
+			EnvDTE.Project project = this.dte.Solution.AddFromFile(path);
+
+			CopyPropertySheets(path);
+			AddProjectItems(project, path, projectType );
+		}
+
+		private void CopyPropertySheets(string path)
+		{
+		}
+
+		private void AddProjectItems(EnvDTE.Project project, string path, ProjectType projectType)
+		{
 		}
     }
 }
