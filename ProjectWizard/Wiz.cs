@@ -25,6 +25,7 @@ namespace ProjectWizard
             if (f.ShowDialog() == DialogResult.OK)
             {
                 WizardData wz = f.GetWizardData();
+				this.createProject(wz, true, "solution", "project", "C:\\somewhere\\");
                 //Do stuff
                 return;
             }
@@ -34,5 +35,21 @@ namespace ProjectWizard
             }
 
         }
+
+		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
+		private void createProject(WizardData wz, bool createNewSolution, string solutionName, string projectName, string path)
+		{
+			switch( projectName )
+			{
+				// All the projects here
+			}
+
+			// Create new solution if we need to....
+			if( createNewSolution )
+				;
+
+//			CopyPropertySheets();
+//			AddProjectItems();
+		}
     }
 }
