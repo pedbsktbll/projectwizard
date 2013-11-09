@@ -19,6 +19,7 @@ namespace ProjectWizard
     public class Wiz : IDTWizard
     {
 		// Basic class variables for object Wizard
+		//TODO: Most or all of these may be within WizardData. Haven't looked much into what all info you grab
 		protected _DTE dte = null;
 		protected WizardData wz = null;
 		protected string solutionName = null;
@@ -77,7 +78,7 @@ namespace ProjectWizard
 			if( createNewSolution )
 				this.dte.Solution.Create(this.path, this.solutionName);
 
-			// Create project dir, stage .vcxproj.
+			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
 
 			// Using EnvDTE, create the VS project...
