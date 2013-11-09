@@ -4,6 +4,7 @@ using System.Text;
 using EnvDTE;
 using EnvDTE80;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ProjectWizard
 {
@@ -25,9 +26,21 @@ namespace ProjectWizard
 		protected string solutionName = null;
 		protected string projectName = null;
 		protected string path = null;
+		protected string solutionPath = null;
+		protected string projectPath = null;
 		protected ProjectType projectType;
+		protected bool createNewSolution = false;
 
         // Execute is the main entry point for a project wizard.  It has to follow this template.
+		// contextParams:
+		// 0: some GUID
+		// 1: Project Name
+		// 2: Project Path
+		// 3: location of visual studio exe
+		// 4: Create New Solution : true..... Add to existing solution: false
+		// 5: Solution Name--- Will be empty string if not selected to create solution
+		// 6: false
+		// 7: "4.0"
         public void Execute(object Application, int hwndOwner, ref object[] contextParams, ref object[] customParams, ref EnvDTE.wizardResult retval)
         {
 			try
@@ -39,13 +52,22 @@ namespace ProjectWizard
 					//TODO: Organize and validate input
 					this.dte = (_DTE)Application;
 					this.wz = f.GetWizardData();
-					this.solutionName = "solutionName";
-					this.projectName = "projectName";
-					this.path = "C:\\somewhere\\";
+					this.solutionName = (string) contextParams[5];
+					this.projectName = (string) contextParams[1];
+					this.path = (string) contextParams[2];
 					this.projectType = ProjectType.ConsoleApp;
+					this.createNewSolution = (bool)contextParams[4];
+
+					// Parse project path and solution path from "path"
+					//TODO: Can "path" be null/empty?
+					this.projectPath = this.path;
+					if( this.createNewSolution )
+						this.solutionPath = path.Substring(0, this.path.Length - this.projectName.Length - 1);
+					else
+						this.solutionPath = Path.GetDirectoryName(this.dte.Solution.FullName);
 
 					// Create a Project based on all our input:
-					retval = createProject(true) ? wizardResult.wizardResultSuccess : wizardResult.wizardResultFailure;
+					retval = createProject() ? wizardResult.wizardResultSuccess : wizardResult.wizardResultFailure;
 				}
 				else
 				{
@@ -54,15 +76,15 @@ namespace ProjectWizard
 			}
 			catch (System.Exception ex)
 			{
-				MessageBox.Show("Error", "Exception: " + ex.Message);
+				MessageBox.Show("Exception: " + ex.Message, "Error");
 				retval = wizardResult.wizardResultBackOut;
-				Environment.Exit(-1);
+//				Environment.Exit(-1);
 			}
         }
 
 		// Main function that does all the work of setting up the project....
 		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
-		private bool createProject(bool createNewSolution)
+		private bool createProject()
 		{
 			switch( this.projectType )
 			{
@@ -75,8 +97,8 @@ namespace ProjectWizard
 			}
 
 			// Create new solution if we need to....
-			if( createNewSolution )
-				this.dte.Solution.Create(this.path, this.solutionName);
+			if( this.createNewSolution )
+				this.dte.Solution.Create(this.solutionPath, this.solutionName);
 
 			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
