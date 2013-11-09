@@ -18,44 +18,51 @@ namespace ProjectWizard
 
     public class Wiz : IDTWizard
     {
-		private _DTE dte = null;
-        /// <summary>
-        /// Execute is the main entry point for a project wizard.  It has to follow this template.
-        /// </summary>
-        /// <param name="Application"></param>
-        /// <param name="hwndOwner"></param>
-        /// <param name="contextParams"></param>
-        /// <param name="customParams"></param>
-        /// <param name="retval"></param>
-        /// <returns></returns>
+		// Basic class variables for object Wizard
+		protected _DTE dte = null;
+		protected WizardData wz = null;
+		protected string solutionName = null;
+		protected string projectName = null;
+		protected string path = null;
+		protected ProjectType projectType;
+
+        // Execute is the main entry point for a project wizard.  It has to follow this template.
         public void Execute(object Application, int hwndOwner, ref object[] contextParams, ref object[] customParams, ref EnvDTE.wizardResult retval)
         {
 			try
 			{
-				this.dte = (_DTE)Application;
 				fMain f = new fMain((string)contextParams[1]);
 				if( f.ShowDialog() == DialogResult.OK )
 				{
-					WizardData wz = f.GetWizardData();
-					this.createProject(wz, true, "solution", "project", "C:\\somewhere\\", ProjectType.ConsoleApp);
-					return;
+					// Set all our member variables based on input:
+					this.dte = (_DTE)Application;
+					this.wz = f.GetWizardData();
+					this.solutionName = "solutionName";
+					this.projectName = "projectName";
+					this.path = "C:\\somewhere\\";
+					this.projectType = ProjectType.ConsoleApp;
+
+					// Create a Project based on all our input:
+					retval = createProject(true) ? wizardResult.wizardResultSuccess : wizardResult.wizardResultFailure;
 				}
 				else
 				{
-					return; //Handle canceling here....
+					retval = wizardResult.wizardResultCancel;
 				}
 			}
 			catch (System.Exception ex)
 			{
 				MessageBox.Show("Error", "Exception: " + ex.Message);
+				retval = wizardResult.wizardResultBackOut;
+				Environment.Exit(-1);
 			}
         }
 
 		// Main function that does all the work of setting up the project....
 		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
-		private void createProject(WizardData wz, bool createNewSolution, string solutionName, string projectName, string path, ProjectType projectType)
+		private bool createProject(bool createNewSolution)
 		{
-			switch( projectType )
+			switch( this.projectType )
 			{
 				// All the projects here
 				case ProjectType.ConsoleApp: break;
@@ -67,20 +74,23 @@ namespace ProjectWizard
 
 			// Create new solution if we need to....
 			if( createNewSolution )
-				this.dte.Solution.Create(path, solutionName);
+				this.dte.Solution.Create(this.path, this.solutionName);
 
-			EnvDTE.Project project = this.dte.Solution.AddFromFile(path);
+			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.path);
 
-			CopyPropertySheets(path);
-			AddProjectItems(project, path, projectType );
+			CopyPropertySheets();
+			AddProjectItems();
+			return true;
 		}
 
-		private void CopyPropertySheets(string path)
+		private bool CopyPropertySheets()
 		{
+			return true;
 		}
 
-		private void AddProjectItems(EnvDTE.Project project, string path, ProjectType projectType)
+		private bool AddProjectItems()
 		{
+			return true;
 		}
     }
 }
