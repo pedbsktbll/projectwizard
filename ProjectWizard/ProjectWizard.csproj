@@ -133,6 +133,37 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\proj\ConsoleAppTemplate.vcxproj" />
+    <None Include="Resources\proj\ConsoleAppTemplate.vcxproj.filters" />
+    <None Include="Resources\props\internal\Common.props" />
+    <None Include="Resources\props\internal\Console.props" />
+    <None Include="Resources\props\internal\Debug.props" />
+    <None Include="Resources\props\internal\DLL.props" />
+    <None Include="Resources\props\internal\GUI.props" />
+    <None Include="Resources\props\internal\Kernel_Common.props" />
+    <None Include="Resources\props\internal\Kernel_x64.props" />
+    <None Include="Resources\props\internal\Kernel_x86.props" />
+    <None Include="Resources\props\internal\Release.props" />
+    <None Include="Resources\props\internal\SYS.props" />
+    <None Include="Resources\props\internal\User_Common.props" />
+    <None Include="Resources\props\internal\User_x64.props" />
+    <None Include="Resources\props\internal\User_x86.props" />
+    <None Include="Resources\props\Kernel_Debug_x64.props" />
+    <None Include="Resources\props\Kernel_Debug_x86.props" />
+    <None Include="Resources\props\Kernel_Release_x64.props" />
+    <None Include="Resources\props\Kernel_Release_x86.props" />
+    <None Include="Resources\props\User_Debug_x64.props" />
+    <None Include="Resources\props\User_Debug_x86.props" />
+    <None Include="Resources\props\User_Dynamic_Debug_x64.props" />
+    <None Include="Resources\props\User_Dynamic_Debug_x86.props" />
+    <None Include="Resources\props\User_Dynamic_Release_x64.props" />
+    <None Include="Resources\props\User_Dynamic_Release_x86.props" />
+    <None Include="Resources\props\User_Release_x64.props" />
+    <None Include="Resources\props\User_Release_x86.props" />
+    <None Include="Resources\props\User_Static_Debug_x64.props" />
+    <None Include="Resources\props\User_Static_Debug_x86.props" />
+    <None Include="Resources\props\User_Static_Release_x64.props" />
+    <None Include="Resources\props\User_Static_Release_x86.props" />
     <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataClasses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\base\__PROJECT_NAME__.cpp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
