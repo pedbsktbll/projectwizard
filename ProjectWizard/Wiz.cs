@@ -5,6 +5,7 @@ using EnvDTE;
 using EnvDTE80;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace ProjectWizard
 {
@@ -98,7 +99,13 @@ namespace ProjectWizard
 
 			// Create new solution if we need to....
 			if( this.createNewSolution )
+			{
 				this.dte.Solution.Create(this.solutionPath, this.solutionName);
+				Directory.CreateDirectory(solutionPath);
+			}
+
+			// Copy all the required property sheets into solutiondir/props
+			CopyPropertySheets();
 
 			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
@@ -106,12 +113,41 @@ namespace ProjectWizard
 			// Using EnvDTE, create the VS project...
 			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.path);
 
-			// Copy all the required property sheets into solutiondir/props
-			CopyPropertySheets();
-
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
+			return true;
+		}
+
+		//TODO: Make props hidden?
+		private bool CopyPropertySheets()
+		{
+			string propResource = "ProjectWizard.Resources.props";
+			string destination = this.solutionPath + "\\props\\";
+
+			Directory.CreateDirectory(destination);
+			Directory.CreateDirectory(destination + "\\internal");
+
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			foreach( string name in assembly.GetManifestResourceNames() )
+			{
+				if( !name.StartsWith(propResource) )
+					continue;
+
+				StringBuilder propSheet = new StringBuilder(name.Substring(propResource.Length + 1));
+				if( propSheet.ToString().StartsWith("internal") )
+					propSheet[propSheet.ToString().IndexOf('.')] = '\\';
+
+				Stream resource = assembly.GetManifestResourceStream(name);
+				Stream output = File.OpenWrite(destination + propSheet.ToString());
+				if( resource != null && output != null )
+				{
+					resource.CopyTo(output);
+					output.Close();
+					resource.Close();
+				}
+
+			}
 			return true;
 		}
 
@@ -119,14 +155,6 @@ namespace ProjectWizard
 		private bool CopyProjFiles()
 		{
 			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
-			return true;
-		}
-
-		//TODO: STUB
-		private bool CopyPropertySheets()
-		{
-			// We somehow need to copy everything from ProjectWizard.Resources.props into the new solution at $(SolutionDir)props.
-			// What if already exists? Should we overwrite? This may be more difficult than it appears...
 			return true;
 		}
 
