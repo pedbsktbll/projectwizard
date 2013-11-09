@@ -35,6 +35,7 @@ namespace ProjectWizard
 				if( f.ShowDialog() == DialogResult.OK )
 				{
 					// Set all our member variables based on input:
+					//TODO: Organize and validate input
 					this.dte = (_DTE)Application;
 					this.wz = f.GetWizardData();
 					this.solutionName = "solutionName";
@@ -76,20 +77,40 @@ namespace ProjectWizard
 			if( createNewSolution )
 				this.dte.Solution.Create(this.path, this.solutionName);
 
+			// Create project dir, stage .vcxproj.
+			CopyProjFiles();
+
+			// Using EnvDTE, create the VS project...
 			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.path);
 
+			// Copy all the required property sheets into solutiondir/props
 			CopyPropertySheets();
+
+			// Copy all project items (source and header files) into project
 			AddProjectItems();
+
 			return true;
 		}
 
+		//TODO: STUB
+		private bool CopyProjFiles()
+		{
+			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
+			return true;
+		}
+
+		//TODO: STUB
 		private bool CopyPropertySheets()
 		{
+			// We somehow need to copy everything from ProjectWizard.Resources.props into the new solution at $(SolutionDir)props.
+			// What if already exists? Should we overwrite? This may be more difficult than it appears...
 			return true;
 		}
 
+		//TODO: STUB
 		private bool AddProjectItems()
 		{
+			// Copy everything from ProjectWizard.Resources.base into new project at $(ProjectDir).
 			return true;
 		}
     }
