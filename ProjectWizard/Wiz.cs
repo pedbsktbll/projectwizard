@@ -114,6 +114,12 @@ namespace ProjectWizard
                 this.dte.Solution.SaveAs(this.solutionName);
 			}
 
+			// Create custom directories:
+			Directory.CreateDirectory(solutionPath + "\\BIN");
+			Directory.CreateDirectory(solutionPath + "\\Shared");
+			Directory.CreateDirectory(solutionPath + "\\Libs");
+			Directory.CreateDirectory(solutionPath + "\\Submodules");
+
 			// Copy all the required property sheets into solutiondir/props
 			CopyPropertySheets();
 
@@ -173,6 +179,9 @@ namespace ProjectWizard
 				Stream output = File.OpenWrite(destination + "\\" + this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
 				if( output != null )
 				{
+					StreamReader reader = new StreamReader(kvp.Value);
+					string projFile = reader.ReadToEnd();
+
 					kvp.Value.CopyTo(output);
 					output.Close();
 				}
@@ -221,6 +230,18 @@ namespace ProjectWizard
 					dict.Add(name.Substring(filter.Length + 1), stream);
 			}
 			return dict;
+		}
+
+		// This function will parse a given string and replace all modifiable data with user-input
+		// from the wizard.
+		private string ParseData(string dataFile)
+		{
+			string retVal = dataFile.Replace("_____FILENAME_____", wz.Author.ProjectName);
+			retVal = dataFile.Replace("_____USER_____", dte.FullName);
+			retVal = dataFile.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
+			retVal = dataFile.Replace("_____DESCRIPTION_____", wz.Author.Description);
+			retVal = dataFile.Replace("_____VERSION_____", wz.Author.Version);
+			return retVal;
 		}
     }
 }
