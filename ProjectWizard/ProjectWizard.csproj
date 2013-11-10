@@ -209,13 +209,13 @@
     <EmbeddedResource Include="Resources\base\SYSApp\myFault.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\base\ConsoleApp\%24_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\DLLApp\%24_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\GUIApp\%24_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\LIBApp\%24_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\LIBApp\%24_____FILENAME_____.h" />
-    <EmbeddedResource Include="Resources\base\SYSApp\%24_____FILENAME_____.c" />
-    <EmbeddedResource Include="Resources\base\SYSApp\%24_____FILENAME_____.h" />
+    <EmbeddedResource Include="Resources\base\ConsoleApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\DLLApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.h" />
+    <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.c" />
+    <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.h" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

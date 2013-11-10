@@ -180,9 +180,13 @@ namespace ProjectWizard
 				if( output != null )
 				{
 					StreamReader reader = new StreamReader(kvp.Value);
-					string projFile = reader.ReadToEnd();
+					string projFile = ParseData(reader.ReadToEnd());
+					reader.Close();
 
-					kvp.Value.CopyTo(output);
+					StreamWriter writer = new StreamWriter(output);
+					writer.Write(projFile);
+					writer.Close();
+
 					output.Close();
 				}
 				kvp.Value.Close();
@@ -200,10 +204,18 @@ namespace ProjectWizard
 			SortedDictionary<string, Stream> srcFiles = GetResources(srcResource);
 			foreach( var kvp in srcFiles )
 			{
-				Stream output = File.OpenWrite(destination + "\\" + kvp.Key);//this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
+//				Stream output = File.OpenWrite(destination + "\\" + kvp.Key);//this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
+				Stream output = File.OpenWrite(destination + "\\" + ParseData(kvp.Key));
 				if( output != null )
 				{
-					kvp.Value.CopyTo(output);
+					StreamReader reader = new StreamReader(kvp.Value);
+					string srcFile = ParseData(reader.ReadToEnd());
+					reader.Close();
+
+					StreamWriter writer = new StreamWriter(output);
+					writer.Write(srcFile);
+					writer.Close();
+
 					output.Close();
 				}
 				kvp.Value.Close();
@@ -237,10 +249,10 @@ namespace ProjectWizard
 		private string ParseData(string dataFile)
 		{
 			string retVal = dataFile.Replace("_____FILENAME_____", wz.Author.ProjectName);
-			retVal = dataFile.Replace("_____USER_____", dte.FullName);
-			retVal = dataFile.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
-			retVal = dataFile.Replace("_____DESCRIPTION_____", wz.Author.Description);
-			retVal = dataFile.Replace("_____VERSION_____", wz.Author.Version);
+			retVal = retVal.Replace("_____USER_____", wz.Author.Author);
+			retVal = retVal.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
+			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description);
+			retVal = retVal.Replace("_____VERSION_____", wz.Author.Version);
 			return retVal;
 		}
     }
