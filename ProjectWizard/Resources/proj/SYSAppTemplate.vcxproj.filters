@@ -22,12 +22,12 @@
     <ClInclude Include="myFault.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="%24_____FILENAME_____.h">
+    <ClInclude Include="_____FILENAME_____.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="%24_____FILENAME_____.c">
+    <ClCompile Include="_____FILENAME_____.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -154,10 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="%24_____FILENAME_____.h" />
+    <ClInclude Include="_____FILENAME_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="%24_____FILENAME_____.cpp" />
+    <ClCompile Include="_____FILENAME_____.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

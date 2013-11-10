@@ -16,7 +16,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="%24_____FILENAME_____.cpp">
+    <ClCompile Include="_____FILENAME_____.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -179,7 +179,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="%24_____FILENAME_____.cpp" />
+    <ClCompile Include="_____FILENAME_____.cpp" />
     <ClCompile Include="MainDlg.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -160,10 +160,10 @@
   <ItemGroup>
     <ClInclude Include="ioctlcmd.h" />
     <ClInclude Include="myFault.h" />
-    <ClInclude Include="%24_____FILENAME_____.h" />
+    <ClInclude Include="_____FILENAME_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="%24_____FILENAME_____.c" />
+    <ClCompile Include="_____FILENAME_____.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
