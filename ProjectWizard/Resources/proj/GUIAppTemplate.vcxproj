@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="GUIAppTemplate.ico" />
+    <None Include="_____FILENAME_____.ico" />
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +183,7 @@
     <ClCompile Include="MainDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="GUIAppTemplate.rc" />
+    <ResourceCompile Include="_____FILENAME_____.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
