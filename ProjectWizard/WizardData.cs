@@ -13,7 +13,7 @@ namespace ProjectWizard
     [Serializable]
     public class WizData_Type
     {
-        public string ProjectTemplate { get; set; }
+        public int ProjectTemplate { get; set; }
         public string MainLocation { get; set; }
         public string OriginLocation { get; set; }
     }
@@ -46,6 +46,7 @@ namespace ProjectWizard
         public string Type { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
+		public int ProjectType { get; set; }
     }
 
     [Serializable]

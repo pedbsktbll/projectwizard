@@ -32,11 +32,11 @@ namespace ProjectWizard
 		protected ProjectType projectType;
 		protected bool createNewSolution = false;
 
-		protected string[] ProjectTypeStrings = new string[5]
+		public static readonly string[] ProjectTypeStrings = new string[5]
 		{
 			"ConsoleApp",
-			"DLLApp",
 			"GUIApp",
+			"DLLApp",
 			"LIBApp",
 			"SYSApp",
 		};
@@ -65,7 +65,7 @@ namespace ProjectWizard
 					this.solutionName = (string) contextParams[5];
 					this.projectName = (string) contextParams[1];
 					this.path = (string) contextParams[2];
-					this.projectType = ProjectType.ConsoleApp;
+					this.projectType = (ProjectType) wz.Type.ProjectTemplate;
 					this.createNewSolution = (bool)contextParams[4];
 
 					// Parse project path and solution path from "path"
@@ -181,10 +181,24 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: STUB
+		//TODO: Customize...
 		protected bool AddProjectItems()
 		{
-			// Copy everything from ProjectWizard.Resources.base into new project at $(ProjectDir).
+			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
+			string srcResource = "ProjectWizard.Resources.base." + ProjectTypeStrings[(int)this.projectType];
+			string destination = this.projectPath;
+
+			SortedDictionary<string, Stream> srcFiles = GetResources(srcResource);
+			foreach( var kvp in srcFiles )
+			{
+				Stream output = File.OpenWrite(destination + "\\" + kvp.Key);//this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
+				if( output != null )
+				{
+					kvp.Value.CopyTo(output);
+					output.Close();
+				}
+				kvp.Value.Close();
+			}
 			return true;
 		}
 
