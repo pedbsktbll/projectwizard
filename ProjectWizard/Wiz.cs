@@ -208,14 +208,19 @@ namespace ProjectWizard
 				Stream output = File.OpenWrite(destination + "\\" + ParseData(kvp.Key));
 				if( output != null )
 				{
-					StreamReader reader = new StreamReader(kvp.Value);
-					string srcFile = ParseData(reader.ReadToEnd());
-					reader.Close();
+					// Yeahhh... sooo binary files like the .ico bitmaps dont like to be treated as strings...
+					if( !kvp.Key.EndsWith(".ico") )
+					{
+						StreamReader reader = new StreamReader(kvp.Value);
+						string srcFile = ParseData(reader.ReadToEnd());
+						reader.Close();
 
-					StreamWriter writer = new StreamWriter(output);
-					writer.Write(srcFile);
-					writer.Close();
-
+						StreamWriter writer = new StreamWriter(output);
+						writer.Write(srcFile);
+						writer.Close();
+					}
+					else
+						kvp.Value.CopyTo(output);
 					output.Close();
 				}
 				kvp.Value.Close();
