@@ -133,8 +133,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\proj\ConsoleAppTemplate.vcxproj" />
-    <None Include="Resources\proj\ConsoleAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\amd64\msvcrt.lib" />
+    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\amd64\msvcrt_win2003.obj" />
+    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\i386\msvcrt.lib" />
+    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\i386\msvcrt_win2000.obj" />
+    <EmbeddedResource Include="Resources\proj\ConsoleAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\ConsoleAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\props\internal\Common.props" />
     <EmbeddedResource Include="Resources\props\internal\Console.props" />
     <EmbeddedResource Include="Resources\props\internal\Debug.props" />
@@ -164,6 +168,14 @@
     <EmbeddedResource Include="Resources\props\User_Static_Debug_x86.props" />
     <EmbeddedResource Include="Resources\props\User_Static_Release_x64.props" />
     <EmbeddedResource Include="Resources\props\User_Static_Release_x86.props" />
+    <EmbeddedResource Include="Resources\proj\DLLAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\DLLAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\GUIAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\GUIAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\LIBAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\LIBAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj.filters" />
     <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +197,23 @@
     <Folder Include="DataClasses\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\base\ConsoleApp\ConsoleAppTemplate.cpp" />
+    <EmbeddedResource Include="Resources\base\DLLApp\DLLAppTemplate.cpp" />
+    <EmbeddedResource Include="Resources\base\DLLApp\dllmain.cpp" />
+    <EmbeddedResource Include="Resources\base\DLLApp\Exports.def" />
+    <EmbeddedResource Include="Resources\base\GUIApp\GUIAppTemplate.cpp" />
+    <EmbeddedResource Include="Resources\base\GUIApp\GUIAppTemplate.ico" />
+    <EmbeddedResource Include="Resources\base\GUIApp\GUIAppTemplate.rc" />
+    <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.cpp" />
+    <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.h" />
+    <EmbeddedResource Include="Resources\base\GUIApp\resource.h" />
+    <EmbeddedResource Include="Resources\base\GUIApp\small.ico" />
+    <EmbeddedResource Include="Resources\base\LIBApp\LIBAppTemplate.cpp" />
+    <EmbeddedResource Include="Resources\base\LIBApp\LIBAppTemplate.h" />
+    <EmbeddedResource Include="Resources\base\SYSApp\ioctlcmd.h" />
+    <EmbeddedResource Include="Resources\base\SYSApp\myFault.h" />
+    <EmbeddedResource Include="Resources\base\SYSApp\SYSAppTemplate.c" />
+    <EmbeddedResource Include="Resources\base\SYSApp\SYSAppTemplate.h" />
     <Content Include="Resources\base\__PROJECT_NAME__.cpp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
