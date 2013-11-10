@@ -253,6 +253,16 @@ namespace ProjectWizard
 			retVal = retVal.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
 			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description);
 			retVal = retVal.Replace("_____VERSION_____", wz.Author.Version);
+
+			// vcxproj specific stuff:
+			string guid = "<ProjectGuid>";
+			string guidEnd = "</ProjectGuid>";
+			string rName = "<RootNamespace>";
+			string rNameEnd = "</RootNamespace>";
+			if( retVal.Contains(guid) )
+				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(guid) + guid.Length, retVal.IndexOf(guidEnd) - retVal.IndexOf(guid) - guid.Length), Guid.NewGuid().ToString().ToUpper());
+			if( retVal.Contains(rName) )
+				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(rName) + rName.Length, retVal.IndexOf(rNameEnd) - retVal.IndexOf(rName) - rName.Length), wz.Author.ProjectName);
 			return retVal;
 		}
     }

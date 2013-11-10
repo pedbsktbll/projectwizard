@@ -199,8 +199,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\base\DLLApp\dllmain.cpp" />
     <EmbeddedResource Include="Resources\base\DLLApp\Exports.def" />
-    <EmbeddedResource Include="Resources\base\GUIApp\GUIAppTemplate.ico" />
-    <EmbeddedResource Include="Resources\base\GUIApp\GUIAppTemplate.rc" />
     <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.cpp" />
     <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.h" />
     <EmbeddedResource Include="Resources\base\GUIApp\resource.h" />
@@ -216,6 +214,10 @@
     <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.h" />
     <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.c" />
     <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.ico" />
+    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.rc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
