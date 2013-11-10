@@ -11,11 +11,11 @@ namespace ProjectWizard
 {
 	public enum ProjectType
 	{
-		ConsoleApp,
-		DLLApp,
-		GUIApp,
-		LIBApp,
-		SYSApp,
+		ConsoleApp = 0,
+		DLLApp = 1,
+		GUIApp = 2,
+		LIBApp = 3,
+		SYSApp = 4,
 	}
 
     public class Wiz : IDTWizard
@@ -31,6 +31,15 @@ namespace ProjectWizard
 		protected string projectPath = null;
 		protected ProjectType projectType;
 		protected bool createNewSolution = false;
+
+		protected string[] ProjectTypeStrings = new string[5]
+		{
+			"ConsoleApp",
+			"DLLApp",
+			"GUIApp",
+			"LIBApp",
+			"SYSApp",
+		};
 
         // Execute is the main entry point for a project wizard.  It has to follow this template.
 		// contextParams:
@@ -85,7 +94,7 @@ namespace ProjectWizard
 
 		// Main function that does all the work of setting up the project....
 		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
-		private bool createProject()
+		protected bool createProject()
 		{
 			switch( this.projectType )
 			{
@@ -112,7 +121,7 @@ namespace ProjectWizard
 			CopyProjFiles();
 
 			// Using EnvDTE, create the VS project...
-			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.path);
+			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.projectPath + "\\" + this.projectName + ".vcxproj");
 
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
@@ -121,49 +130,83 @@ namespace ProjectWizard
 		}
 
 		//TODO: Make props hidden?
-		private bool CopyPropertySheets()
+		protected bool CopyPropertySheets()
 		{
 			string propResource = "ProjectWizard.Resources.props";
 			string destination = this.solutionPath + "\\props\\";
 
-			Directory.CreateDirectory(destination);
+			// Create property sheet directory hierarchy:
 			Directory.CreateDirectory(destination + "\\internal");
 
-			Assembly assembly = Assembly.GetExecutingAssembly();
-			foreach( string name in assembly.GetManifestResourceNames() )
+			SortedDictionary<string, Stream> propSheets = GetResources(propResource);
+			foreach( var kvp in propSheets )
 			{
-				if( !name.StartsWith(propResource) )
-					continue;
-
-				StringBuilder propSheet = new StringBuilder(name.Substring(propResource.Length + 1));
+				StringBuilder propSheet = new StringBuilder(kvp.Key);
 				if( propSheet.ToString().StartsWith("internal") )
 					propSheet[propSheet.ToString().IndexOf('.')] = '\\';
 
-				Stream resource = assembly.GetManifestResourceStream(name);
 				Stream output = File.OpenWrite(destination + propSheet.ToString());
-				if( resource != null && output != null )
+				if( output != null )
 				{
-					resource.CopyTo(output);
+					kvp.Value.CopyTo(output);
 					output.Close();
-					resource.Close();
 				}
+				kvp.Value.Close();
 
 			}
 			return true;
 		}
 
-		//TODO: STUB
-		private bool CopyProjFiles()
+		//TODO: Customize project settings based on user input as well as creating the unique GUIDs and other customizations
+		protected bool CopyProjFiles()
 		{
 			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
+			string projResource = "ProjectWizard.Resources.proj." + ProjectTypeStrings[(int)this.projectType];
+			string destination = this.projectPath;
+
+			// Create VS Project directory hierarchy:
+			Directory.CreateDirectory(this.projectPath);
+
+			SortedDictionary<string, Stream> projFiles = GetResources(projResource);
+			foreach( var kvp in projFiles )
+			{
+				Stream output = File.OpenWrite(destination + "\\" + this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
+				if( output != null )
+				{
+					kvp.Value.CopyTo(output);
+					output.Close();
+				}
+				kvp.Value.Close();
+			}
 			return true;
 		}
 
 		//TODO: STUB
-		private bool AddProjectItems()
+		protected bool AddProjectItems()
 		{
 			// Copy everything from ProjectWizard.Resources.base into new project at $(ProjectDir).
 			return true;
+		}
+
+		// Helper functions:
+
+		// This function will return a filtered list of embedded resources to do work on.
+		// The SortedDictionary is to match the relative name to the associated resource data stream.
+		private SortedDictionary<string, Stream> GetResources(string filter)
+		{
+			SortedDictionary<string, Stream> dict = new SortedDictionary<string, Stream>();
+
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			foreach( string name in assembly.GetManifestResourceNames() )
+			{
+				if( !name.StartsWith(filter) )
+					continue;
+
+				Stream stream = assembly.GetManifestResourceStream(name);
+				if( stream != null )
+					dict.Add(name.Substring(filter.Length + 1), stream);
+			}
+			return dict;
 		}
     }
 }
