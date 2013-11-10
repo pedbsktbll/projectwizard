@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
@@ -19,6 +20,7 @@
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>
       </PrecompiledHeaderOutputFile>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(Libs);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -41,3 +43,4 @@
     </BuildMacro>
   </ItemGroup>
 </Project>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->

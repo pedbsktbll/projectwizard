@@ -1,11 +1,11 @@
 /*
- * Filename:		ConsoleAppTemplate.cpp
+ * Filename:		dllmain.cpp
  *
- * Author:			<Your name>
- * Date Created:	9/27/2013
- * Version 1.0:		9/27/2013 (Josh)
+ * Author:			$_____USER_____
+ * Date Created:	$_____DATE_____
+ * Version 1.0:		$_____DATE_____ ($_____USER_____)
  *
- * ConsoleApp Template
+ * _____DESCRIPTION_____
  */
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers

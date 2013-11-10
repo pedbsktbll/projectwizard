@@ -1,5 +1,13 @@
-// WTL_Sample.cpp : main source file for WTL_Sample.exe
-//
+/*
+ * Filename:		$_____FILENAME_____.cpp
+ *
+ * Author:			$_____USER_____
+ * Date Created:	$_____DATE_____
+ * Version 1.0:		$_____DATE_____ ($_____USER_____)
+ *
+ * _____DESCRIPTION_____
+ */
+
 #include "MainDlg.h"
 
 CAppModule _Module;

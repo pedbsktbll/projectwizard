@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8D9DA1D5-0A8A-472D-9443-9EB05FDEEE10}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>LIBAppTemplate</RootNamespace>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -26,12 +32,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>{8D9DA1D5-0A8A-472D-9443-9EB05FDEEE10}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LIBAppTemplate</RootNamespace>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -68,6 +68,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -153,12 +154,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="LIBAppTemplate.h" />
+    <ClInclude Include="%24_____FILENAME_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LIBAppTemplate.cpp" />
+    <ClCompile Include="%24_____FILENAME_____.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->

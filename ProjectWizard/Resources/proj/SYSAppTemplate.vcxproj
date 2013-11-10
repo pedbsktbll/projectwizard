@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BE731125-5F57-42F2-B8B4-42A0C78EBBA7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SYSAppTemplate</RootNamespace>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -26,12 +32,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>{BE731125-5F57-42F2-B8B4-42A0C78EBBA7}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>SYSAppTemplate</RootNamespace>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -65,6 +65,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -159,12 +160,13 @@
   <ItemGroup>
     <ClInclude Include="ioctlcmd.h" />
     <ClInclude Include="myFault.h" />
-    <ClInclude Include="SYSAppTemplate.h" />
+    <ClInclude Include="%24_____FILENAME_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SYSAppTemplate.c" />
+    <ClCompile Include="%24_____FILENAME_____.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->

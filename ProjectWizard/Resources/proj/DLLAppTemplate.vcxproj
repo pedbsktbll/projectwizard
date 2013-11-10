@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{396C61C4-9B92-41CE-91F0-8219CAE7D012}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>DLLAppTemplate</RootNamespace>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -26,12 +32,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>{396C61C4-9B92-41CE-91F0-8219CAE7D012}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DLLAppTemplate</RootNamespace>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -68,6 +68,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -155,7 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DLLAppTemplate.cpp" />
+    <ClCompile Include="%24_____FILENAME_____.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -172,3 +173,4 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+<!-- This project created via the OSB Project Template by Josh S, Keith T. -->
