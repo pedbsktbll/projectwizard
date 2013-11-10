@@ -12,8 +12,8 @@ namespace ProjectWizard
 	public enum ProjectType
 	{
 		ConsoleApp = 0,
-		DLLApp = 1,
-		GUIApp = 2,
+		GUIApp = 1,
+		DLLApp = 2,
 		LIBApp = 3,
 		SYSApp = 4,
 	}
