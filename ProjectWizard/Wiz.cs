@@ -13,9 +13,10 @@ namespace ProjectWizard
 	{
 		ConsoleApp = 0,
 		GUIApp = 1,
-		DLLApp = 2,
-		LIBApp = 3,
-		SYSApp = 4,
+		WTLApp = 2,
+		DLLApp = 3,
+		LIBApp = 4,
+		SYSApp = 5,
 	}
 
     public class Wiz : IDTWizard
@@ -32,10 +33,11 @@ namespace ProjectWizard
 		protected ProjectType projectType;
 		protected bool createNewSolution = false;
 
-		public static readonly string[] ProjectTypeStrings = new string[5]
+		public static readonly string[] ProjectTypeStrings = new string[6]
 		{
 			"ConsoleApp",
 			"GUIApp",
+			"WTLApp",
 			"DLLApp",
 			"LIBApp",
 			"SYSApp",
@@ -96,16 +98,6 @@ namespace ProjectWizard
 		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
 		protected bool createProject()
 		{
-			switch( this.projectType )
-			{
-				// All the projects here
-				case ProjectType.ConsoleApp: break;
-				case ProjectType.DLLApp: break;
-				case ProjectType.GUIApp: break;
-				case ProjectType.LIBApp: break;
-				case ProjectType.SYSApp: break;
-			}
-
 			// Create new solution if we need to....
 			if( this.createNewSolution )
 			{
@@ -183,7 +175,10 @@ namespace ProjectWizard
 
 				// Don't overwrite existing libs... just cuz they're big and in case the user has replaced them or something
 				if( File.Exists(destination + lib.ToString()) )
+				{
+					kvp.Value.Close();
 					continue;
+				}
 
 				Stream output = File.OpenWrite(destination + lib.ToString());
 				if( output != null )
@@ -196,7 +191,6 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: Customize project settings based on user input as well as creating the unique GUIDs and other customizations
 		protected bool CopyProjFiles()
 		{
 			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
@@ -227,7 +221,6 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: Customize...
 		protected bool AddProjectItems()
 		{
 			// Copy everything from ProjectWizard.Resources.proj into new project at $(ProjectDir).
@@ -237,7 +230,6 @@ namespace ProjectWizard
 			SortedDictionary<string, Stream> srcFiles = GetResources(srcResource);
 			foreach( var kvp in srcFiles )
 			{
-//				Stream output = File.OpenWrite(destination + "\\" + kvp.Key);//this.projectName + kvp.Key.Substring(kvp.Key.IndexOf('.')));
 				Stream output = File.OpenWrite(destination + "\\" + ParseData(kvp.Key));
 				if( output != null )
 				{
