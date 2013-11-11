@@ -61,6 +61,7 @@
     <Compile Include="fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GitInterop.cs" />
     <Compile Include="PopBox.cs">
       <SubType>Component</SubType>
     </Compile>
