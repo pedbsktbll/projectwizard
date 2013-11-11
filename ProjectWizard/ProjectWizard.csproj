@@ -172,6 +172,9 @@
     <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\proj\WINAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\WINAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\props\internal\GUI_x64.props" />
+    <EmbeddedResource Include="Resources\props\internal\GUI_x86.props" />
+    <EmbeddedResource Include="Resources\props\internal\LIB.props" />
     <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -199,8 +202,6 @@
     <EmbeddedResource Include="Resources\base\WTLApp\MainDlg.h" />
     <EmbeddedResource Include="Resources\base\WTLApp\resource.h" />
     <EmbeddedResource Include="Resources\base\WTLApp\small.ico" />
-    <EmbeddedResource Include="Resources\base\SYSApp\ioctlcmd.h" />
-    <EmbeddedResource Include="Resources\base\SYSApp\myFault.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\base\ConsoleApp\_____FILENAME_____.cpp" />
