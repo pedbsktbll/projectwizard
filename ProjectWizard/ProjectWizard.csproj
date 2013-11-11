@@ -164,14 +164,14 @@
     <EmbeddedResource Include="Resources\props\User_Static_Release_x86.props" />
     <EmbeddedResource Include="Resources\proj\DLLAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\DLLAppTemplate.vcxproj.filters" />
-    <EmbeddedResource Include="Resources\proj\GUIAppTemplate.vcxproj" />
-    <EmbeddedResource Include="Resources\proj\GUIAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\WTLAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\WTLAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\proj\LIBAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\LIBAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj.filters" />
-    <EmbeddedResource Include="Resources\proj\WinAppTemplate.vcxproj" />
-    <EmbeddedResource Include="Resources\proj\WinAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\WINAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\WINAppTemplate.vcxproj.filters" />
     <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>

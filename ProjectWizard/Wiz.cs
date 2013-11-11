@@ -157,7 +157,7 @@ namespace ProjectWizard
 
 		protected bool CopyDynamicLibs()
 		{
-			string libResource = "ProjectWizard.Resources.libs";
+			string libResource = "ProjectWizard.Resources.libs.Dynamic_Libs";
 			string destination = this.solutionPath + "\\Libs\\Dynamic_Libs\\";
 
 			// Create Dynamic Libs directory hierarchy:
