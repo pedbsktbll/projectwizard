@@ -123,6 +123,9 @@ namespace ProjectWizard
 			// Copy all the required property sheets into solutiondir/props
 			CopyPropertySheets();
 
+			// Copy all the libs required for Dynamic building if they don't already exist
+			CopyDynamicLibs();
+
 			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
 
@@ -135,7 +138,6 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: Make props hidden?
 		protected bool CopyPropertySheets()
 		{
 			string propResource = "ProjectWizard.Resources.props";
@@ -158,7 +160,38 @@ namespace ProjectWizard
 					output.Close();
 				}
 				kvp.Value.Close();
+			}
+			return true;
+		}
 
+		//TODO: try/catch around stream shit
+		protected bool CopyDynamicLibs()
+		{
+			string libResource = "ProjectWizard.Resources.libs";
+			string destination = this.solutionPath + "\\Libs\\Dynamic_Libs\\";
+
+			// Create Dynamic Libs directory hierarchy:
+			Directory.CreateDirectory(destination);
+			Directory.CreateDirectory(destination + "amd64");
+			Directory.CreateDirectory(destination + "i386");
+
+			SortedDictionary<string, Stream> dynLibs = GetResources(libResource);
+			foreach( var kvp in dynLibs )
+			{
+				StringBuilder lib = new StringBuilder(kvp.Key);
+				lib[lib.ToString().IndexOf('.')] = '\\';
+
+				// Don't overwrite existing libs... just cuz they're big and in case the user has replaced them or something
+				if( File.Exists(destination + lib.ToString()) )
+					continue;
+
+				Stream output = File.OpenWrite(destination + lib.ToString());
+				if( output != null )
+				{
+					kvp.Value.CopyTo(output);
+					output.Close();
+				}
+				kvp.Value.Close();
 			}
 			return true;
 		}
