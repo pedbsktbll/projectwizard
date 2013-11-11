@@ -5,5 +5,10 @@
     <Import Project="internal\User_x86.props" />
     <Import Project="internal\Debug.props" />
   </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
 </Project>
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->

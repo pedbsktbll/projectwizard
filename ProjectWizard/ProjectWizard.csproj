@@ -158,14 +158,8 @@
     <EmbeddedResource Include="Resources\props\Kernel_Release_x86.props" />
     <EmbeddedResource Include="Resources\props\User_Debug_x64.props" />
     <EmbeddedResource Include="Resources\props\User_Debug_x86.props" />
-    <EmbeddedResource Include="Resources\props\User_Dynamic_Debug_x64.props" />
-    <EmbeddedResource Include="Resources\props\User_Dynamic_Debug_x86.props" />
     <EmbeddedResource Include="Resources\props\User_Dynamic_Release_x64.props" />
     <EmbeddedResource Include="Resources\props\User_Dynamic_Release_x86.props" />
-    <EmbeddedResource Include="Resources\props\User_Release_x64.props" />
-    <EmbeddedResource Include="Resources\props\User_Release_x86.props" />
-    <EmbeddedResource Include="Resources\props\User_Static_Debug_x64.props" />
-    <EmbeddedResource Include="Resources\props\User_Static_Debug_x86.props" />
     <EmbeddedResource Include="Resources\props\User_Static_Release_x64.props" />
     <EmbeddedResource Include="Resources\props\User_Static_Release_x86.props" />
     <EmbeddedResource Include="Resources\proj\DLLAppTemplate.vcxproj" />
@@ -176,6 +170,8 @@
     <EmbeddedResource Include="Resources\proj\LIBAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\SYSAppTemplate.vcxproj.filters" />
+    <EmbeddedResource Include="Resources\proj\WinAppTemplate.vcxproj" />
+    <EmbeddedResource Include="Resources\proj\WinAppTemplate.vcxproj.filters" />
     <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -199,25 +195,33 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\base\DLLApp\dllmain.cpp" />
     <EmbeddedResource Include="Resources\base\DLLApp\Exports.def" />
-    <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.cpp" />
-    <EmbeddedResource Include="Resources\base\GUIApp\MainDlg.h" />
-    <EmbeddedResource Include="Resources\base\GUIApp\resource.h" />
-    <EmbeddedResource Include="Resources\base\GUIApp\small.ico" />
+    <EmbeddedResource Include="Resources\base\WTLApp\MainDlg.cpp" />
+    <EmbeddedResource Include="Resources\base\WTLApp\MainDlg.h" />
+    <EmbeddedResource Include="Resources\base\WTLApp\resource.h" />
+    <EmbeddedResource Include="Resources\base\WTLApp\small.ico" />
     <EmbeddedResource Include="Resources\base\SYSApp\ioctlcmd.h" />
     <EmbeddedResource Include="Resources\base\SYSApp\myFault.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\base\ConsoleApp\_____FILENAME_____.cpp" />
     <EmbeddedResource Include="Resources\base\DLLApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.cpp" />
     <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.cpp" />
     <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.h" />
     <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.c" />
     <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.ico" />
-    <EmbeddedResource Include="Resources\base\GUIApp\_____FILENAME_____.rc" />
+    <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.ico" />
+    <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\base\WINApp\Resource.h" />
+    <EmbeddedResource Include="Resources\base\WINApp\small.ico" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.cpp" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.h" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.ico" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.rc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

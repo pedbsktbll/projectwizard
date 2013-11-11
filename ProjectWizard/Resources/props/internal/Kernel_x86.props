@@ -9,9 +9,8 @@
       <PreprocessorDefinitions>_X86_=1;X86=1;i386=1;STD_CALL;_WIN32_WINNT=0x0500;WINVER=0x0500;_WIN32_IE=0x0501;NTDDI_VERSION=0x05000000;FPO=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sehupd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DDKBASE-6001_18001)\lib\w2k\i386;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>DriverEntry%408</EntryPointSymbol>
+      <AdditionalDependencies>sehupd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>

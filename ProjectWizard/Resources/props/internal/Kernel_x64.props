@@ -10,7 +10,6 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(DDKBASE-6001_18001)\lib\wnet\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>DriverEntry</EntryPointSymbol>
       <MinimumRequiredVersion>5.2</MinimumRequiredVersion>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>

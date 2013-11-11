@@ -12,7 +12,7 @@ namespace ProjectWizard
 	public enum ProjectType
 	{
 		ConsoleApp = 0,
-		GUIApp = 1,
+		WINApp = 1,
 		WTLApp = 2,
 		DLLApp = 3,
 		LIBApp = 4,
@@ -36,7 +36,7 @@ namespace ProjectWizard
 		public static readonly string[] ProjectTypeStrings = new string[6]
 		{
 			"ConsoleApp",
-			"GUIApp",
+			"WINApp",
 			"WTLApp",
 			"DLLApp",
 			"LIBApp",
@@ -90,12 +90,10 @@ namespace ProjectWizard
 			{
 				MessageBox.Show("Exception: " + ex.Message, "Error");
 				retval = wizardResult.wizardResultBackOut;
-//				Environment.Exit(-1);
 			}
         }
 
 		// Main function that does all the work of setting up the project....
-		// Template... how much of this stuff is needed and how much is contained in WizardData? Dunno, just memory dumping right nwo...
 		protected bool createProject()
 		{
 			// Create new solution if we need to....
@@ -130,6 +128,7 @@ namespace ProjectWizard
 			return true;
 		}
 
+		//TODO: We probably need try/catch around all the stream shit in the following functions just in case it isnt writable...
 		protected bool CopyPropertySheets()
 		{
 			string propResource = "ProjectWizard.Resources.props";
@@ -156,7 +155,6 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: try/catch around stream shit
 		protected bool CopyDynamicLibs()
 		{
 			string libResource = "ProjectWizard.Resources.libs";
@@ -278,7 +276,7 @@ namespace ProjectWizard
 		// from the wizard.
 		private string ParseData(string dataFile)
 		{
-			string retVal = dataFile.Replace("_____FILENAME_____", wz.Author.ProjectName);
+			string retVal = dataFile.Replace("_____FILENAME_____", this.projectName);//wz.Author.ProjectName);
 			retVal = retVal.Replace("_____USER_____", wz.Author.Author);
 			retVal = retVal.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
 			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description);

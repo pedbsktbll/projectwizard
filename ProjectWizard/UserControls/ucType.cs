@@ -14,42 +14,36 @@ namespace ProjectWizard
 
             rbCON.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbCON.Tag).Type = "Console Executable";
-            //((ProjectType_Data)rbCON.Tag).Location = "CONEXELOCATION";
 			((ProjectType_Data)rbCON.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[0];
             ((ProjectType_Data)rbCON.Tag).Description = "Awesome Console EXE description should go here";
 			((ProjectType_Data)rbCON.Tag).ProjectType = 0;
 
             rbWIN.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbWIN.Tag).Type = "Windows Executable";
-            //((ProjectType_Data)rbWIN.Tag).Location = "WINEXELOCATION";
 			((ProjectType_Data)rbWIN.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[1];
             ((ProjectType_Data)rbWIN.Tag).Description = "Awesome Windows EXE description should go here";
 			((ProjectType_Data)rbWIN.Tag).ProjectType = 1;
 
 			rbWTL.Tag = new ProjectType_Data();
 			((ProjectType_Data)rbWTL.Tag).Type = "Windows WTL Executable";
-			//((ProjectType_Data)rbWIN.Tag).Location = "WINEXELOCATION";
 			((ProjectType_Data)rbWTL.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[2];
 			((ProjectType_Data)rbWTL.Tag).Description = "Awesome Windows WTL EXE description should go here";
 			((ProjectType_Data)rbWTL.Tag).ProjectType = 2;
 
             rbDLL.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbDLL.Tag).Type = "Dynamic Link Library";
-//            ((ProjectType_Data)rbDLL.Tag).Location = "DLLLOCATION";
 			((ProjectType_Data)rbDLL.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[3];
             ((ProjectType_Data)rbDLL.Tag).Description = "Awesome DLL description should go here";
 			((ProjectType_Data)rbDLL.Tag).ProjectType = 3;
 
             rbLIB.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbLIB.Tag).Type = "Static Library";
-//            ((ProjectType_Data)rbLIB.Tag).Location = "LIBLOCATION";
 			((ProjectType_Data)rbLIB.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[4];
             ((ProjectType_Data)rbLIB.Tag).Description = "Awesome LIB description should go here";
 			((ProjectType_Data)rbLIB.Tag).ProjectType = 4;
 
             rbSYS.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbSYS.Tag).Type = "Native Driver";
-//            ((ProjectType_Data)rbSYS.Tag).Location = "SYSLOCATION";
 			((ProjectType_Data)rbSYS.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[5];
             ((ProjectType_Data)rbSYS.Tag).Description = "Awesome SYS description should go here";
 			((ProjectType_Data)rbSYS.Tag).ProjectType = 5;

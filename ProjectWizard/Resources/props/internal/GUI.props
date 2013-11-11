@@ -2,44 +2,13 @@
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros">
-    <Bin>$(SolutionDir)BIN\</Bin>
-    <Shared>$(SolutionDir)Shared\</Shared>
-    <Libs>$(SolutionDir)Libs\</Libs>
-    <Subs>$(SolutionDir)Submodules\</Subs>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OutDir>$(Bin)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Shared);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>
-      </PrecompiledHeaderOutputFile>
+      <PreprocessorDefinitions>_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(Libs);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <BuildMacro Include="Bin">
-      <Value>$(Bin)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
-    <BuildMacro Include="Shared">
-      <Value>$(Shared)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
-    <BuildMacro Include="Libs">
-      <Value>$(Libs)</Value>
-    </BuildMacro>
-    <BuildMacro Include="Subs">
-      <Value>$(Subs)</Value>
-    </BuildMacro>
-  </ItemGroup>
 </Project>
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->

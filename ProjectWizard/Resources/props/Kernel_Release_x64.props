@@ -5,5 +5,10 @@
     <Import Project="internal\Kernel_x64.props" />
     <Import Project="internal\Release.props" />
   </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
 </Project>
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->
