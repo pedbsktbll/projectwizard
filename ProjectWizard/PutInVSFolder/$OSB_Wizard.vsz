@@ -1,0 +1,6 @@
+VSWizard 7.0
+Wizard=VsWizard.VsWizardEngine.10.0
+
+Param="WIZARD_NAME = OSBWizard"
+Param="WIZARD_VERSION = 1.0"
+Param="ABSOLUTE_PATH = C:\OSB_Wizard\"
