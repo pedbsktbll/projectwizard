@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWizard", "ProjectWizard\ProjectWizard.csproj", "{7C68B641-40B7-4744-AA1A-BF42E04194DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectInstaller", "ProjectInstaller\ProjectInstaller.csproj", "{FD61183E-4F4C-4E0E-BF7B-C846B8B19F72}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C68B641-40B7-4744-AA1A-BF42E04194DA} = {7C68B641-40B7-4744-AA1A-BF42E04194DA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
