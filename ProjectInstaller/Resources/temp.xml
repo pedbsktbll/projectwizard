@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjectType_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectType_Data>
+    <Type>Template 1</Type>
+    <Description>Template Description 1</Description>
+    <Location>Template Location 1</Location>
+  </ProjectType_Data>
+  <ProjectType_Data>
+    <Type>Template 2</Type>
+    <Description>Template Description 2</Description>
+    <Location>Template Location 2</Location>
+  </ProjectType_Data>
+  <ProjectType_Data>
+    <Type>Template 3</Type>
+    <Description>Template Description 3</Description>
+    <Location>Template Location 3</Location>
+  </ProjectType_Data>
+  <ProjectType_Data>
+    <Type>Template 4</Type>
+    <Description>Template Description 4</Description>
+    <Location>Template Location 4</Location>
+  </ProjectType_Data>
+  <ProjectType_Data>
+    <Type>Template 5</Type>
+    <Description>Template Description 5</Description>
+    <Location>Template Location 5</Location>
+  </ProjectType_Data>
+</ArrayOfProjectType_Data>
