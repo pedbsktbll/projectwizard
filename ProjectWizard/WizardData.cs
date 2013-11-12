@@ -54,7 +54,7 @@ namespace ProjectWizard
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string CheckoutCommand { get; set; }
+        public string OriginLocation { get; set; }
         public string[] IncludeStrAr { get; set; }
         public string Stash { get; set; }
         public string Jira { get; set; }

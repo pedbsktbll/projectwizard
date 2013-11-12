@@ -125,6 +125,28 @@ namespace ProjectWizard
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
+            //Lets add submodules now and other git stuff!
+            //Todo add error checking...
+            GitInterop git = new GitInterop(solutionPath);
+            git.init();
+            if (wz.Type.OriginLocation != "")
+            {
+                git.Remote_Add(wz.Type.OriginLocation);
+            }
+
+            StringBuilder incHeader = new StringBuilder();
+            foreach (var item in wz.SubmodulesAr)
+            {
+                string path = @"./Submodules/" + item.Name;
+                git.Submodule_Add(item.Location, path);
+                foreach (var str in item.IncludeStrAr)
+                {
+                    incHeader.Append(str + "\r\n");
+                }
+            }
+
+            string finalHeader = incHeader.ToString();
+            
 			return true;
 		}
 
