@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Reflection;
 
 namespace ProjectWizard
 {
@@ -20,7 +21,7 @@ namespace ProjectWizard
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Submodules_Data[]));
 
-				StreamReader reader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "tempSubmodule.xml");
+				StreamReader reader = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\tempSubmodule.xml");
                 Submodules_Data[] temp = (Submodules_Data[])serializer.Deserialize(reader);
                 reader.Close();
                 foreach (Submodules_Data d in temp)
