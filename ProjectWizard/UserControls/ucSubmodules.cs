@@ -60,7 +60,7 @@ namespace ProjectWizard
             {
                 wz[i] = new WizData_Submodules();
                 wz[i].Name = ((Submodules_Data)item.Tag).Name;
-                wz[i].Location = ((Submodules_Data)item.Tag).Stash;
+                wz[i].Location = ((Submodules_Data)item.Tag).OriginLocation;
                 wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
                 i++;
             }
