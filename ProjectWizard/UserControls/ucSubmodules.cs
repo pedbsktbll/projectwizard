@@ -20,7 +20,7 @@ namespace ProjectWizard
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Submodules_Data[]));
 
-                StreamReader reader = new StreamReader("tempSubmodule.xml");
+				StreamReader reader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "tempSubmodule.xml");
                 Submodules_Data[] temp = (Submodules_Data[])serializer.Deserialize(reader);
                 reader.Close();
                 foreach (Submodules_Data d in temp)
@@ -41,7 +41,7 @@ namespace ProjectWizard
             }
             catch (SystemException e)
             {
-//                MessageBox.Show("There was an error loading the submodule list.  The wizard will continue, but the submodules will be unavailable.\r\n\r\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error loading the submodule list.  The wizard will continue, but the submodules will be unavailable.\r\n\r\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

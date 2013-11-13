@@ -52,7 +52,7 @@ namespace ProjectWizard
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ProjectType_Data[]));
 
-                StreamReader reader = new StreamReader("temp.xml");
+				StreamReader reader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "temp.xml");
                 ProjectType_Data[] temp = (ProjectType_Data[])serializer.Deserialize(reader);
                 reader.Close();
                 foreach (ProjectType_Data d in temp)
@@ -72,11 +72,10 @@ namespace ProjectWizard
                 {
                     rbCUS.Enabled = false;
                 }
-
             }
             catch (SystemException e)
             {
-//                MessageBox.Show("There was an error loading the custom templates.  The wizard will continue, but the templates will be unavailable.\r\n\r\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error loading the custom templates.  The wizard will continue, but the templates will be unavailable.\r\n\r\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 rbCUS.Enabled = false;
             }
         }

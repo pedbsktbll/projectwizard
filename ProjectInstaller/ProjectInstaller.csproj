@@ -88,6 +88,14 @@
     <EmbeddedResource Include="Resources\tempSubmodule.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy /Y "$(SolutionDir)ProjectWizard\bin\$(ConfigurationName)\ProjectWizard.dll" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.ico" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsdir" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsz" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizard\temp.xml" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizard\tempSubmodule.xml" "$(ProjectDir)Resources\"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

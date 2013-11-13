@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace ProjectInstaller
 {
@@ -22,6 +23,28 @@ namespace ProjectInstaller
 			string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 			string projDir = "\\VC\\vcprojects\\";
 			string wizDir = projDir + "OSBWizard\\";
+
+			string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3) + "OSBWizard\\";
+			Directory.CreateDirectory(baseDir);
+			foreach( var kvp in wizFiles )
+			{
+				if( kvp.Key.StartsWith("OSBWizard") )
+					continue;
+				Stream output = File.OpenWrite(baseDir + kvp.Key);
+				if( output != null )
+				{
+					kvp.Value.CopyTo(output);
+					output.Close();
+				}
+			}
+
+			// FIGURED IT OUTTTTTTTT!!!!!!!!!!!!!!!!!!! From Visual Studio Command Prompt, run regasm ProjectWizard.dll / codebase C:\OSBWizard\ProjectWizard.dll
+			// Additional we COULD OPTIONALLY add to GAC.. but I dont think this is necessary... I was playing around with: gacutil -i ProjectWizard.dll
+			// gacutil -u ProjectWizard..... regasm ProjectWizard.dll /unregister
+
+			Assembly asm = Assembly.LoadFrom(baseDir + "ProjectWizard.dll");
+			RegistrationServices regAsm = new RegistrationServices();
+			bool bResult = regAsm.RegisterAssembly(asm, AssemblyRegistrationFlags.SetCodeBase);
 
 			StringBuilder vs = new StringBuilder(progFiles + "\\Microsoft Visual Studio 10.0");
 			for( char i = '0'; i < '3'; i++ )

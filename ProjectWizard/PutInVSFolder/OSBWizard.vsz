@@ -1,4 +1,2 @@
 VSWizard 7.0
 Wizard=ProjectWizard.Wiz
-
-Param="RELATIVE_PATH = vcprojects\OSBWizard\"
