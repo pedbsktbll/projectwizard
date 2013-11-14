@@ -60,6 +60,7 @@ namespace ProjectInstaller
 					if( output != null )
 					{
 						kvp.Value.CopyTo(output);
+						kvp.Value.Seek(0, SeekOrigin.Begin);
 						output.Close();
 					}
 				}
