@@ -110,6 +110,25 @@ namespace ProjectWizard
 			Directory.CreateDirectory(solutionPath + "\\Libs");
 			Directory.CreateDirectory(solutionPath + "\\Submodules");
 
+			// If .gitignore file doesn't exist, create it: ... This should probably be a function, meh...
+			if( !File.Exists(solutionPath + "\\.gitignore") )
+			{
+				string gitResource = "ProjectWizard.Resources.base..gitignore";
+				SortedDictionary<string, Stream> gitIgnore = GetResources(gitResource);
+//				var/*Stream*/ gigIgnoreFile = gitIgnore.Values.Last();
+
+				foreach( var kvp in gitIgnore )
+				{
+					Stream output = File.OpenWrite(solutionPath + "\\.gitignore");
+					if( output != null )
+					{
+						kvp.Value.CopyTo(output);
+						output.Close();
+					}
+					kvp.Value.Close();
+				}
+			}
+
 			// Copy all the required property sheets into solutiondir/props
 			CopyPropertySheets();
 
@@ -289,7 +308,7 @@ namespace ProjectWizard
 
 				Stream stream = assembly.GetManifestResourceStream(name);
 				if( stream != null )
-					dict.Add(name.Substring(filter.Length + 1), stream);
+					dict.Add(name.Substring(filter.Length < name.Length ? filter.Length + 1 : 0), stream);
 			}
 			return dict;
 		}
