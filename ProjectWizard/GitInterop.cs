@@ -71,5 +71,33 @@ namespace ProjectWizard
             Proc.WaitForExit();
             return true;
         }
+
+        public bool Git_Add(string args)
+        {
+            Proc.Start();
+            inputWriter = Proc.StandardInput;
+            errorReader = Proc.StandardError;
+            outputReader = Proc.StandardOutput;
+            inputWriter.WriteLine("git add {0}", args);
+            inputWriter.Flush();
+            inputWriter.WriteLine("exit");
+            inputWriter.Flush();
+            Proc.WaitForExit();
+            return true;
+        }
+
+        public bool Git_Commit(string message)
+        {
+            Proc.Start();
+            inputWriter = Proc.StandardInput;
+            errorReader = Proc.StandardError;
+            outputReader = Proc.StandardOutput;
+            inputWriter.WriteLine("git commit -m \"{0}\"", message);
+            inputWriter.Flush();
+            inputWriter.WriteLine("exit");
+            inputWriter.Flush();
+            Proc.WaitForExit();
+            return true;
+        }
     }
 }

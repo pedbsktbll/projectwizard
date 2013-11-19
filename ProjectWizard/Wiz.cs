@@ -165,7 +165,10 @@ namespace ProjectWizard
             }
 
             string finalHeader = incHeader.ToString();
-            
+
+            git.Git_Add("--all");
+            git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
+            git.Git_Commit("Initial commit by Project Wizard.");            
 			return true;
 		}
 

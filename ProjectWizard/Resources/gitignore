@@ -13,8 +13,9 @@
 x64/
 build/
 [Bb]in/
-[Oo]bj/
 BIN/
+[Oo]bj/
+[Ll]ibs/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -46,7 +47,6 @@ BIN/
 *.pidb
 *.log
 *.scc
-*.lib
 
 # Visual C++ cache files
 ipch/
