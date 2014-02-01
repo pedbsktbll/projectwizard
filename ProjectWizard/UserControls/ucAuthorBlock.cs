@@ -69,16 +69,12 @@ namespace ProjectWizard
 					{
 						if( wd.Description[j] == ' ' )
 						{
-//							wd.Description = wd.Description.Insert(j, "\r\n");
 							wd.Description = wd.Description.Substring(0, j) + "\r\n" + wd.Description.Substring(j + 2);
 							break;
 						}
 					}
 				}
 			}
-			if( !wd.Description.EndsWith("\r\n") )
-				wd.Description += "\r\n";
-
             return wd;
         }
 

@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{15CEAE00-3E3A-4783-BA7A-57CC1AC5FF47}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WinApp</RootNamespace>
+    <RootNamespace>WINAppTemplate</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">

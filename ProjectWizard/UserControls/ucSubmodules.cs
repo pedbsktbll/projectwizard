@@ -46,6 +46,12 @@ namespace ProjectWizard
             }
         }
 
+		public void setRequiredSubmodule(int subNum)
+		{
+			if( subNum < pbAvailable.Items.Count )
+				pbSelected.Items.Add(pbAvailable.Items[subNum]);
+		}
+
         public override bool ValidateData()
         {
             //Nothing for the user to screw up...

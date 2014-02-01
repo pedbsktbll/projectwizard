@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0CB6CCDE-AAEF-4F10-A85E-F66AACB8BB3F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GUIAppTemplate</RootNamespace>
+    <RootNamespace>WTLAppTemplate</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -107,7 +107,7 @@
     <IncludePath>C:\WTL80\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Dynamic|Win32'">
-    <IncludePath>C:\WTL80\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(Subs)WTL\WTL81\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Static|Win32'">
     <IncludePath>C:\WTL80\include;$(IncludePath)</IncludePath>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_Dynamic|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\WTL80\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Subs)WTL\WTL81\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>

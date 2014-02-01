@@ -41,13 +41,21 @@ namespace ProjectWizard
                     break;
             }
 
-            for (int i = 0; i < pucList.Length; i++)
+            for( int i = 0; i < pucList.Length; i++ )
             {
                 pucList[i].Visible = false;
                 pucList[i].Enabled = false;
             }
 
-            if (iCurIndex == (pucList.Length - 1))
+			if( iCurIndex == 1 )
+			{
+				if( ((ucType)pucList[0]).GetData().ProjectTemplate == 2 )
+				{
+					((ucSubmodules)pucList[1]).
+				}
+			}
+
+            if( iCurIndex == 3 )
             {
                 WizardData wz = new WizardData();
                 wz.Type = ((ucType)pucList[0]).GetData();

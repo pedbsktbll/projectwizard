@@ -144,14 +144,20 @@ namespace ProjectWizard
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
-            //Lets add submodules now and other git stuff!
-            //Todo add error checking...
+            //Let's add submodules now and other git stuff!
+            //TODO: add error checking...
             GitInterop git = new GitInterop(solutionPath);
             git.init();
             if( wz.Type.OriginLocation != "" )
             {
                 git.Remote_Add(wz.Type.OriginLocation);
             }
+
+//			// If this is a WTL App, the user will need the WTL submodule.. If they didn't select it, then add it anyway.
+//			if( this.projectType == ProjectType.WTLApp )
+//			{
+//
+//			}
 
             StringBuilder incHeader = new StringBuilder();
             foreach (var item in wz.SubmodulesAr)

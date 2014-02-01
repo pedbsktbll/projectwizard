@@ -9,6 +9,14 @@
 	<Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
   </Submodules_Data>
   <Submodules_Data>
+    <Name>Windows Template Library (WTL)</Name>
+    <Description>Required for creating WTL Windows Applications</Description>
+    <OriginLocation>git clone git@bitbucket.org:pedbsktbll/wtl.git</OriginLocation>
+    <Stash>https://www.stash.net/submodule2</Stash>
+    <Jira>https://www.jira.net/submodule2</Jira>
+    <Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
+  </Submodules_Data>
+  <Submodules_Data>
     <Name>Test1</Name>
     <Description>This is an actual submodule, PleasShowUp.txt should appear...</Description>
     <OriginLocation>git@bitbucket.org:wantedhiker/testrepo.git</OriginLocation>

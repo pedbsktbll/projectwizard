@@ -6,6 +6,7 @@
  * Version _____VERSION_____:		_____DATE_____ (_____USER_____)
  *
  * _____DESCRIPTION_____
+ *
  */
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers

@@ -6,6 +6,7 @@
  * Version _____VERSION_____:		_____DATE_____ (_____USER_____)
  *
  * _____DESCRIPTION_____
+ *
  */
 
 #include "_____FILENAME_____.h"
