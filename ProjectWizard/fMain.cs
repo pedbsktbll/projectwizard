@@ -51,7 +51,7 @@ namespace ProjectWizard
 			{
 				if( ((ucType)pucList[0]).GetData().ProjectTemplate == 2 )
 				{
-					((ucSubmodules)pucList[1]).
+					((ucSubmodules)pucList[1]).setRequiredSubmodule(1);
 				}
 			}
 
