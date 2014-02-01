@@ -191,9 +191,9 @@
 			this.lblDescription.AutoSize = true;
 			this.lblDescription.Location = new System.Drawing.Point(3, 269);
 			this.lblDescription.Name = "lblDescription";
-			this.lblDescription.Size = new System.Drawing.Size(181, 13);
+			this.lblDescription.Size = new System.Drawing.Size(199, 13);
 			this.lblDescription.TabIndex = 2;
-			this.lblDescription.Text = "Description of Selected Type:";
+			this.lblDescription.Text = "Description of Selected Project:";
 			// 
 			// txtRemote
 			// 

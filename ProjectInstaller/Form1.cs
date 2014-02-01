@@ -46,8 +46,9 @@ namespace ProjectInstaller
 			RegistrationServices regAsm = new RegistrationServices();
 			bool bResult = regAsm.RegisterAssembly(asm, AssemblyRegistrationFlags.SetCodeBase);
 
+			// Supports up to VS 19.0 :)
 			StringBuilder vs = new StringBuilder(progFiles + "\\Microsoft Visual Studio 10.0");
-			for( char i = '0'; i < '3'; i++ )
+			for( char i = '0'; i <= '9'; i++ )
 			{
 				vs[vs.Length - 3] = i;
 				if( !Directory.Exists(vs.ToString()) )

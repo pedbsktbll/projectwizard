@@ -323,7 +323,7 @@ namespace ProjectWizard
 			string retVal = dataFile.Replace("_____FILENAME_____", this.projectName);//wz.Author.ProjectName);
 			retVal = retVal.Replace("_____USER_____", wz.Author.Author);
 			retVal = retVal.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
-			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description);
+			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description.Replace("\r\n", "\r\n * "));
 			retVal = retVal.Replace("_____VERSION_____", wz.Author.Version);
 
 			// vcxproj specific stuff:
