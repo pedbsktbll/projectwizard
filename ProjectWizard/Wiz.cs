@@ -133,7 +133,7 @@ namespace ProjectWizard
 			CopyPropertySheets();
 
 			// Copy all the libs required for Dynamic building if they don't already exist
-			CopyDynamicLibs();
+//			CopyDynamicLibs();
 
 			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
@@ -148,7 +148,7 @@ namespace ProjectWizard
             //Todo add error checking...
             GitInterop git = new GitInterop(solutionPath);
             git.init();
-            if (wz.Type.OriginLocation != "")
+            if( wz.Type.OriginLocation != "" )
             {
                 git.Remote_Add(wz.Type.OriginLocation);
             }
@@ -167,7 +167,7 @@ namespace ProjectWizard
             string finalHeader = incHeader.ToString();
 
             git.Git_Add("--all");
-            git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
+//            git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
             git.Git_Commit("Initial commit by Project Wizard.");            
 			return true;
 		}

@@ -215,9 +215,10 @@
 			// 
 			this.txtMain.Location = new System.Drawing.Point(6, 452);
 			this.txtMain.Name = "txtMain";
+			this.txtMain.ReadOnly = true;
 			this.txtMain.Size = new System.Drawing.Size(278, 20);
 			this.txtMain.TabIndex = 5;
-			this.txtMain.Text = "ProjectName.cpp";
+			this.txtMain.Text = "ProjectName";
 			// 
 			// lblMain
 			// 

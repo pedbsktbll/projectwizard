@@ -25,7 +25,7 @@ namespace ProjectWizard
                 txtAuthor.Text = Environment.UserName;
             }
             
-            txtProjectNumber.Text = "XXXX-" + (DateTime.Now.Month >= 10 ? DateTime.Now.Year + 1 : DateTime.Now.Year);
+            txtProjectNumber.Text = (DateTime.Now.Month >= 10 ? DateTime.Now.Year + 1 : DateTime.Now.Year) + "-XXXX";
         }
 
         public override bool ValidateData()

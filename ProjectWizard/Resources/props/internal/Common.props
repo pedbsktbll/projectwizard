@@ -7,6 +7,8 @@
     <Shared>$(SolutionDir)Shared\</Shared>
     <Libs>$(SolutionDir)Libs\</Libs>
     <Subs>$(SolutionDir)Submodules\</Subs>
+    <S>$(SolutionDir)</S>
+    <P>$(ProjectDir)</P>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(Bin)$(Platform)\$(Configuration)\</OutDir>
@@ -40,6 +42,12 @@
     </BuildMacro>
     <BuildMacro Include="Subs">
       <Value>$(Subs)</Value>
+    </BuildMacro>
+    <BuildMacro Include="S">
+      <Value>$(S)</Value>
+    </BuildMacro>
+    <BuildMacro Include="P">
+      <Value>$(P)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

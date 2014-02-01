@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfSubmodules_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Submodules_Data>
+    <Name>Dynamic Libraries</Name>
+    <Description>Required for linking /MD against MSVCRT.dll to attain small code size</Description>
+    <OriginLocation>git@bitbucket.org:pedbsktbll/dynamic_libs.git</OriginLocation>
+	<Stash>https://www.stash.net/submodule2</Stash>
+	<Jira>https://www.jira.net/submodule2</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
+  </Submodules_Data>
+  <Submodules_Data>
     <Name>Test1</Name>
     <Description>This is an actual submodule, PleasShowUp.txt should appear...</Description>
     <OriginLocation>git@bitbucket.org:wantedhiker/testrepo.git</OriginLocation>
