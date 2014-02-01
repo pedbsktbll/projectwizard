@@ -16,13 +16,17 @@ namespace ProjectWizard
             rbCON.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbCON.Tag).Type = "Console Executable";
 			((ProjectType_Data)rbCON.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[0];
-            ((ProjectType_Data)rbCON.Tag).Description = "Awesome Console EXE description should go here";
+            ((ProjectType_Data)rbCON.Tag).Description = "Normal Windows Console Application (.exe). No TCHARs and no STDAFX";
 			((ProjectType_Data)rbCON.Tag).ProjectType = 0;
 
             rbWIN.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbWIN.Tag).Type = "Windows Executable";
 			((ProjectType_Data)rbWIN.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[1];
-            ((ProjectType_Data)rbWIN.Tag).Description = "Awesome Windows EXE description should go here";
+			((ProjectType_Data)rbWIN.Tag).Description = "Basic Windows Application with some typical boilerplate code " +
+														"for registering your class, initializing your window, and enabling " +
+														"your basic WndProc for Windows messages.\r\n\r\n" +
+														"Additional files include a standard header file and Windows Resources";
+
 			((ProjectType_Data)rbWIN.Tag).ProjectType = 1;
 
 			rbWTL.Tag = new ProjectType_Data();
