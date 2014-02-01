@@ -131,6 +131,7 @@
 			this.rbCON.Text = "Console Application (exe)";
 			this.rbCON.UseVisualStyleBackColor = true;
 			this.rbCON.CheckedChanged += new System.EventHandler(this.rbChecked_Changed);
+			this.rbCON.Enter += new System.EventHandler(this.rbChecked_Changed);
 			// 
 			// rbSYS
 			// 
