@@ -301,7 +301,9 @@ namespace ProjectWizard
 				foreach( var item in wz.SubmodulesAr )
 				{
 					string path = @"./Submodules/" + item.Repo_Name;
-					git.Submodule_Add(item.Location, path);
+					if( !Directory.Exists(solutionPath + "\\Submodules\\" + item.Repo_Name) )
+						git.Submodule_Add(item.Location, path);
+
 //                 foreach (var str in item.IncludeStrAr)
 //                 {
 //                     incHeader.Append(str + "\r\n");

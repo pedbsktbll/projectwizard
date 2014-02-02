@@ -13,7 +13,7 @@
     <Name>Windows Template Library (WTL)</Name>
     <Repo_Name>WTL</Repo_Name>
     <Description>Required for creating WTL Windows Applications</Description>
-    <OriginLocation>git clone git@bitbucket.org:pedbsktbll/wtl.git</OriginLocation>
+    <OriginLocation>git@bitbucket.org:pedbsktbll/wtl.git</OriginLocation>
     <Stash>https://www.stash.net/submodule2</Stash>
     <Jira>https://www.jira.net/submodule2</Jira>
     <Confluence>https://www.confluence.devlan.net/submodule2</Confluence>

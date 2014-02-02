@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System;
 
 namespace ProjectWizard
 {
@@ -69,7 +70,35 @@ namespace ProjectWizard
             inputWriter.WriteLine("exit");
             inputWriter.Flush();
             Proc.WaitForExit();
-            return true;
+
+			// If failed? ... Try https?
+			if( !Directory.Exists(submodulePath) && submoduleAddress.StartsWith("git@") )
+			{
+				string url = "https://" + submoduleAddress.Substring(submoduleAddress.IndexOf("@") + 1,
+					submoduleAddress.IndexOf(":") - submoduleAddress.IndexOf("@") - 1) + "/" +
+					submoduleAddress.Substring(submoduleAddress.IndexOf(":") + 1);
+				if( !url.EndsWith(".git") )
+					url += ".git";
+
+				Proc.Start();
+				inputWriter = Proc.StandardInput;
+				errorReader = Proc.StandardError;
+				outputReader = Proc.StandardOutput;
+				inputWriter.WriteLine("git submodule add {0} {1}", url, submodulePath);
+				inputWriter.Flush();
+				inputWriter.WriteLine("exit");
+				inputWriter.Flush();
+				Proc.WaitForExit();
+
+			}
+
+			// Still fails? IDK, try using different keys?
+// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
+// 			{
+// 
+// 			}
+
+            return Directory.Exists(submodulePath);
         }
 
         public bool Git_Add(string args)
