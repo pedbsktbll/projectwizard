@@ -46,26 +46,15 @@ namespace ProjectWizard
             }
         }
 
-// 		public void setRequiredSubmodule(int subNum)
-// 		{
-// 			if( subNum < pbAvailable.Items.Count )
-// 				//pbSelected.Items.Add(pbAvailable.Items[subNum]);
-// 				pbSelected.push(pbAvailable.pop());
-// //				pbSelected.Items.Insert(0, pbAvailable.pop());
-// 		}
-
 		public void setRequiredSubmodule(string subName)
 		{
 			foreach( ListViewItem item in pbAvailable.Items )
 			{
 				if( ((Submodules_Data)item.Tag).Name.Equals(subName) )
 				{
-//					pbSelected.Items.Add(item);
-//					bClick = true;
-//					pbSelected.push(item);
+					((Submodules_Data)item.Tag).required = true;
 					pbAvailable.Items.Remove(item);
 					pbSelected.push(item);
-
 					return;
 				}
 			}
@@ -142,8 +131,29 @@ namespace ProjectWizard
             else
                 bRemove.Enabled = true;
             
-            if (pb.SelectedItems.Count == 0)
-                return;
+//            if (pb.SelectedItems.Count == 0)
+//                return;
+
+			// If any selected item is required, you dont get to deselect it, buddy
+			foreach( ListViewItem item in pbSelected.SelectedItems )
+			{
+				if( ((Submodules_Data)item.Tag).required )
+				{
+					bRemoveAll.Enabled = false;
+					bRemove.Enabled = false;
+					break;
+				}
+			}
+
+			// Ah! You don't get to deselect it from "Deselect All" either...
+			foreach( ListViewItem item in pbSelected.Items )
+			{
+				if( ((Submodules_Data)item.Tag).required )
+				{
+					bRemoveAll.Enabled = false;
+					break;
+				}
+			}
             
             if (bClick)
             {

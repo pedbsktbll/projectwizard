@@ -61,5 +61,7 @@ namespace ProjectWizard
         public string Stash { get; set; }
         public string Jira { get; set; }
         public string Confluence { get; set; }
+
+		public bool required = false;
     }
 }

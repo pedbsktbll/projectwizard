@@ -48,12 +48,10 @@ namespace ProjectWizard
             }
 
 			if( iCurIndex == 1 )
-			{
-				if( ((ucType)pucList[0]).GetData().ProjectTemplate == 2 )
-				{
-					((ucSubmodules)pucList[1]).setRequiredSubmodule("Windows Template Library (WTL)");
-				}
-			}
+				((ucSubmodules)pucList[1]).setRequiredSubmodule("Dynamic Libraries");
+
+			if( iCurIndex == 1 && ((ucType)pucList[0]).GetData().ProjectTemplate == 2 )
+				((ucSubmodules)pucList[1]).setRequiredSubmodule("Windows Template Library (WTL)");
 
             if( iCurIndex == 3 )
             {

@@ -18,4 +18,82 @@
     <Jira>https://www.jira.net/submodule2</Jira>
     <Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
   </Submodules_Data>
+    <Submodules_Data>
+    <Name>Submodule #4</Name>
+	<Repo_Name>SM4</Repo_Name>
+    <Description>Awesome description for Submodule #4</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 4"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule4</Stash>
+	<Jira>https://www.jira.net/submodule4</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule4</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule4.h"</string>
+		<string>#include "Submodule4a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #5</Name>
+	<Repo_Name>SM5</Repo_Name>
+    <Description>Awesome description for Submodule #5</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 5"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule5</Stash>
+	<Jira>https://www.jira.net/submodule5</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule5</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule5.h"</string>
+		<string>#include "Submodule5a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #6</Name>
+	<Repo_Name>SM6</Repo_Name>
+    <Description>Awesome description for Submodule #6</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 6"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule6</Stash>
+	<Jira>https://www.jira.net/submodule6</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule6</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule6.h"</string>
+		<string>#include "Submodule6a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #7</Name>
+	<Repo_Name>SM7</Repo_Name>
+    <Description>Awesome description for Submodule #7</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 7"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule7</Stash>
+	<Jira>https://www.jira.net/submodule7</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule7</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule7.h"</string>
+		<string>#include "Submodule7a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #8</Name>
+	<Repo_Name>SM8</Repo_Name>
+    <Description>Awesome description for Submodule #8</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 8"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule8</Stash>
+	<Jira>https://www.jira.net/submodule8</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule8</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule8.h"</string>
+		<string>#include "Submodule8a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
+  <Submodules_Data>
+    <Name>Submodule #9</Name>
+	<Repo_Name>SM9</Repo_Name>
+    <Description>Awesome description for Submodule #9</Description>
+    <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 9"</CheckoutCommand>
+	<Stash>https://www.stash.net/submodule9</Stash>
+	<Jira>https://www.jira.net/submodule9</Jira>
+	<Confluence>https://www.confluence.devlan.net/submodule9</Confluence>
+	<IncludeStrAr>
+		<string>#include "Submodule9.h"</string>
+		<string>#include "Submodule9a.h"</string>
+	</IncludeStrAr>
+  </Submodules_Data>
 </ArrayOfSubmodules_Data>
