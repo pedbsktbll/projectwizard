@@ -46,10 +46,29 @@ namespace ProjectWizard
             }
         }
 
-		public void setRequiredSubmodule(int subNum)
+// 		public void setRequiredSubmodule(int subNum)
+// 		{
+// 			if( subNum < pbAvailable.Items.Count )
+// 				//pbSelected.Items.Add(pbAvailable.Items[subNum]);
+// 				pbSelected.push(pbAvailable.pop());
+// //				pbSelected.Items.Insert(0, pbAvailable.pop());
+// 		}
+
+		public void setRequiredSubmodule(string subName)
 		{
-			if( subNum < pbAvailable.Items.Count )
-				pbSelected.Items.Add(pbAvailable.Items[subNum]);
+			foreach( ListViewItem item in pbAvailable.Items )
+			{
+				if( ((Submodules_Data)item.Tag).Name.Equals(subName) )
+				{
+//					pbSelected.Items.Add(item);
+//					bClick = true;
+//					pbSelected.push(item);
+					pbAvailable.Items.Remove(item);
+					pbSelected.push(item);
+
+					return;
+				}
+			}
 		}
 
         public override bool ValidateData()
@@ -67,7 +86,8 @@ namespace ProjectWizard
                 wz[i] = new WizData_Submodules();
                 wz[i].Name = ((Submodules_Data)item.Tag).Name;
                 wz[i].Location = ((Submodules_Data)item.Tag).OriginLocation;
-                wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
+//                wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
+				wz[i].Repo_Name = ((Submodules_Data)item.Tag).Repo_Name;
                 i++;
             }
             return wz;

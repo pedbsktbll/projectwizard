@@ -16,7 +16,7 @@ namespace ProjectWizard
             rbCON.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbCON.Tag).Type = "Console Executable";
 			((ProjectType_Data)rbCON.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[0];
-            ((ProjectType_Data)rbCON.Tag).Description = "Normal Windows Console Application (.exe).\r\n\r\n Like all our " +
+            ((ProjectType_Data)rbCON.Tag).Description = "Normal Windows Console Application (.exe).\r\n\r\nLike all our " +
 														"projects, there are No TCHARs and no STDAFX.";
 			((ProjectType_Data)rbCON.Tag).ProjectType = 0;
 
@@ -55,7 +55,7 @@ namespace ProjectWizard
             rbSYS.Tag = new ProjectType_Data();
             ((ProjectType_Data)rbSYS.Tag).Type = "Native Driver";
 			((ProjectType_Data)rbSYS.Tag).Location = ProjectWizard.Wiz.ProjectTypeStrings[5];
-			((ProjectType_Data)rbSYS.Tag).Description = "Windows Driver (.sys) with boilerplate WDM implementation from VisualDDK.\r\n  " +
+			((ProjectType_Data)rbSYS.Tag).Description = "Windows Driver (.sys) with boilerplate WDM implementation from VisualDDK.\r\n" +
 														"This project allows you to write driver code and actually compile it directly " +
 														"with Visual Studio. Our only project that starts with .h/.c files.";
 			((ProjectType_Data)rbSYS.Tag).ProjectType = 5;

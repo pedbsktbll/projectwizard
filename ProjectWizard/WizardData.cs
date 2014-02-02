@@ -22,8 +22,9 @@ namespace ProjectWizard
     public class WizData_Submodules
     {
         public string Name { get; set; }
+		public string Repo_Name { get; set; }
         public string Location { get; set; }
-        public string[] IncludeStrAr { get; set; }
+//        public string[] IncludeStrAr { get; set; }
     }
 
     [Serializable]
@@ -53,9 +54,10 @@ namespace ProjectWizard
     public class Submodules_Data
     {
         public string Name { get; set; }
+		public string Repo_Name { get; set; }
         public string Description { get; set; }
         public string OriginLocation { get; set; }
-        public string[] IncludeStrAr { get; set; }
+//        public string[] IncludeStrAr { get; set; }
         public string Stash { get; set; }
         public string Jira { get; set; }
         public string Confluence { get; set; }

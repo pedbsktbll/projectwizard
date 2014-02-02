@@ -144,37 +144,9 @@ namespace ProjectWizard
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
-            //Let's add submodules now and other git stuff!
-            //TODO: add error checking...
-            GitInterop git = new GitInterop(solutionPath);
-            git.init();
-            if( wz.Type.OriginLocation != "" )
-            {
-                git.Remote_Add(wz.Type.OriginLocation);
-            }
-
-//			// If this is a WTL App, the user will need the WTL submodule.. If they didn't select it, then add it anyway.
-//			if( this.projectType == ProjectType.WTLApp )
-//			{
-//
-//			}
-
-            StringBuilder incHeader = new StringBuilder();
-            foreach (var item in wz.SubmodulesAr)
-            {
-                string path = @"./Submodules/" + item.Name;
-                git.Submodule_Add(item.Location, path);
-                foreach (var str in item.IncludeStrAr)
-                {
-                    incHeader.Append(str + "\r\n");
-                }
-            }
-
-            string finalHeader = incHeader.ToString();
-
-            git.Git_Add("--all");
-//            git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
-            git.Git_Commit("Initial commit by Project Wizard.");            
+			//Let's add submodules now and other git stuff!
+			AddProjectToGit();
+  
 			return true;
 		}
 
@@ -297,6 +269,56 @@ namespace ProjectWizard
 					output.Close();
 				}
 				kvp.Value.Close();
+			}
+			return true;
+		}
+
+		//TODO: add error checking...
+		protected bool AddProjectToGit()
+		{
+			// First let's see if git already exists in the solution:
+			bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
+
+			try
+			{
+				GitInterop git = new GitInterop(solutionPath);
+
+				// Only init the Repo if not already a git repo, though I guess it doesn't really matter.
+				if( !gitRepo )
+					git.init();
+
+				// Add origin location if provided
+				if( wz.Type.OriginLocation != "" )
+					git.Remote_Add(wz.Type.OriginLocation);
+
+//			// If this is a WTL App, the user will need the WTL submodule.. If they didn't select it, then add it anyway.
+// 			if( this.projectType == ProjectType.WTLApp )
+// 			{
+// 
+// 			}
+
+				StringBuilder incHeader = new StringBuilder();
+				foreach( var item in wz.SubmodulesAr )
+				{
+					string path = @"./Submodules/" + item.Repo_Name;
+					git.Submodule_Add(item.Location, path);
+//                 foreach (var str in item.IncludeStrAr)
+//                 {
+//                     incHeader.Append(str + "\r\n");
+//                 }
+				}
+
+				string finalHeader = incHeader.ToString();
+
+				git.Git_Add("--all");
+//				git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
+
+				git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");        
+			}
+			catch( System.Exception ex )
+			{
+				MessageBox.Show("Error adding files to Git: " + ex.Message, "Error");
+				return false;
 			}
 			return true;
 		}

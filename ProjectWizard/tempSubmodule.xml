@@ -2,6 +2,7 @@
 <ArrayOfSubmodules_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Submodules_Data>
     <Name>Dynamic Libraries</Name>
+    <Repo_Name>Dynamic_Libs</Repo_Name>
     <Description>Required for linking /MD against MSVCRT.dll to attain small code size</Description>
     <OriginLocation>git@bitbucket.org:pedbsktbll/dynamic_libs.git</OriginLocation>
 	<Stash>https://www.stash.net/submodule2</Stash>
@@ -10,33 +11,11 @@
   </Submodules_Data>
   <Submodules_Data>
     <Name>Windows Template Library (WTL)</Name>
+    <Repo_Name>WTL</Repo_Name>
     <Description>Required for creating WTL Windows Applications</Description>
     <OriginLocation>git clone git@bitbucket.org:pedbsktbll/wtl.git</OriginLocation>
     <Stash>https://www.stash.net/submodule2</Stash>
     <Jira>https://www.jira.net/submodule2</Jira>
     <Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
-  </Submodules_Data>
-  <Submodules_Data>
-    <Name>Test1</Name>
-    <Description>This is an actual submodule, PleasShowUp.txt should appear...</Description>
-    <OriginLocation>git@bitbucket.org:wantedhiker/testrepo.git</OriginLocation>
-	<Stash>https://www.stash.net/submodule1</Stash>
-	<Jira>https://www.jira.net/submodule1</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule1</Confluence>
-	<IncludeStrAr>
-		<string>#include "Submodule1.h"</string>
-		<string>#include "Submodule1a.h"</string>
-	</IncludeStrAr>
-  </Submodules_Data>
-  <Submodules_Data>
-    <Name>Test2</Name>
-    <Description>Awesome description for Submodule #2</Description>
-    <OriginLocation>git@bitbucket.org:wantedhiker/test2.git</OriginLocation>
-	<Stash>https://www.stash.net/submodule2</Stash>
-	<Jira>https://www.jira.net/submodule2</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
-	<IncludeStrAr>
-		<string>#include "Submodule2.h"</string>
-	</IncludeStrAr>
   </Submodules_Data>
 </ArrayOfSubmodules_Data>
