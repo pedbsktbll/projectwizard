@@ -302,7 +302,11 @@ namespace ProjectWizard
 				{
 					string path = @"./Submodules/" + item.Repo_Name;
 					if( !Directory.Exists(solutionPath + "\\Submodules\\" + item.Repo_Name) )
-						git.Submodule_Add(item.Location, path);
+					{
+						// may be cool to add some progress bars or something here...
+						if( !git.Submodule_Add(item.Location, path) )
+							MessageBox.Show("Submodule " + item.Name + " failed to clone", "Error Adding Submodule");
+					}
 
 //                 foreach (var str in item.IncludeStrAr)
 //                 {
