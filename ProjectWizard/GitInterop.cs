@@ -31,6 +31,11 @@ namespace ProjectWizard
             Proc.Close();
         }
 
+		public static bool gitExists()
+		{
+			return File.Exists(@"C:\Program Files (x86)\Git\bin\sh.exe");
+		}
+
         public bool init()
         {
             Proc.Start();

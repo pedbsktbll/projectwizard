@@ -177,39 +177,39 @@ namespace ProjectWizard
 			return true;
 		}
 
-		protected bool CopyDynamicLibs()
-		{
-			string libResource = "ProjectWizard.Resources.libs.Dynamic_Libs";
-			string destination = this.solutionPath + "\\Libs\\Dynamic_Libs\\";
-
-			// Create Dynamic Libs directory hierarchy:
-			Directory.CreateDirectory(destination);
-			Directory.CreateDirectory(destination + "amd64");
-			Directory.CreateDirectory(destination + "i386");
-
-			SortedDictionary<string, Stream> dynLibs = GetResources(libResource);
-			foreach( var kvp in dynLibs )
-			{
-				StringBuilder lib = new StringBuilder(kvp.Key);
-				lib[lib.ToString().IndexOf('.')] = '\\';
-
-				// Don't overwrite existing libs... just cuz they're big and in case the user has replaced them or something
-				if( File.Exists(destination + lib.ToString()) )
-				{
-					kvp.Value.Close();
-					continue;
-				}
-
-				Stream output = File.OpenWrite(destination + lib.ToString());
-				if( output != null )
-				{
-					kvp.Value.CopyTo(output);
-					output.Close();
-				}
-				kvp.Value.Close();
-			}
-			return true;
-		}
+// 		protected bool CopyDynamicLibs()
+// 		{
+// 			string libResource = "ProjectWizard.Resources.libs.Dynamic_Libs";
+// 			string destination = this.solutionPath + "\\Libs\\Dynamic_Libs\\";
+// 
+// 			// Create Dynamic Libs directory hierarchy:
+// 			Directory.CreateDirectory(destination);
+// 			Directory.CreateDirectory(destination + "amd64");
+// 			Directory.CreateDirectory(destination + "i386");
+// 
+// 			SortedDictionary<string, Stream> dynLibs = GetResources(libResource);
+// 			foreach( var kvp in dynLibs )
+// 			{
+// 				StringBuilder lib = new StringBuilder(kvp.Key);
+// 				lib[lib.ToString().IndexOf('.')] = '\\';
+// 
+// 				// Don't overwrite existing libs... just cuz they're big and in case the user has replaced them or something
+// 				if( File.Exists(destination + lib.ToString()) )
+// 				{
+// 					kvp.Value.Close();
+// 					continue;
+// 				}
+// 
+// 				Stream output = File.OpenWrite(destination + lib.ToString());
+// 				if( output != null )
+// 				{
+// 					kvp.Value.CopyTo(output);
+// 					output.Close();
+// 				}
+// 				kvp.Value.Close();
+// 			}
+// 			return true;
+// 		}
 
 		protected bool CopyProjFiles()
 		{
@@ -276,6 +276,13 @@ namespace ProjectWizard
 		//TODO: add error checking...
 		protected bool AddProjectToGit()
 		{
+			// Git exist?
+			if( !GitInterop.gitExists() )
+			{
+				MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
+				return false;
+			}
+
 			// First let's see if git already exists in the solution:
 			bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
 
@@ -323,7 +330,7 @@ namespace ProjectWizard
 			}
 			catch( System.Exception ex )
 			{
-				MessageBox.Show("Error adding files to Git: " + ex.Message, "Error");
+				MessageBox.Show("Error adding files to Git: " + ex.Message, "Git Error");
 				return false;
 			}
 			return true;

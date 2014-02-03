@@ -119,6 +119,7 @@ namespace ProjectWizard
             var checkedButton = this.gbProject.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
             //wz.ProjectTemplate = ((ProjectType_Data)checkedButton.Tag).Location;
 			wz.ProjectTemplate = ((ProjectType_Data)checkedButton.Tag).ProjectType;
+			wz.projectTemplateString = ((ProjectType_Data)checkedButton.Tag).Type;
             wz.MainLocation = txtMain.Text;
             wz.OriginLocation = txtRemote.Text;
             return wz;

@@ -14,6 +14,7 @@ namespace ProjectWizard
     public class WizData_Type
     {
         public int ProjectTemplate { get; set; }
+		public string projectTemplateString { get; set; }
         public string MainLocation { get; set; }
         public string OriginLocation { get; set; }
     }

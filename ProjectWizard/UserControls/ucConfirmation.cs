@@ -19,7 +19,7 @@ namespace ProjectWizard
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Project Settings:\r\n");
-            sb.Append("Project Type - " + wd.Type.ProjectTemplate + "\r\n");
+            sb.Append("Project Type - " + wd.Type.projectTemplateString + "\r\n");
             sb.Append("Location of Main - " + wd.Type.MainLocation + "\r\n");
             sb.Append("Location of Origin - " + wd.Type.OriginLocation + "\r\n");
 
