@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System;
+using Microsoft.Win32;
 
 namespace ProjectWizard
 {
     internal class GitInterop
     {
+		private string gitInstallPath;
         private Process Proc = new Process();
         private ProcessStartInfo ProcInfo = new ProcessStartInfo();
         private StreamWriter inputWriter;
@@ -14,8 +16,13 @@ namespace ProjectWizard
 
         public GitInterop(string workingDirectory)
         {
-            //TODO figure out where git is installed on the system.
-            ProcInfo.FileName = @"C:\Program Files (x86)\Git\bin\sh.exe";
+			 gitInstallPath = Environment.Is64BitOperatingSystem ?
+				(string) Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1",
+				"InstallLocation", @"C:\Program Files (x86)\Git\bin\sh.exe") : 
+				(string) Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1",
+				"IntsllLocation", @"C:\Program Files\Git\bin\sh.exe");
+			
+			ProcInfo.FileName = gitInstallPath + "bin\\sh.exe";
             ProcInfo.Arguments = "--login -i";
             ProcInfo.RedirectStandardInput = true;
             ProcInfo.RedirectStandardError = true;
@@ -31,9 +38,9 @@ namespace ProjectWizard
             Proc.Close();
         }
 
-		public static bool gitExists()
+		public bool gitExists()
 		{
-			return File.Exists(@"C:\Program Files (x86)\Git\bin\sh.exe");
+			return File.Exists(ProcInfo.FileName);
 		}
 
         public bool init()

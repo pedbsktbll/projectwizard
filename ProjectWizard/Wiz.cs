@@ -6,6 +6,8 @@ using EnvDTE80;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using Microsoft.VisualStudio.VCCodeModel;
+using Microsoft.Win32;
 
 namespace ProjectWizard
 {
@@ -144,7 +146,88 @@ namespace ProjectWizard
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
+
+			Microsoft.VisualStudio.VCProjectEngine.VCProject proj;
+			Microsoft.VisualStudio.VCProjectEngine.VCCLCompilerTool compilerTool;
+			Microsoft.VisualStudio.VCProjectEngine.IVCCollection toolsCollection;
+			Microsoft.VisualStudio.VCProjectEngine.IVCCollection configurationsCollection;
+			
+			proj = (Microsoft.VisualStudio.VCProjectEngine.VCProject)project.Object;
+			configurationsCollection = (Microsoft.VisualStudio.VCProjectEngine.IVCCollection)proj.Configurations;
+			
+			foreach( Microsoft.VisualStudio.VCProjectEngine.VCConfiguration configuration in configurationsCollection )
+			{
+				toolsCollection = (Microsoft.VisualStudio.VCProjectEngine.IVCCollection)configuration.Tools;
+				compilerTool = toolsCollection.Item("VCCLCompilerTool");
+				compilerTool.AdditionalIncludeDirectories += "$(Submodules)Dynamic_Libs/blah/bah";
+
+				Microsoft.VisualStudio.VCProjectEngine.VCLinkerTool linkerTool = toolsCollection.Item("VCLinkerTool");
+				linkerTool.AdditionalLibraryDirectories += "$(Libs)Bin/location/here";
+
+// 				foreach( Object toolObject in toolsCollection) 
+// 				{
+// 					if( toolObject is Microsoft.VisualStudio.VCProjectEngine.VCCLCompilerTool )
+// 					{
+// 						compilerTool = (Microsoft.VisualStudio.VCProjectEngine.VCCLCompilerTool)toolObject;
+// //						MessageBox.Show(configuration.Name + ": " + compilerTool.AdditionalIncludeDirectories);
+// 						compilerTool.AdditionalIncludeDirectories += "$(Submodules)Dynamic_Libs/blah/bah";
+// 
+// 						break;
+// 					}
+// 					if( toolObject is Microsoft.VisualStudio.VCProjectEngine.VCCL)
+// 				}
+			}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//         Configuration config;
+//         EnvDTE.Properties configProps;
+//         Property prop;
+//         config = project.ConfigurationManager.ActiveConfiguration;
+//         configProps = config.Properties;
+//         prop = configProps.Item("PlatformTarget");
+//         MessageBox.Show("The platform target for this project is: " + prop.Value.ToString());
+//         prop = configProps.Item("WarningLevel");
+//         MessageBox.Show
+// ("The warning level for this project is set to: " + prop.Value.ToString());
+//         MessageBox.Show("Changing the warning level to 3...");
+//         prop.Value = "3";
+//         MessageBox.Show
+// ("The warning level for this project is now set to: " + prop.Value.ToString());
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// 			foreach( object projConfigName in (object[])project.ConfigurationManager.ConfigurationRowNames )
+// 			{
+// 				Configurations projConfigs = project.ConfigurationManager.ConfigurationRow(projConfigName.ToString());
+// 				foreach( Configuration config in projConfigs )
+// 				{
+// 					EnvDTE.Properties configProps = config.Properties;
+// //					Property prop = configProps.Item("PlatformTarget");
+// 					Property prop = configProps.Item("WarningLevel");
+// 					prop.Value = "1";
+// 				}
+// 			}
+
 			//Let's add submodules now and other git stuff!
+			GitInterop git = new GitInterop(solutionPath);
+
+			// Git exist?
+			if( !git.gitExists() )
+			{
+				MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
+				return true;
+			}
+
+			// First let's see if git already exists in the solution:
+			bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
+
+			// Only init the Repo if not already a git repo, though I guess it doesn't really matter.
+			if( !gitRepo )
+				git.init();
+
+			AddGitSubmodules(git);
+
 			AddProjectToGit();
   
 			return true;
@@ -273,37 +356,10 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: add error checking...
-		protected bool AddProjectToGit()
+		protected bool AddGitSubmodules(GitInterop git)
 		{
-			// Git exist?
-			if( !GitInterop.gitExists() )
-			{
-				MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
-				return false;
-			}
-
-			// First let's see if git already exists in the solution:
-			bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
-
 			try
 			{
-				GitInterop git = new GitInterop(solutionPath);
-
-				// Only init the Repo if not already a git repo, though I guess it doesn't really matter.
-				if( !gitRepo )
-					git.init();
-
-				// Add origin location if provided
-				if( wz.Type.OriginLocation != "" )
-					git.Remote_Add(wz.Type.OriginLocation);
-
-//			// If this is a WTL App, the user will need the WTL submodule.. If they didn't select it, then add it anyway.
-// 			if( this.projectType == ProjectType.WTLApp )
-// 			{
-// 
-// 			}
-
 				StringBuilder incHeader = new StringBuilder();
 				foreach( var item in wz.SubmodulesAr )
 				{
@@ -320,19 +376,28 @@ namespace ProjectWizard
 //                     incHeader.Append(str + "\r\n");
 //                 }
 				}
-
-				string finalHeader = incHeader.ToString();
-
-				git.Git_Add("--all");
-//				git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
-
-				git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");        
 			}
 			catch( System.Exception ex )
 			{
 				MessageBox.Show("Error adding files to Git: " + ex.Message, "Git Error");
 				return false;
 			}
+			return true;
+		}
+
+		//TODO: add error checking...
+		protected bool AddProjectToGit(GitInterop git)
+		{
+			// Add origin location if provided
+			if( wz.Type.OriginLocation != "" )
+				git.Remote_Add(wz.Type.OriginLocation);
+			
+			git.Git_Add("--all");
+
+//			git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
+
+			git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");        
+
 			return true;
 		}
 
