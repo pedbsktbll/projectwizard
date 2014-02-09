@@ -1,5 +1,5 @@
 /*
- * Filename:		_____FILENAME_____.c
+ * Filename:		_____SRCFILE_____.c
  *
  * Author:			_____USER_____
  * Date Created:	_____DATE_____
@@ -31,6 +31,7 @@
 #include <ntddstor.h>
 #include <mountdev.h>
 #include <ntddvol.h>
+/*_____USER_INCS_____*/
 
 
 void Driver_TemplateUnload(IN PDRIVER_OBJECT DriverObject);

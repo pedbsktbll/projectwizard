@@ -1,5 +1,5 @@
 /*
- * Filename:		_____FILENAME_____.cpp
+ * Filename:		_____SRCFILE_____.cpp
  *
  * Author:			_____USER_____
  * Date Created:	_____DATE_____
@@ -12,6 +12,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+/*_____USER_INCS_____*/
 
 int wmain(int argc, wchar_t* argv[])
 {
