@@ -208,15 +208,14 @@
 			this.lblRemote.AutoSize = true;
 			this.lblRemote.Location = new System.Drawing.Point(3, 485);
 			this.lblRemote.Name = "lblRemote";
-			this.lblRemote.Size = new System.Drawing.Size(295, 13);
+			this.lblRemote.Size = new System.Drawing.Size(355, 13);
 			this.lblRemote.TabIndex = 6;
-			this.lblRemote.Text = "Optional location of Origin remote (i.e. Stash):";
+			this.lblRemote.Text = "Remote Repository URL (OPTIONAL, will perform initial push)";
 			// 
 			// txtMain
 			// 
 			this.txtMain.Location = new System.Drawing.Point(6, 452);
 			this.txtMain.Name = "txtMain";
-			this.txtMain.ReadOnly = true;
 			this.txtMain.Size = new System.Drawing.Size(278, 20);
 			this.txtMain.TabIndex = 5;
 			this.txtMain.Text = "ProjectName";

@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8D9DA1D5-0A8A-472D-9443-9EB05FDEEE10}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LIBAppTemplate</RootNamespace>
+    <RootNamespace>_____FILENAME_____</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -128,10 +128,10 @@
     <ClCompile />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="_____FILENAME_____.h" />
+    <ClInclude Include="_____SRCFILE_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_____FILENAME_____.cpp" />
+    <ClCompile Include="_____SRCFILE_____.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

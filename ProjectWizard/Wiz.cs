@@ -32,6 +32,9 @@ namespace ProjectWizard
 		protected string projectPath = null;
 		protected ProjectType projectType;
 		protected bool createNewSolution = false;
+		protected string includes = null;
+		protected string addlIncludeDirs = null;
+		protected string addlLibDirs = null;
 
 		public static readonly string[] ProjectTypeStrings = new string[6]
 		{
@@ -43,12 +46,16 @@ namespace ProjectWizard
 			"SYSApp",
 		};
 
+		private static Guid vsWizardNewProject = new Guid( "{0F90E1D0-4999-11D1-B6D1-00A0C90F2744}" );		//Adds new project to a solution
+		private static Guid vsWizardAddItem = new Guid( "{0F90E1D1-4999-11D1-B6D1-00A0C90F2744}" );			//Adds a subproject to an existing project
+		private static Guid vsWizardAddSubproject = new Guid( "{0F90E1D2-4999-11D1-B6D1-00A0C90F2744}" );	//Adds an item to an existing project
+
         // Execute is the main entry point for a project wizard.  It has to follow this template.
 		// contextParams:
-		// 0: some GUID
+		// 0: Wizard Type GUID
 		// 1: Project Name
-		// 2: Project Path
-		// 3: location of visual studio exe
+		// 2: ProjectItems Collection
+		// 3: location of visual studio exe (Local directory)
 		// 4: Create New Solution : true..... Add to existing solution: false
 		// 5: Solution Name--- Will be empty string if not selected to create solution
 		// 6: false
@@ -69,6 +76,12 @@ namespace ProjectWizard
 					this.path = (string) contextParams[2];
 					this.projectType = (ProjectType) wz.Type.ProjectTemplate;
 					this.createNewSolution = (bool)contextParams[4];
+
+					// Make sure main source file isn't null and doesnt have a . (dot):
+					if( this.wz.Type.MainLocation.Equals( "" ) )
+						this.wz.Type.MainLocation = projectName;
+					else if( this.wz.Type.MainLocation.Contains( "." ) )
+						this.wz.Type.MainLocation = this.wz.Type.MainLocation.Remove( wz.Type.MainLocation.LastIndexOf( "." ) );
 
 					// Parse project path and solution path from "path"
 					//TODO: Can "path" be null/empty?
@@ -115,7 +128,6 @@ namespace ProjectWizard
 			{
 				string gitResource = "ProjectWizard.Resources.base..gitignore";
 				SortedDictionary<string, Stream> gitIgnore = GetResources(gitResource);
-//				var/*Stream*/ gigIgnoreFile = gitIgnore.Values.Last();
 
 				foreach( var kvp in gitIgnore )
 				{
@@ -129,11 +141,26 @@ namespace ProjectWizard
 				}
 			}
 
+			// Get our includes based on the submodules we've added
+			StringBuilder incHeader = new StringBuilder();
+			StringBuilder incDirs = new StringBuilder();
+			StringBuilder incLibs = new StringBuilder();
+			foreach( var item in wz.SubmodulesAr )
+			{
+				if( item.IncludeStrAr != null )
+					foreach( var str in item.IncludeStrAr )
+						incHeader.Append( str + "\r\n" );
+				if( item.AddlIncludeDirs != null )
+					foreach( var str in item.AddlIncludeDirs )
+						incDirs.Append( str + ";" );
+				if( item.AddlLibDirs != null )
+					foreach( var str in item.AddlLibDirs )
+						incLibs.Append( str + ";" );
+			}
+			includes = incHeader.ToString();
+
 			// Copy all the required property sheets into solutiondir/props
 			CopyPropertySheets();
-
-			// Copy all the libs required for Dynamic building if they don't already exist
-//			CopyDynamicLibs();
 
 			// Create project dir, stage .vcxproj and .filters
 			CopyProjFiles();
@@ -144,8 +171,65 @@ namespace ProjectWizard
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
 
+			// Let's modify the project now to add the additional include/lib dirs to the configuration:
+			try
+			{
+				if( incDirs.Length > 0 || incLibs.Length > 0 )
+				{
+					Microsoft.VisualStudio.VCProjectEngine.VCProject proj = (Microsoft.VisualStudio.VCProjectEngine.VCProject)project.Object;
+					Microsoft.VisualStudio.VCProjectEngine.IVCCollection configurationsCollection = (Microsoft.VisualStudio.VCProjectEngine.IVCCollection)proj.Configurations;
+
+					foreach( Microsoft.VisualStudio.VCProjectEngine.VCConfiguration configuration in configurationsCollection )
+					{
+						Microsoft.VisualStudio.VCProjectEngine.IVCCollection toolsCollection = (Microsoft.VisualStudio.VCProjectEngine.IVCCollection)configuration.Tools;
+						Microsoft.VisualStudio.VCProjectEngine.VCCLCompilerTool compilerTool = toolsCollection.Item( "VCCLCompilerTool" );
+						Microsoft.VisualStudio.VCProjectEngine.VCLinkerTool linkerTool = toolsCollection.Item( "VCLinkerTool" );
+
+						if( incDirs.Length > 0 )
+							compilerTool.AdditionalIncludeDirectories += incDirs.ToString();
+
+						if( incLibs.Length > 0 )
+							linkerTool.AdditionalLibraryDirectories += incLibs.ToString();
+					}
+				}
+			} catch(System.Exception) {}
+
+
+			// Initialize git repository
+			GitInterop git = new GitInterop( solutionPath );
+
+			// Git exist?
+			if( !git.gitExists() )
+			{
+				MessageBox.Show( "Cannot find Git; No Git functions can be performed.", "Git Error" );
+				return false;
+			}
+
+			// First let's see if git already exists in the solution, and initialize a repository if not
+			bool gitRepo = Directory.Exists( this.solutionPath + "\\.git" );
+			if( !gitRepo )
+				git.init();
+
 			//Let's add submodules now and other git stuff!
-			AddProjectToGit();
+			AddGitSubmodules( git );
+
+			// Save the solution and project and shit
+			project.Save();
+			this.dte.Solution.SaveAs( this.solutionName );
+
+			// Finally, commit and push to git:
+			git.Git_Add( "--all" );
+			git.Git_Commit( gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard." );
+			if( !gitRepo )
+			{
+				// Add origin location if provided
+				if( wz.Type.OriginLocation != "" )
+				{
+					git.Remote_Add( wz.Type.OriginLocation );
+					git.Git_Push();
+				}
+				git.Git_CheckoutDevelop();
+			}
   
 			return true;
 		}
@@ -176,40 +260,6 @@ namespace ProjectWizard
 			}
 			return true;
 		}
-
-// 		protected bool CopyDynamicLibs()
-// 		{
-// 			string libResource = "ProjectWizard.Resources.libs.Dynamic_Libs";
-// 			string destination = this.solutionPath + "\\Libs\\Dynamic_Libs\\";
-// 
-// 			// Create Dynamic Libs directory hierarchy:
-// 			Directory.CreateDirectory(destination);
-// 			Directory.CreateDirectory(destination + "amd64");
-// 			Directory.CreateDirectory(destination + "i386");
-// 
-// 			SortedDictionary<string, Stream> dynLibs = GetResources(libResource);
-// 			foreach( var kvp in dynLibs )
-// 			{
-// 				StringBuilder lib = new StringBuilder(kvp.Key);
-// 				lib[lib.ToString().IndexOf('.')] = '\\';
-// 
-// 				// Don't overwrite existing libs... just cuz they're big and in case the user has replaced them or something
-// 				if( File.Exists(destination + lib.ToString()) )
-// 				{
-// 					kvp.Value.Close();
-// 					continue;
-// 				}
-// 
-// 				Stream output = File.OpenWrite(destination + lib.ToString());
-// 				if( output != null )
-// 				{
-// 					kvp.Value.CopyTo(output);
-// 					output.Close();
-// 				}
-// 				kvp.Value.Close();
-// 			}
-// 			return true;
-// 		}
 
 		protected bool CopyProjFiles()
 		{
@@ -273,64 +323,53 @@ namespace ProjectWizard
 			return true;
 		}
 
-		//TODO: add error checking...
-		protected bool AddProjectToGit()
+		protected bool AddGitSubmodules(GitInterop git)
 		{
-			// Git exist?
-			if( !GitInterop.gitExists() )
-			{
-				MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
-				return false;
-			}
-
-			// First let's see if git already exists in the solution:
-			bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
-
 			try
 			{
-				GitInterop git = new GitInterop(solutionPath);
+				// Get the "Submodules" SolutionFolder from the solution explorer:
+				Solution2 sol2 = this.dte.Solution as Solution2;
+				SolutionFolder submodulesDir = null;
 
-				// Only init the Repo if not already a git repo, though I guess it doesn't really matter.
-				if( !gitRepo )
-					git.init();
+				var projects = sol2.GetEnumerator();
+				while( projects.MoveNext() )
+				{
+					Project proj = (Project)projects.Current;
+					if( proj.FullName.Equals( "" ) && proj.Name.Equals( "Submodules" ) )
+					{
+						submodulesDir = (SolutionFolder)proj.Object;
+						break;
+					}
+				}
 
-				// Add origin location if provided
-				if( wz.Type.OriginLocation != "" )
-					git.Remote_Add(wz.Type.OriginLocation);
-
-//			// If this is a WTL App, the user will need the WTL submodule.. If they didn't select it, then add it anyway.
-// 			if( this.projectType == ProjectType.WTLApp )
-// 			{
-// 
-// 			}
-
-				StringBuilder incHeader = new StringBuilder();
 				foreach( var item in wz.SubmodulesAr )
 				{
 					string path = @"./Submodules/" + item.Repo_Name;
-					if( !Directory.Exists(solutionPath + "\\Submodules\\" + item.Repo_Name) )
+					if( !Directory.Exists( solutionPath + "\\Submodules\\" + item.Repo_Name ) )
 					{
-						// may be cool to add some progress bars or something here...
-						if( !git.Submodule_Add(item.Location, path) )
-							MessageBox.Show("Submodule " + item.Name + " failed to clone", "Error Adding Submodule");
+						// Clone submodule:
+						if( git.Submodule_Add( item.Location, path, solutionPath + "\\Submodules\\" + item.Repo_Name ) )
+						{
+							if( item.AddToSolution )
+							{
+								// If submodulesDir doesn't exist, let's go ahead and create it
+								if( submodulesDir == null )
+									submodulesDir = sol2.AddSolutionFolder( "Submodules" ).Object;
+
+								// Add this specific submodule as a nested SolutionFolder and import all its projects:
+								string subDir = item.Repo_Name.Remove( item.Repo_Name.IndexOf( "_repo" ) );
+								SolutionFolder subProj = submodulesDir.AddSolutionFolder( item.Repo_Name ).Object;
+								subProj.AddFromFile( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + "\\" + subDir + ".sln" );
+							}
+						}
+						else
+							MessageBox.Show( "Submodule " + item.Name + " failed to clone", "Error Adding Submodule" );
 					}
-
-//                 foreach (var str in item.IncludeStrAr)
-//                 {
-//                     incHeader.Append(str + "\r\n");
-//                 }
 				}
-
-				string finalHeader = incHeader.ToString();
-
-				git.Git_Add("--all");
-//				git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
-
-				git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");        
 			}
 			catch( System.Exception ex )
 			{
-				MessageBox.Show("Error adding files to Git: " + ex.Message, "Git Error");
+				MessageBox.Show("Error adding Git submodules: " + ex.Message, "Git Error");
 				return false;
 			}
 			return true;
@@ -357,25 +396,32 @@ namespace ProjectWizard
 			return dict;
 		}
 
-		// This function will parse a given string and replace all modifiable data with user-input
-		// from the wizard.
+		// This function will parse a given string and replace all modifiable data with user-input from the wizard.
 		private string ParseData(string dataFile)
 		{
-			string retVal = dataFile.Replace("_____FILENAME_____", this.projectName);//wz.Author.ProjectName);
-			retVal = retVal.Replace("_____USER_____", wz.Author.Author);
-			retVal = retVal.Replace("_____DATE_____", DateTime.Now.ToString("M/d/yyyy"));
-			retVal = retVal.Replace("_____DESCRIPTION_____", wz.Author.Description.Replace("\r\n", "\r\n * "));
-			retVal = retVal.Replace("_____VERSION_____", wz.Author.Version);
+			// Required fields: Will never be null:
+			string retVal = dataFile.Replace("_____FILENAME_____", this.projectName);
+			retVal = retVal.Replace("_____SRCFILE_____", wz.Type.MainLocation );
+
+			// Required
+			retVal = retVal.Replace( "_____USER_____", wz.Author.Author );
+			retVal = retVal.Replace( "_____DATE_____", DateTime.Now.ToString( "M/d/yyyy" ) );
+			retVal = retVal.Replace( "_____VERSION_____", wz.Author.Version );
+
+			retVal = wz.Author.Description.Equals( "" ) ? retVal.Replace( " *\r\n * _____DESCRIPTION_____\r\n", "" ) : retVal.Replace( "_____DESCRIPTION_____", wz.Author.Description.Replace( "\r\n", "\r\n * " ) );
+
+			// Header file includes:
+			retVal = retVal.Replace( "/*_____USER_INCS_____*/\r\n", includes );
 
 			// vcxproj specific stuff:
 			string guid = "<ProjectGuid>";
 			string guidEnd = "</ProjectGuid>";
-			string rName = "<RootNamespace>";
-			string rNameEnd = "</RootNamespace>";
+//			string rName = "<RootNamespace>";
+//			string rNameEnd = "</RootNamespace>";
 			if( retVal.Contains(guid) )
 				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(guid) + guid.Length, retVal.IndexOf(guidEnd) - retVal.IndexOf(guid) - guid.Length), Guid.NewGuid().ToString().ToUpper());
-			if( retVal.Contains(rName) )
-				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(rName) + rName.Length, retVal.IndexOf(rNameEnd) - retVal.IndexOf(rName) - rName.Length), wz.Author.ProjectName);
+//			if( retVal.Contains(rName) )
+//				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(rName) + rName.Length, retVal.IndexOf(rNameEnd) - retVal.IndexOf(rName) - rName.Length), wz.Author.ToolName);
 			return retVal;
 		}
     }

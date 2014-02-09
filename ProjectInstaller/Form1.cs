@@ -15,7 +15,7 @@ namespace ProjectInstaller
 {
 	public class ProjInstaller
 	{
-		static const string binsURL = "git@bitbucket.org:pedbsktbll/projectbin.git";
+		private static readonly string binsURL = "git@bitbucket.org:pedbsktbll/projectbin.git";
 
 		public ProjInstaller()
 		{

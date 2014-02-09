@@ -10,6 +10,7 @@
       <ModuleDefinitionFile>Exports.def</ModuleDefinitionFile>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/ignore:4070 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>$(Libs)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
 </Project>

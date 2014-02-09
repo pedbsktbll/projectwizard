@@ -7,7 +7,7 @@
     <OriginLocation>git@bitbucket.org:pedbsktbll/dynamic_libs.git</OriginLocation>
 	<Stash>https://www.stash.net/submodule2</Stash>
 	<Jira>https://www.jira.net/submodule2</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
+	<Confluence>https://www.confluence.net/submodule2</Confluence>
   </Submodules_Data>
   <Submodules_Data>
     <Name>Windows Template Library (WTL)</Name>
@@ -16,7 +16,7 @@
     <OriginLocation>git@bitbucket.org:pedbsktbll/wtl.git</OriginLocation>
     <Stash>https://www.stash.net/submodule2</Stash>
     <Jira>https://www.jira.net/submodule2</Jira>
-    <Confluence>https://www.confluence.devlan.net/submodule2</Confluence>
+    <Confluence>https://www.confluence.net/submodule2</Confluence>
   </Submodules_Data>
     <Submodules_Data>
     <Name>Submodule #4</Name>
@@ -25,7 +25,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 4"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule4</Stash>
 	<Jira>https://www.jira.net/submodule4</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule4</Confluence>
+	<Confluence>https://www.confluence.net/submodule4</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule4.h"</string>
 		<string>#include "Submodule4a.h"</string>
@@ -38,7 +38,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 5"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule5</Stash>
 	<Jira>https://www.jira.net/submodule5</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule5</Confluence>
+	<Confluence>https://www.confluence.net/submodule5</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule5.h"</string>
 		<string>#include "Submodule5a.h"</string>
@@ -51,7 +51,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 6"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule6</Stash>
 	<Jira>https://www.jira.net/submodule6</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule6</Confluence>
+	<Confluence>https://www.confluence.net/submodule6</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule6.h"</string>
 		<string>#include "Submodule6a.h"</string>
@@ -64,7 +64,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 7"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule7</Stash>
 	<Jira>https://www.jira.net/submodule7</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule7</Confluence>
+	<Confluence>https://www.confluence.net/submodule7</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule7.h"</string>
 		<string>#include "Submodule7a.h"</string>
@@ -77,7 +77,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 8"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule8</Stash>
 	<Jira>https://www.jira.net/submodule8</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule8</Confluence>
+	<Confluence>https://www.confluence.net/submodule8</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule8.h"</string>
 		<string>#include "Submodule8a.h"</string>
@@ -90,7 +90,7 @@
     <CheckoutCommand>git submodule --idontknowwhatimdoing "submodule 9"</CheckoutCommand>
 	<Stash>https://www.stash.net/submodule9</Stash>
 	<Jira>https://www.jira.net/submodule9</Jira>
-	<Confluence>https://www.confluence.devlan.net/submodule9</Confluence>
+	<Confluence>https://www.confluence.net/submodule9</Confluence>
 	<IncludeStrAr>
 		<string>#include "Submodule9.h"</string>
 		<string>#include "Submodule9a.h"</string>

@@ -9,10 +9,13 @@
     <ClCompile>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(Libs)\Dynamic_Libs\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Subs)\Dynamic_Libs\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>msvcrt_win2003.obj;msvcrt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MinimumRequiredVersion>5.2</MinimumRequiredVersion>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Subs)Dynamic_Libs\inc\api;$(Subs)Dynamic_Libs\inc\crt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
 </Project>
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->

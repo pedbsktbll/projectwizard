@@ -15,6 +15,7 @@ namespace ProjectWizard
     {
         public int ProjectTemplate { get; set; }
 		public string projectTemplateString { get; set; }
+		public string projectName { get; set; }
         public string MainLocation { get; set; }
         public string OriginLocation { get; set; }
     }
@@ -25,7 +26,10 @@ namespace ProjectWizard
         public string Name { get; set; }
 		public string Repo_Name { get; set; }
         public string Location { get; set; }
-//        public string[] IncludeStrAr { get; set; }
+		public bool AddToSolution { get; set; }
+        public string[] IncludeStrAr { get; set; }
+		public string[] AddlIncludeDirs { get; set; }
+		public string[] AddlLibDirs { get; set; }
     }
 
     [Serializable]
@@ -56,9 +60,12 @@ namespace ProjectWizard
     {
         public string Name { get; set; }
 		public string Repo_Name { get; set; }
-        public string Description { get; set; }
-        public string OriginLocation { get; set; }
-//        public string[] IncludeStrAr { get; set; }
+		public string Description { get; set; }
+		public string OriginLocation { get; set; }
+		public bool AddToSolution { get; set; }
+        public string[] IncludeStrAr { get; set; }
+		public string[] AddlIncludeDirs { get; set; }
+		public string[] AddlLibDirs { get; set; }
         public string Stash { get; set; }
         public string Jira { get; set; }
         public string Confluence { get; set; }

@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{396C61C4-9B92-41CE-91F0-8219CAE7D012}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DLLAppTemplate</RootNamespace>
+    <RootNamespace>_____FILENAME_____</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -134,7 +134,7 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="_____FILENAME_____.cpp" />
+    <ClCompile Include="_____SRCFILE_____.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>

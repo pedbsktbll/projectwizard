@@ -48,6 +48,9 @@
     <Reference Include="envdte80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.VCProjectEngine, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
@@ -212,23 +215,12 @@
     <EmbeddedResource Include="Resources\base\WTLApp\small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\base\ConsoleApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\DLLApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\LIBApp\_____FILENAME_____.h" />
-    <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.c" />
-    <EmbeddedResource Include="Resources\base\SYSApp\_____FILENAME_____.h" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.ico" />
     <EmbeddedResource Include="Resources\base\WTLApp\_____FILENAME_____.rc" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\base\WINApp\Resource.h" />
     <EmbeddedResource Include="Resources\base\WINApp\small.ico" />
-    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.cpp" />
-    <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.h" />
     <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.ico" />
     <EmbeddedResource Include="Resources\base\WINApp\_____FILENAME_____.rc" />
   </ItemGroup>
@@ -239,11 +231,21 @@
     <EmbeddedResource Include="Resources\base\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\base\ConsoleApp\_____SRCFILE_____.cpp" />
+    <EmbeddedResource Include="Resources\base\DLLApp\_____SRCFILE_____.cpp" />
+    <EmbeddedResource Include="Resources\base\LIBApp\_____SRCFILE_____.cpp" />
+    <EmbeddedResource Include="Resources\base\LIBApp\_____SRCFILE_____.h" />
+    <EmbeddedResource Include="Resources\base\SYSApp\_____SRCFILE_____.c" />
+    <EmbeddedResource Include="Resources\base\SYSApp\_____SRCFILE_____.h" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____SRCFILE_____.cpp" />
+    <EmbeddedResource Include="Resources\base\WINApp\_____SRCFILE_____.h" />
+    <EmbeddedResource Include="Resources\base\WTLApp\_____SRCFILE_____.cpp" />
     <Content Include="temp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="tempSubmodule.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

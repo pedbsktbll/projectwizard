@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{15CEAE00-3E3A-4783-BA7A-57CC1AC5FF47}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WINAppTemplate</RootNamespace>
+    <RootNamespace>_____FILENAME_____</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,10 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="_____FILENAME_____.h" />
+    <ClInclude Include="_____SRCFILE_____.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_____FILENAME_____.cpp" />
+    <ClCompile Include="_____SRCFILE_____.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="_____FILENAME_____.rc" />

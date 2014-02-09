@@ -58,6 +58,29 @@ namespace ProjectWizard
 					return;
 				}
 			}
+
+			// WHAT? Still haven't found it?? You're trying to trick me, aint ya?!!!
+			foreach( ListViewItem item in pbSelected.Items )
+			{
+				if( ( (Submodules_Data)item.Tag ).Name.Equals( subName ) )
+				{
+					( (Submodules_Data)item.Tag ).required = true;
+					return;
+				}
+			}
+		}
+
+		public void resetSubs()
+		{
+			foreach( ListViewItem item in pbSelected.Items )
+			{
+				if( ( (Submodules_Data)item.Tag ).required == true )
+				{
+					( (Submodules_Data)item.Tag ).required = false;
+					pbSelected.Items.Remove( item );
+					pbAvailable.push( item );
+				}
+			}
 		}
 
         public override bool ValidateData()
@@ -74,9 +97,12 @@ namespace ProjectWizard
             {
                 wz[i] = new WizData_Submodules();
                 wz[i].Name = ((Submodules_Data)item.Tag).Name;
+				wz[i].Repo_Name = ( (Submodules_Data)item.Tag ).Repo_Name;
                 wz[i].Location = ((Submodules_Data)item.Tag).OriginLocation;
-//                wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
-				wz[i].Repo_Name = ((Submodules_Data)item.Tag).Repo_Name;
+				wz[i].AddToSolution = ( (Submodules_Data)item.Tag ).AddToSolution;
+                wz[i].IncludeStrAr = ((Submodules_Data)item.Tag).IncludeStrAr;
+				wz[i].AddlIncludeDirs = ( (Submodules_Data)item.Tag ).AddlIncludeDirs;
+				wz[i].AddlLibDirs = ( (Submodules_Data)item.Tag ).AddlLibDirs;
                 i++;
             }
             return wz;

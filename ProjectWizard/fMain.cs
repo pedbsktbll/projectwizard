@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace ProjectWizard
 {
@@ -29,29 +30,29 @@ namespace ProjectWizard
 
         private void PaintPanels()
         {
-            switch (iCurIndex)
-            {
-                case 0:
-                    bPrevious.Visible = false;
-                    bPrevious.Enabled = false;
-                    break;
-                default:
-                    bPrevious.Visible = true;
-                    bPrevious.Enabled = true;
-                    break;
-            }
+			// Set "previous" button to visible IFF previous exists
+			bPrevious.Visible = bPrevious.Enabled = iCurIndex == 0 ? false : true;
 
+			// Set all controls to invisible
             for( int i = 0; i < pucList.Length; i++ )
             {
                 pucList[i].Visible = false;
                 pucList[i].Enabled = false;
             }
 
-			if( iCurIndex == 1 )
-				((ucSubmodules)pucList[1]).setRequiredSubmodule("Dynamic Libraries");
+			// if current index is the first uctypes control, let's reset the submodule picks
+			if( iCurIndex == 0 )
+			{
+				( (ucSubmodules)pucList[1] ).resetSubs();
+			}
 
-			if( iCurIndex == 1 && ((ucType)pucList[0]).GetData().ProjectTemplate == 2 )
-				((ucSubmodules)pucList[1]).setRequiredSubmodule("Windows Template Library (WTL)");
+			// if current index is Submodules:
+			if( iCurIndex == 1 )
+			{
+				((ucSubmodules)pucList[1]).setRequiredSubmodule( "Dynamic Libraries" );
+				if( ((ucType) pucList[0]).GetData().ProjectTemplate == 2 )
+					((ucSubmodules)pucList[1]).setRequiredSubmodule("Windows Template Library (WTL)");
+			}
 
             if( iCurIndex == 3 )
             {
@@ -61,6 +62,9 @@ namespace ProjectWizard
                 wz.Author = ((ucAuthorBlock)pucList[2]).GetData();
                 ((ucConfirmation)pucList[iCurIndex]).PrintResults(wz);
             }
+
+			if( iCurIndex != 3 )
+				pucList[iCurIndex].Parent.BackColor = Color.White;
             pucList[iCurIndex].Visible = true;
             pucList[iCurIndex].Enabled = true;
 

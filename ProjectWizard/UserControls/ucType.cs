@@ -9,6 +9,8 @@ namespace ProjectWizard
 {
     public partial class ucType : UserControlEx
     {
+		public string projName;
+
         public ucType()
         {
             InitializeComponent();
@@ -95,14 +97,10 @@ namespace ProjectWizard
 
         public override bool ValidateData()
         {
-            string e = Path.GetExtension(txtMain.Text);
-            if (e != ".cpp")
-            {
-                MessageBox.Show("Error Parsing Main Project File: File must end in .cpp", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+			if( txtMain.Text == "" )
+				txtMain.Text = projName;
 
-            e = Path.GetFileName(txtMain.Text);
+            string e = Path.GetFileName(txtMain.Text);
             if (e != txtMain.Text)
             {
                 MessageBox.Show("Error Parsing Main Project File: Putting the main cpp file in a folder is not currently supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -117,10 +115,10 @@ namespace ProjectWizard
         {
             WizData_Type wz = new WizData_Type();
             var checkedButton = this.gbProject.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked);
-            //wz.ProjectTemplate = ((ProjectType_Data)checkedButton.Tag).Location;
 			wz.ProjectTemplate = ((ProjectType_Data)checkedButton.Tag).ProjectType;
 			wz.projectTemplateString = ((ProjectType_Data)checkedButton.Tag).Type;
-            wz.MainLocation = txtMain.Text;
+			wz.projectName = projName;
+			wz.MainLocation = txtMain.Text;
             wz.OriginLocation = txtRemote.Text;
             return wz;
         }
@@ -155,11 +153,13 @@ namespace ProjectWizard
         {
             try
             {
-                txtMain.Text = projName + ".cpp";
+				this.projName = projName;
+                txtMain.Text = projName; //+ ".cpp";
             }
             catch 
             {
-                txtMain.Text = "ProjectMain.cpp";
+				this.projName = "Project";
+                txtMain.Text = "ProjectMain";//.cpp";
             }
         }
     }

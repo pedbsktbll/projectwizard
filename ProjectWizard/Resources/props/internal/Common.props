@@ -11,8 +11,8 @@
     <P>$(ProjectDir)</P>
   </PropertyGroup>
   <PropertyGroup>
-    <OutDir>$(Bin)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(Bin)$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

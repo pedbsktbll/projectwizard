@@ -3,6 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "MainDlg.h"
+/*_____USER_INCS_____*/
 extern CAppModule _Module;
 
 BOOL CMainDlg::PreTranslateMessage(MSG* pMsg)

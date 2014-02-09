@@ -16,14 +16,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="_____FILENAME_____.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="_____FILENAME_____.c">
+    <ClCompile Include="_____SRCFILE_____.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_____SRCFILE_____.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
 <!-- This project created via the OSB Project Template by Josh S, Keith T. -->

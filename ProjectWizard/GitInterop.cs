@@ -1,28 +1,36 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System;
+using Microsoft.Win32;
 
 namespace ProjectWizard
 {
     public class GitInterop
     {
+		private string gitInstallPath;
         private Process Proc = new Process();
         private ProcessStartInfo ProcInfo = new ProcessStartInfo();
         private StreamWriter inputWriter;
         private StreamReader errorReader;
         private StreamReader outputReader;
+		private string workingDirectory;
 
         public GitInterop(string workingDirectory)
         {
-            //TODO figure out where git is installed on the system.
-            ProcInfo.FileName = @"C:\Program Files (x86)\Git\bin\sh.exe";
+			gitInstallPath = Environment.Is64BitOperatingSystem ?
+			   (string)Registry.GetValue( @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1",
+			   "InstallLocation", @"C:\Program Files (x86)\Git\" ) :
+			   (string)Registry.GetValue( @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1",
+			   "IntsllLocation", @"C:\Program Files\Git\" );
+
+			ProcInfo.FileName = gitInstallPath + "bin\\sh.exe";
             ProcInfo.Arguments = "--login -i";
             ProcInfo.RedirectStandardInput = true;
             ProcInfo.RedirectStandardError = true;
             ProcInfo.RedirectStandardOutput = true;
             ProcInfo.UseShellExecute = false;
             ProcInfo.CreateNoWindow = true;
-            ProcInfo.WorkingDirectory = workingDirectory;
+            ProcInfo.WorkingDirectory = this.workingDirectory = workingDirectory;
             Proc.StartInfo = ProcInfo;
         }
 
@@ -31,9 +39,33 @@ namespace ProjectWizard
             Proc.Close();
         }
 
-		public static bool gitExists()
+		public bool gitExists()
 		{
-			return File.Exists(@"C:\Program Files (x86)\Git\bin\sh.exe");
+			return File.Exists(gitInstallPath + "bin\\sh.exe");
+		}
+
+		public string gitPath()
+		{
+			return gitInstallPath;
+		}
+
+		private void startProc(string args, bool createWindow = false)
+		{
+			Process myProc = new Process();
+			ProcessStartInfo myProcInfo = new ProcessStartInfo();
+
+			myProcInfo.FileName = gitInstallPath + "bin\\sh.exe";
+			myProcInfo.Arguments = args;
+			myProcInfo.RedirectStandardInput = !createWindow;
+			myProcInfo.RedirectStandardError = !createWindow;
+			myProcInfo.RedirectStandardOutput = !createWindow;
+			myProcInfo.UseShellExecute = false;
+			myProcInfo.CreateNoWindow = !createWindow;
+			myProcInfo.WorkingDirectory = workingDirectory;
+			myProc.StartInfo = myProcInfo;
+
+			myProc.Start();
+			myProc.WaitForExit();
 		}
 
         public bool init()
@@ -64,37 +96,33 @@ namespace ProjectWizard
             return true;
         }
 
-        public bool Submodule_Add(string submoduleAddress, string submodulePath)
+        public bool Submodule_Add(string submoduleAddress, string submodulePath, string fullPath)
         {
-            Proc.Start();
-            inputWriter = Proc.StandardInput;
-            errorReader = Proc.StandardError;
-            outputReader = Proc.StandardOutput;
-            inputWriter.WriteLine("git submodule add {0} {1}", submoduleAddress, submodulePath);
-            inputWriter.Flush();
-            inputWriter.WriteLine("exit");
-            inputWriter.Flush();
-            Proc.WaitForExit();
+			startProc( String.Format( "-c \"git submodule add {0} {1}\"", submoduleAddress, submodulePath), true );
 
 			// If failed? ... Try https?
-			if( !Directory.Exists(submodulePath) && submoduleAddress.StartsWith("git@") )
+			if( !Directory.Exists(fullPath) && (submoduleAddress.StartsWith("git") || submoduleAddress.StartsWith("ssh")) )
 			{
-				string url = "https://" + submoduleAddress.Substring(submoduleAddress.IndexOf("@") + 1,
-					submoduleAddress.IndexOf(":") - submoduleAddress.IndexOf("@") - 1) + "/" +
-					submoduleAddress.Substring(submoduleAddress.IndexOf(":") + 1);
-				if( !url.EndsWith(".git") )
+				// Attempt #1:
+				string url = "https://" + submoduleAddress.Substring( submoduleAddress.IndexOf( "@" ) + 1,
+					submoduleAddress.LastIndexOf( ":" ) - submoduleAddress.IndexOf( "@" ) - 1 ) + "/scm" +
+					submoduleAddress.Substring( submoduleAddress.LastIndexOf( ":" ) + 5 );
+				if( !url.EndsWith( ".git" ) )
 					url += ".git";
 
-				Proc.Start();
-				inputWriter = Proc.StandardInput;
-				errorReader = Proc.StandardError;
-				outputReader = Proc.StandardOutput;
-				inputWriter.WriteLine("git submodule add {0} {1}", url, submodulePath);
-				inputWriter.Flush();
-				inputWriter.WriteLine("exit");
-				inputWriter.Flush();
-				Proc.WaitForExit();
+				startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
 
+				if( !Directory.Exists( fullPath ) )
+				{
+					// Attempt #2:
+					string url2 = "https://" + submoduleAddress.Substring( submoduleAddress.IndexOf( "@" ) + 1,
+						submoduleAddress.LastIndexOf( ":" ) - submoduleAddress.IndexOf( "@" ) - 1 ) + "/" +
+						submoduleAddress.Substring( submoduleAddress.LastIndexOf( ":" ) + 1 );
+					if( !url2.EndsWith( ".git" ) )
+						url2 += ".git";
+
+					startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
+				}
 			}
 
 			// Still fails? IDK, try using different keys?
@@ -103,7 +131,7 @@ namespace ProjectWizard
 // 
 // 			}
 
-            return Directory.Exists(submodulePath);
+			return Directory.Exists( fullPath );
         }
 
         public bool Git_Add(string args)
@@ -133,5 +161,47 @@ namespace ProjectWizard
             Proc.WaitForExit();
             return true;
         }
+
+		public bool Git_Push()
+		{
+			Proc.Start();
+			inputWriter = Proc.StandardInput;
+			errorReader = Proc.StandardError;
+			outputReader = Proc.StandardOutput;
+			inputWriter.WriteLine( "git push origin" );
+			inputWriter.Flush();
+			inputWriter.WriteLine( "exit" );
+			inputWriter.Flush();
+			Proc.WaitForExit();
+			return true;
+		}
+
+		public bool Git_CheckoutDevelop()
+		{
+			Proc.Start();
+			inputWriter = Proc.StandardInput;
+			errorReader = Proc.StandardError;
+			outputReader = Proc.StandardOutput;
+			inputWriter.WriteLine( "git branch develop; git checkout develop" );
+			inputWriter.Flush();
+			inputWriter.WriteLine( "exit" );
+			inputWriter.Flush();
+			Proc.WaitForExit();
+			return true;
+		}
+
+		public bool Git_Clone(string repo)
+		{
+			Proc.Start();
+			inputWriter = Proc.StandardInput;
+			errorReader = Proc.StandardError;
+			outputReader = Proc.StandardOutput;
+			inputWriter.WriteLine( "git clone -q {0}", repo );
+			inputWriter.Flush();
+			inputWriter.WriteLine( "exit" );
+			inputWriter.Flush();
+			Proc.WaitForExit();
+			return true;
+		}
     }
 }

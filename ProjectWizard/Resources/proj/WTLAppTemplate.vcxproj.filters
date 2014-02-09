@@ -35,7 +35,7 @@
     <ClCompile Include="MainDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="_____FILENAME_____.cpp">
+    <ClCompile Include="_____SRCFILE_____.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

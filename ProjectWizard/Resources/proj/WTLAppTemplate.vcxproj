@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0CB6CCDE-AAEF-4F10-A85E-F66AACB8BB3F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WTLAppTemplate</RootNamespace>
+    <RootNamespace>_____FILENAME_____</RootNamespace>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -166,7 +166,7 @@
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_____FILENAME_____.cpp" />
+    <ClCompile Include="_____SRCFILE_____.cpp" />
     <ClCompile Include="MainDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
