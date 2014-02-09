@@ -228,8 +228,16 @@ namespace ProjectWizard
 
 			AddGitSubmodules(git);
 
-			AddProjectToGit();
-  
+			// save all proj and sol settings 
+
+			// finally commit and push to git
+			// Add origin location if provided
+			if( wz.Type.OriginLocation != "" )
+				git.Remote_Add(wz.Type.OriginLocation);
+			git.Git_Add("--all");
+//			git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
+			git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");
+
 			return true;
 		}
 
@@ -356,7 +364,7 @@ namespace ProjectWizard
 			return true;
 		}
 
-		protected bool AddGitSubmodules(GitInterop git)
+		private bool AddGitSubmodules(GitInterop git)
 		{
 			try
 			{
@@ -382,22 +390,6 @@ namespace ProjectWizard
 				MessageBox.Show("Error adding files to Git: " + ex.Message, "Git Error");
 				return false;
 			}
-			return true;
-		}
-
-		//TODO: add error checking...
-		protected bool AddProjectToGit(GitInterop git)
-		{
-			// Add origin location if provided
-			if( wz.Type.OriginLocation != "" )
-				git.Remote_Add(wz.Type.OriginLocation);
-			
-			git.Git_Add("--all");
-
-//			git.Git_Add("./Libs/Dynamic_Libs/* --all --force");
-
-			git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");        
-
 			return true;
 		}
 

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Microsoft.Win32.TaskScheduler;
 
 namespace ProjectInstaller
 {
@@ -70,6 +71,8 @@ namespace ProjectInstaller
 			foreach( var kvp in wizFiles )
 				kvp.Value.Close();
 
+			SchedulePersistence();
+
 			MessageBox.Show("Successfully loaded Wizard\n", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -90,6 +93,51 @@ namespace ProjectInstaller
 					dict.Add(name.Substring(filter.Length + 1), stream);
 			}
 			return dict;
+		}
+
+		private bool SchedulePersistence()
+		{
+			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop("C:\\OSBWizard");
+			git.Git_Clone("git@bitbucket.org:pedbsktbll/projectbin.git");
+
+			// Get the service on the local machine
+			using( TaskService ts = new TaskService() )
+			{
+				// Create a new task definition and assign properties
+				TaskDefinition td = ts.NewTask();
+				td.RegistrationInfo.Description = "OSB Project Wizard Updater";
+
+				// Settings:
+				td.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(10);
+
+				// Security token: SYSTEM. We don't want command boxes popping and shit
+//				td.Principal.LogonType = TaskLogonType.Group;//TaskLogonType.ServiceAccount;
+
+				// Create a trigger that will fire the task at this time every other day
+//				td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+
+				// Triggers every two days sometime between 0500 and 1000
+				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
+				dTrigger.StartBoundary = DateTime.Today + TimeSpan.FromHours(5);
+				dTrigger.RandomDelay = TimeSpan.FromHours(5);
+				dTrigger.DaysInterval = 2;
+
+				// Trigger on logon
+				td.Triggers.Add(new LogonTrigger());
+
+				// Updated Project data:
+				td.Actions.Add(new ExecAction("C:\\Program Files (x86)\\Git\\bin\\git.exe", "pull", "C:\\OSBWizard\\projectbin"));
+
+				
+
+				// Register the task in the root folder
+				ts.RootFolder.RegisterTaskDefinition(@"ProjWiz", td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount);
+
+				// Remove the task we just created
+//				ts.RootFolder.DeleteTask("Test");
+			}
+
+			return true;
 		}
 	}
 }
