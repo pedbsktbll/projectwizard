@@ -53,12 +53,14 @@ namespace ProjectWizard
         // Execute is the main entry point for a project wizard.  It has to follow this template.
 		// contextParams:
 		// 0: Wizard Type GUID
-		// 1: Project Name
-		// 2: ProjectItems Collection
-		// 3: location of visual studio exe (Local directory)
+		// 1: Project Name: A string that is the unique VS project name
+		// 2: Local Directory: Local Location of working project files
+		// 3: Installation Directory: Directory path of the VS installation
 		// 4: Create New Solution : true..... Add to existing solution: false
-		// 5: Solution Name--- Will be empty string if not selected to create solution
-		// 6: false
+		// 5: *WRONG* Solution Name: Name of the solution file without directory portion or .sln extension; Will be empty string if not selected to create solution
+		//	  FUCK YOU VISUAL STUDIO... item 5 always contains the project name........
+		//	  I guess we need to find another way to do this...
+		// 6: Silent: Boolean that indicates whether the wizard should run silently
 		// 7: "4.0"
         public void Execute(object Application, int hwndOwner, ref object[] contextParams, ref object[] customParams, ref EnvDTE.wizardResult retval)
         {
@@ -215,7 +217,7 @@ namespace ProjectWizard
 
 			// Save the solution and project and shit
 			project.Save();
-			this.dte.Solution.SaveAs( this.solutionName );
+			this.dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
 
 			// Finally, commit and push to git:
 			git.Git_Add( "--all" );
