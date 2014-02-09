@@ -4,7 +4,7 @@ using System;
 
 namespace ProjectWizard
 {
-    internal class GitInterop
+    public class GitInterop
     {
         private Process Proc = new Process();
         private ProcessStartInfo ProcInfo = new ProcessStartInfo();

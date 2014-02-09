@@ -37,6 +37,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Win32.TaskScheduler">
+      <HintPath>TaskScheduler\Microsoft.Win32.TaskScheduler.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,7 +83,12 @@
     <EmbeddedResource Include="Resources\OSBWizard.vsdir" />
     <EmbeddedResource Include="Resources\OSBWizard.vsz" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectWizard\ProjectWizard.csproj">
+      <Project>{7C68B641-40B7-4744-AA1A-BF42E04194DA}</Project>
+      <Name>ProjectWizard</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\OSBWizard.ico" />
     <EmbeddedResource Include="Resources\ProjectWizard.dll" />

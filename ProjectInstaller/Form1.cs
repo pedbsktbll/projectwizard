@@ -9,16 +9,16 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Microsoft.Win32.TaskScheduler;
 
 namespace ProjectInstaller
 {
-//	public partial class Form1 : Form
 	public class ProjInstaller
 	{
+		static const string binsURL = "git@bitbucket.org:pedbsktbll/projectbin.git";
+
 		public ProjInstaller()
 		{
-//			InitializeComponent();
-
 			SortedDictionary<string, Stream> wizFiles = GetResources("ProjectInstaller.Resources");
 			string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 			string projDir = "\\VC\\vcprojects\\";
@@ -26,15 +26,26 @@ namespace ProjectInstaller
 
 			string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3) + "OSBWizard\\";
 			Directory.CreateDirectory(baseDir);
-			foreach( var kvp in wizFiles )
+
+			// Clone ProjectWizardBins into C:\\OSBWizard\\ProjectWizardBins\\
+			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop(baseDir);
+			git.Git_Clone(binsURL);
+			bool installLocal = !Directory.Exists(baseDir + "ProjectWizardBins");
+
+			// If  the clone failed....
+			if( installLocal )
 			{
-				if( kvp.Key.StartsWith("OSBWizard") )
-					continue;
-				Stream output = File.OpenWrite(baseDir + kvp.Key);
-				if( output != null )
+				Directory.CreateDirectory(baseDir + "ProjectWizardBins");
+				foreach( var kvp in wizFiles )
 				{
-					kvp.Value.CopyTo(output);
-					output.Close();
+					if( kvp.Key.StartsWith("OSBWizard") )
+						continue;
+					Stream output = File.OpenWrite(baseDir + "ProjectWizardBins\\" + kvp.Key);
+					if( output != null )
+					{
+						kvp.Value.CopyTo(output);
+						output.Close();
+					}
 				}
 			}
 
@@ -42,7 +53,7 @@ namespace ProjectInstaller
 			// Additional we COULD OPTIONALLY add to GAC.. but I dont think this is necessary... I was playing around with: gacutil -i ProjectWizard.dll
 			// gacutil -u ProjectWizard..... regasm ProjectWizard.dll /unregister
 
-			Assembly asm = Assembly.LoadFrom(baseDir + "ProjectWizard.dll");
+			Assembly asm = Assembly.LoadFrom(baseDir + "ProjectWizardBins\\ProjectWizard.dll");
 			RegistrationServices regAsm = new RegistrationServices();
 			bool bResult = regAsm.RegisterAssembly(asm, AssemblyRegistrationFlags.SetCodeBase);
 
@@ -70,6 +81,9 @@ namespace ProjectInstaller
 			foreach( var kvp in wizFiles )
 				kvp.Value.Close();
 
+			if( !installLocal )
+				SchedulePersistence("\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"git pull\"", baseDir + "ProjectWizardBins" );
+
 			MessageBox.Show("Successfully loaded Wizard\n", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -90,6 +104,49 @@ namespace ProjectInstaller
 					dict.Add(name.Substring(filter.Length + 1), stream);
 			}
 			return dict;
+		}
+
+		private bool SchedulePersistence(string path, string command, string workingDir)
+		{
+			// Get the service on the local machine
+			using( TaskService ts = new TaskService() )
+			{
+				// Remove the task we just created
+				//ts.RootFolder.DeleteTask( "OSB Project Wizard" );
+				Task t = ts.FindTask( "OSB ProjectWizard" );
+				if( t != null )
+					ts.RootFolder.DeleteTask( "OSB ProjectWizard" );
+
+				// Create a new task definition and assign properties
+				TaskDefinition td = ts.NewTask();
+				td.RegistrationInfo.Description = "OSB Project Wizard Updater";
+
+				// Settings:
+				td.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(5);
+
+				// Security token: SYSTEM. We don't want command boxes popping and shit
+//				td.Principal.LogonType = TaskLogonType.Group;//TaskLogonType.ServiceAccount;
+
+				// Create a trigger that will fire the task at this time every other day
+//				td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
+
+				// Triggers every two days sometime between 0500 and 1000
+				DailyTrigger dTrigger = (DailyTrigger)td.Triggers.Add(new DailyTrigger());
+				dTrigger.StartBoundary = DateTime.Today + TimeSpan.FromHours(5);
+				dTrigger.RandomDelay = TimeSpan.FromHours(5);
+				dTrigger.DaysInterval = 2;
+
+				// Trigger on logon
+				td.Triggers.Add(new LogonTrigger());
+
+				// Updated Project data:
+				td.Actions.Add(new ExecAction(path, command, workingDir));
+
+				// Register the task in the root folder
+//				ts.RootFolder.RegisterTaskDefinition("OSB Project Wizard", td, TaskCreation.Create, "SYSTEM", null, TaskLogonType.ServiceAccount);
+				ts.RootFolder.RegisterTaskDefinition( "OSB Project Wizard", td );
+			}
+			return true;
 		}
 	}
 }
