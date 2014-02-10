@@ -25,6 +25,9 @@ namespace ProjectInstaller
 			string wizDir = projDir + "OSBWizard\\";
 
 			string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3) + "OSBWizard\\";
+
+			// Delete old shit and re-create base directory
+			Directory.Delete(baseDir, true);
 			Directory.CreateDirectory(baseDir);
 
 			// Clone ProjectWizardBins into C:\\OSBWizard\\ProjectWizardBins\\
