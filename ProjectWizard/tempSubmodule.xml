@@ -10,6 +10,15 @@
 	<Confluence>https://www.confluence.net/submodule2</Confluence>
   </Submodules_Data>
   <Submodules_Data>
+    <Name>Kernel Libraries</Name>
+    <Repo_Name>Kernel_Libs</Repo_Name>
+    <Description>Required for building native system drivers</Description>
+    <OriginLocation>git@bitbucket.org:pedbsktbll/kernel_libs.git</OriginLocation>
+    <Stash>https://www.stash.net/submodule2</Stash>
+    <Jira>https://www.jira.net/submodule2</Jira>
+    <Confluence>https://www.confluence.net/submodule2</Confluence>
+  </Submodules_Data>
+  <Submodules_Data>
     <Name>Windows Template Library (WTL)</Name>
     <Repo_Name>WTL</Repo_Name>
     <Description>Required for creating WTL Windows Applications</Description>

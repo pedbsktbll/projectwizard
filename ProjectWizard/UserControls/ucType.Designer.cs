@@ -33,7 +33,7 @@
 			this.rbWTL = new System.Windows.Forms.RadioButton();
 			this.lblStandardProject = new System.Windows.Forms.Label();
 			this.lvCustomTemplates = new System.Windows.Forms.ListView();
-			this.ProjectType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.colProjectType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.rbWIN = new System.Windows.Forms.RadioButton();
 			this.rbCON = new System.Windows.Forms.RadioButton();
 			this.rbSYS = new System.Windows.Forms.RadioButton();
@@ -92,7 +92,7 @@
 			// lvCustomTemplates
 			// 
 			this.lvCustomTemplates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ProjectType});
+            this.colProjectType});
 			this.lvCustomTemplates.Enabled = false;
 			this.lvCustomTemplates.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.lvCustomTemplates.Location = new System.Drawing.Point(254, 31);
@@ -105,8 +105,8 @@
 			// 
 			// ProjectType
 			// 
-			this.ProjectType.Text = "ProjectType";
-			this.ProjectType.Width = 385;
+			this.colProjectType.Text = "ProjectType";
+			this.colProjectType.Width = 385;
 			// 
 			// rbWIN
 			// 
@@ -297,7 +297,7 @@
         private System.Windows.Forms.ListView lvCustomTemplates;
         private System.Windows.Forms.RadioButton rbWIN;
         private System.Windows.Forms.GroupBox gbProject;
-        private System.Windows.Forms.ColumnHeader ProjectType;
+        private System.Windows.Forms.ColumnHeader colProjectType;
 		private System.Windows.Forms.RadioButton rbWTL;
 
 

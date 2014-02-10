@@ -50,8 +50,10 @@ namespace ProjectWizard
 			if( iCurIndex == 1 )
 			{
 				((ucSubmodules)pucList[1]).setRequiredSubmodule( "Dynamic Libraries" );
-				if( ((ucType) pucList[0]).GetData().ProjectTemplate == 2 )
+				if( ((ucType)pucList[0]).GetData().ProjectTemplate == ProjectType.WTLApp )
 					((ucSubmodules)pucList[1]).setRequiredSubmodule("Windows Template Library (WTL)");
+				if( ((ucType)pucList[0]).GetData().ProjectTemplate == ProjectType.SYSApp )
+					((ucSubmodules)pucList[1]).setRequiredSubmodule("Kernel Libraries");
 			}
 
             if( iCurIndex == 3 )
