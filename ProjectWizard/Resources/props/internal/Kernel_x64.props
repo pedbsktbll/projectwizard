@@ -9,7 +9,7 @@
       <PreprocessorDefinitions>_WIN64;_AMD64_;AMD64;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x0603;NTDDI_VERSION=0x05020000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(DDKBASE-6001_18001)\lib\wnet\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Subs)Kernel_Libs\wnet\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <MinimumRequiredVersion>5.2</MinimumRequiredVersion>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
