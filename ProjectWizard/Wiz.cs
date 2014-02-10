@@ -196,43 +196,51 @@ namespace ProjectWizard
 				}
 			} catch(System.Exception) {}
 
-
-			// Initialize git repository
-			GitInterop git = new GitInterop( solutionPath );
-
-			// Git exist?
-			if( !git.gitExists() )
+			try
 			{
-				MessageBox.Show( "Cannot find Git; No Git functions can be performed.", "Git Error" );
-				return false;
-			}
+				// Initialize git repository
+				GitInterop git = new GitInterop(solutionPath);
 
-			// First let's see if git already exists in the solution, and initialize a repository if not
-			bool gitRepo = Directory.Exists( this.solutionPath + "\\.git" );
-			if( !gitRepo )
-				git.init();
-
-			//Let's add submodules now and other git stuff!
-			AddGitSubmodules( git );
-
-			// Save the solution and project and shit
-			project.Save();
-			this.dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
-
-			// Finally, commit and push to git:
-			git.Git_Add( "--all" );
-			git.Git_Commit( gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard." );
-			if( !gitRepo )
-			{
-				// Add origin location if provided
-				if( wz.Type.OriginLocation != "" )
+				// Git exist?
+				if( !git.gitExists() )
 				{
-					git.Remote_Add( wz.Type.OriginLocation );
-					git.Git_Push();
+					MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
+					return false;
 				}
-				git.Git_CheckoutDevelop();
+
+				// First let's see if git already exists in the solution, and initialize a repository if not
+				bool gitRepo = Directory.Exists(this.solutionPath + "\\.git");
+				if( !gitRepo )
+					git.init();
+
+				//Let's add submodules now and other git stuff!
+				AddGitSubmodules(git);
+
+				// Save the solution and project and shit
+				project.Save();
+				this.dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
+
+				// Finally, commit and push to git:
+				git.Git_Add("--all");
+				git.Git_Commit(gitRepo ? "Added Project " + this.projectName : "Initial commit by Project Wizard.");
+				if( !gitRepo )
+				{
+					// Add origin location if provided
+					if( wz.Type.OriginLocation != "" )
+					{
+						git.Remote_Add(wz.Type.OriginLocation);
+						git.Git_Push();
+					}
+					git.Git_CheckoutDevelop();
+				}
 			}
-  
+			catch( System.Exception ex )
+			{
+				MessageBox.Show("Hmm.. Git probably fucked up somewhere.. Well, I guess it's not *critical* for project creation so let's proceed...." +
+					"\nERROR: " + ex.Message, "Git Error?");
+				project.Save();
+				this.dte.Solution.SaveAs(this.dte.Solution.FullName); 
+			}
 			return true;
 		}
 
