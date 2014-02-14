@@ -6,6 +6,7 @@ using EnvDTE80;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ProjectWizard
 {
@@ -115,8 +116,8 @@ namespace ProjectWizard
 			if( this.createNewSolution )
 			{
                 Directory.CreateDirectory(solutionPath);
-				this.dte.Solution.Create(this.solutionPath, this.solutionName);
-                this.dte.Solution.SaveAs(this.solutionName);
+				dte.Solution.Create(solutionPath, solutionName);
+				dte.Solution.SaveAs(solutionPath + "\\" + solutionName + ".sln");
 			}
 
 			// Create custom directories:
@@ -168,7 +169,7 @@ namespace ProjectWizard
 			CopyProjFiles();
 
 			// Using EnvDTE, create the VS project...
-			EnvDTE.Project project = this.dte.Solution.AddFromFile(this.projectPath + "\\" + this.projectName + ".vcxproj");
+			EnvDTE.Project project = dte.Solution.AddFromFile(this.projectPath + "\\" + this.projectName + ".vcxproj");
 
 			// Copy all project items (source and header files) into project
 			AddProjectItems();
@@ -218,7 +219,8 @@ namespace ProjectWizard
 
 				// Save the solution and project and shit
 				project.Save();
-				this.dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
+				dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
+//				FuckYouMicrosoftAndYourGodDamnFuckingPieceOfShitEnvDTECuntAssVSLibrary();
 
 				// Finally, commit and push to git:
 				git.Git_Add("--all");
@@ -426,13 +428,36 @@ namespace ProjectWizard
 			// vcxproj specific stuff:
 			string guid = "<ProjectGuid>";
 			string guidEnd = "</ProjectGuid>";
-//			string rName = "<RootNamespace>";
-//			string rNameEnd = "</RootNamespace>";
 			if( retVal.Contains(guid) )
 				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(guid) + guid.Length, retVal.IndexOf(guidEnd) - retVal.IndexOf(guid) - guid.Length), Guid.NewGuid().ToString().ToUpper());
-//			if( retVal.Contains(rName) )
-//				retVal = retVal.Replace(retVal.Substring(retVal.IndexOf(rName) + rName.Length, retVal.IndexOf(rNameEnd) - retVal.IndexOf(rName) - rName.Length), wz.Author.ToolName);
 			return retVal;
+		}
+
+		void FuckYouMicrosoftAndYourGodDamnFuckingPieceOfShitEnvDTECuntAssVSLibrary()
+		{
+			try
+			{
+				// Let's open the god damn .sln file and find this fucking ../../../ bullshit it adds because it's a fucktwat
+				string slnFileData = File.ReadAllText(this.dte.Solution.FullName);
+
+				// Match the regex for:
+				// Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SuperAwesomeProject32", "..\..\..\..\..\......
+				string regexPattern = @"^Project\(" + "\".*" + projectName + "\", \"" + @"\.\.\\.*$";
+				Match m = Regex.Match(slnFileData, regexPattern, RegexOptions.Multiline);
+				if( !m.Success )
+					return;
+
+				// Lines....
+				Capture cap = m.Groups[0].Captures[0];
+				string capStart = slnFileData.Substring(cap.Index);
+				string replaceStart = capStart.Substring(capStart.IndexOf("..\\"));
+				string lineToReplace = replaceStart.Substring(0, replaceStart.IndexOf("\""));
+				slnFileData = slnFileData.Replace(lineToReplace, projectName + "\\" + projectName + ".vcxproj");
+
+				// Write out modified data
+				File.WriteAllText(this.dte.Solution.FullName, slnFileData);
+			}
+			catch(System.Exception){}
 		}
     }
 }
