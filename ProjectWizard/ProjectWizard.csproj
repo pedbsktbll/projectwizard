@@ -144,10 +144,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\amd64\msvcrt.lib" />
-    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\amd64\msvcrt_win2003.obj" />
-    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\i386\msvcrt.lib" />
-    <EmbeddedResource Include="Resources\libs\Dynamic_Libs\i386\msvcrt_win2000.obj" />
     <EmbeddedResource Include="Resources\proj\ConsoleAppTemplate.vcxproj" />
     <EmbeddedResource Include="Resources\proj\ConsoleAppTemplate.vcxproj.filters" />
     <EmbeddedResource Include="Resources\props\internal\Common.props" />
@@ -186,7 +182,6 @@
     <EmbeddedResource Include="Resources\props\internal\GUI_x64.props" />
     <EmbeddedResource Include="Resources\props\internal\GUI_x86.props" />
     <EmbeddedResource Include="Resources\props\internal\LIB.props" />
-    <None Include="Resources\temp.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Arrow-double-right-icon.png" />

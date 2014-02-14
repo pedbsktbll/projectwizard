@@ -76,7 +76,7 @@ namespace ProjectWizard
 			return gitInstallPath;
 		}
 
-		private void startProc(string args, bool createWindow = false, bool usePlink = false)
+		private int startProc(string args, bool createWindow = false, bool usePlink = false)
 		{
 			Process myProc = new Process();
 			ProcessStartInfo myProcInfo = new ProcessStartInfo();
@@ -96,6 +96,7 @@ namespace ProjectWizard
 
 			myProc.Start();
 			myProc.WaitForExit();
+			return myProc.ExitCode;
 		}
 
         public bool init()
@@ -206,7 +207,7 @@ namespace ProjectWizard
 			inputWriter = Proc.StandardInput;
 			errorReader = Proc.StandardError;
 			outputReader = Proc.StandardOutput;
-			inputWriter.WriteLine( "git push origin" );
+			inputWriter.WriteLine( "git push --all" );
 			inputWriter.Flush();
 			inputWriter.WriteLine( "exit" );
 			inputWriter.Flush();
@@ -228,18 +229,105 @@ namespace ProjectWizard
 			return true;
 		}
 
-		public bool Git_Clone(string repo)
+		public bool Git_Clone(string repo, string dirPath)
 		{
-			Proc.Start();
-			inputWriter = Proc.StandardInput;
-			errorReader = Proc.StandardError;
-			outputReader = Proc.StandardOutput;
-			inputWriter.WriteLine( "git clone -q {0}", repo );
-			inputWriter.Flush();
-			inputWriter.WriteLine( "exit" );
-			inputWriter.Flush();
-			Proc.WaitForExit();
-			return true;
+// 			Proc.Start();
+// 			inputWriter = Proc.StandardInput;
+// 			errorReader = Proc.StandardError;
+// 			outputReader = Proc.StandardOutput;
+// 			inputWriter.WriteLine( "git clone -q {0}", repo );
+// 			inputWriter.Flush();
+// 			inputWriter.WriteLine( "exit" );
+// 			inputWriter.Flush();
+// 			Proc.WaitForExit();
+// 			return true;
+
+			startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ) );
+
+			// On first failure, let's try plink...
+			if( !Directory.Exists( dirPath ) && plink != null )
+				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), false, true );
+
+			// ... Try https?
+			if( !Directory.Exists( dirPath ) && ( repo.StartsWith( "git" ) || repo.StartsWith( "ssh" ) ) )
+			{
+				// Attempt #1: This is the way stash handles it
+				string url = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
+					repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/scm" +
+					repo.Substring( repo.LastIndexOf( ":" ) + 5 );
+				if( !url.EndsWith( ".git" ) )
+					url += ".git";
+
+				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
+				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url ) );
+
+				if( !Directory.Exists( dirPath ) )
+				{
+					// Attempt #2: This is the way bitbucket handles it
+					string url2 = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
+						repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/" +
+						repo.Substring( repo.LastIndexOf( ":" ) + 1 );
+					if( !url2.EndsWith( ".git" ) )
+						url2 += ".git";
+
+					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
+					startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url2 ) );
+				}
+			}
+
+			// Still fails? IDK, try using different keys?
+			// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
+			// 			{
+			// 
+			// 			}
+
+			return Directory.Exists( dirPath );
+		}
+
+		public bool Git_Pull(bool quiet = true)
+		{
+			//int retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ) );
+			int retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ), !quiet );
+
+			// On first failure, let's try plink...
+			if( retCode != 0 && plink != null )
+				retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ), !quiet, true );
+
+			// ... Try https?
+// 			if( retCode != 0 && ( repo.StartsWith( "git" ) || repo.StartsWith( "ssh" ) ) )
+// 			{
+// 				// Attempt #1: This is the way stash handles it
+// 				string url = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
+// 					repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/scm" +
+// 					repo.Substring( repo.LastIndexOf( ":" ) + 5 );
+// 				if( !url.EndsWith( ".git" ) )
+// 					url += ".git";
+// 
+// 				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
+// 				startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe", url ) );
+// 
+// 				if( !Directory.Exists( dirPath ) )
+// 				{
+// 					// Attempt #2: This is the way bitbucket handles it
+// 					string url2 = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
+// 						repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/" +
+// 						repo.Substring( repo.LastIndexOf( ":" ) + 1 );
+// 					if( !url2.EndsWith( ".git" ) )
+// 						url2 += ".git";
+// 
+// 					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
+// 					startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe", url2 ) );
+// 				}
+// 			}
+
+			// Still fails? IDK, try using different keys?
+			// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
+			// 			{
+			// 
+			// 			}
+
+//			return Directory.Exists( dirPath );
+			return retCode == 0 ? true : false;
 		}
     }
 }
