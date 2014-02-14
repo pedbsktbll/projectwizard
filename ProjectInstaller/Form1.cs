@@ -19,36 +19,53 @@ namespace ProjectInstaller
 
 		public ProjInstaller()
 		{
-			SortedDictionary<string, Stream> wizFiles = GetResources("ProjectInstaller.Resources");
 			string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 			string projDir = "\\VC\\vcprojects\\";
-			string wizDir = projDir + "OSBWizard\\";
+//			string wizDir = projDir + "OSBWizard\\";
 
-			string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3) + "OSBWizard\\";
+			string baseDir = /*Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3)*/progFiles + "\\OSBWizard\\";
 
 			// Delete old shit and re-create base directory
-			Directory.Delete(baseDir, true);
-			Directory.CreateDirectory(baseDir);
+			try
+			{
+//				Directory.Delete( baseDir + "ProjectWizardBins", true );
+				DeleteDirectoryBecauseCSharpIsFuckingRetardedAndSucksAss( baseDir + "ProjectWizardBins", true );
+			}
+			catch( System.Exception /*e*/ ) { /*MessageBox.Show( e.Message );*/ }
+			Directory.CreateDirectory( baseDir );
+
+			// Dump Updater program:
+			Stream updaterProgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ProjectInstaller.Resources.UpdateScript.ProjectWizardUpdater.exe");
+			if( updaterProgStream != null )
+			{
+				Stream output = File.OpenWrite( baseDir + "ProjectWizardUpdater.exe" );
+				if( output != null )
+				{
+					updaterProgStream.CopyTo( output );
+					output.Close();
+				}
+				updaterProgStream.Close();
+			}
 
 			// Clone ProjectWizardBins into C:\\OSBWizard\\ProjectWizardBins\\
 			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop(baseDir);
-			git.Git_Clone(binsURL);
+			git.Git_Clone(binsURL, baseDir + "ProjectWizardBins");
 			bool installLocal = !Directory.Exists(baseDir + "ProjectWizardBins");
 
 			// If  the clone failed....
 			if( installLocal )
 			{
 				Directory.CreateDirectory(baseDir + "ProjectWizardBins");
+				SortedDictionary<string, Stream> wizFiles = GetResources( "ProjectInstaller.Resources.ProjectWizardBins" );
 				foreach( var kvp in wizFiles )
 				{
-					if( kvp.Key.StartsWith("OSBWizard") )
-						continue;
 					Stream output = File.OpenWrite(baseDir + "ProjectWizardBins\\" + kvp.Key);
 					if( output != null )
 					{
 						kvp.Value.CopyTo(output);
 						output.Close();
 					}
+					kvp.Value.Close();
 				}
 			}
 
@@ -67,25 +84,30 @@ namespace ProjectInstaller
 				vs[vs.Length - 3] = i;
 				if( !Directory.Exists(vs.ToString()) )
 					continue;
-				Directory.CreateDirectory(vs.ToString() + wizDir);
+//				Directory.CreateDirectory(vs.ToString() + wizDir);
 
-				foreach( var kvp in wizFiles )
+				SortedDictionary<string, Stream> vsConfigFiles = GetResources( "ProjectInstaller.Resources.VS_Config" );
+				foreach( var kvp in vsConfigFiles )
 				{
-					Stream output = File.OpenWrite( kvp.Key.StartsWith("OSBWizard") ? vs.ToString() + projDir + kvp.Key : vs.ToString() + wizDir + kvp.Key  );
+					Stream output = File.OpenWrite( /*kvp.Key.StartsWith("OSBWizard") ? */vs.ToString() + projDir + kvp.Key /*: vs.ToString() + wizDir + kvp.Key*/  );
 					if( output != null )
 					{
 						kvp.Value.CopyTo(output);
 						kvp.Value.Seek(0, SeekOrigin.Begin);
 						output.Close();
 					}
+					kvp.Value.Close();
 				}
 			}
 
-			foreach( var kvp in wizFiles )
-				kvp.Value.Close();
+//			foreach( var kvp in wizFiles )
+//				kvp.Value.Close();
 
 			if( !installLocal )
-				SchedulePersistence("\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"git pull\"", baseDir + "ProjectWizardBins" );
+//				SchedulePersistence("\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"git pull\"", baseDir + "ProjectWizardBins" );
+//				SchedulePersistence( "\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"'" + git.gitPath() + "bin\\git.exe' pull\"", baseDir + "ProjectWizardBins" );
+//				SchedulePersistence( "cmd.exe", "/C \"" + baseDir + "ProjectWizardUpdater.exe -q\"", baseDir + "ProjectWizardBins" );
+				SchedulePersistence( "\"" + baseDir + "ProjectWizardUpdater.exe\"", "-q", baseDir + "ProjectWizardBins" );
 
 			MessageBox.Show("Successfully loaded Wizard\n", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -129,6 +151,7 @@ namespace ProjectInstaller
 
 				// Security token: SYSTEM. We don't want command boxes popping and shit
 //				td.Principal.LogonType = TaskLogonType.Group;//TaskLogonType.ServiceAccount;
+				td.Principal.RunLevel = TaskRunLevel.Highest;
 
 				// Create a trigger that will fire the task at this time every other day
 //				td.Triggers.Add(new DailyTrigger { DaysInterval = 2 });
@@ -150,6 +173,26 @@ namespace ProjectInstaller
 				ts.RootFolder.RegisterTaskDefinition( "OSB Project Wizard", td );
 			}
 			return true;
+		}
+
+		private static void DeleteDirectoryBecauseCSharpIsFuckingRetardedAndSucksAss(string path, bool recursive)
+		{
+			if( recursive )
+			{
+				var subDirs = Directory.GetDirectories( path );
+				foreach( var s in subDirs )
+					DeleteDirectoryBecauseCSharpIsFuckingRetardedAndSucksAss( s, true );
+			}
+
+			var files = Directory.GetFiles( path );
+			foreach( var f in files )
+			{
+				var attr = File.GetAttributes( f );
+				if( ( attr & FileAttributes.ReadOnly ) == FileAttributes.ReadOnly )
+					File.SetAttributes( f, attr ^ FileAttributes.ReadOnly );
+				File.Delete( f );
+			}
+			Directory.Delete( path );
 		}
 	}
 }

@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ProjectWizard\GitInterop.cs">
+      <Link>GitInterop.cs</Link>
+    </Compile>
     <Compile Include="Form1.cs" />
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -80,20 +83,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Resources\OSBWizard.vsdir" />
-    <EmbeddedResource Include="Resources\OSBWizard.vsz" />
+    <EmbeddedResource Include="Resources\VS_Config\OSBWizard.vsdir" />
+    <EmbeddedResource Include="Resources\VS_Config\OSBWizard.vsz" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProjectWizard\ProjectWizard.csproj">
-      <Project>{7C68B641-40B7-4744-AA1A-BF42E04194DA}</Project>
-      <Name>ProjectWizard</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Resources\ProjectWizardBins\ProjectWizard.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\OSBWizard.ico" />
-    <EmbeddedResource Include="Resources\ProjectWizard.dll" />
-    <EmbeddedResource Include="Resources\temp.xml" />
-    <EmbeddedResource Include="Resources\tempSubmodule.xml" />
+    <EmbeddedResource Include="Resources\UpdateScript\ProjectWizardUpdater.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ProjectWizardBins\temp.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ProjectWizardBins\tempSubmodule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\VS_Config\OSBWizard.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -102,7 +108,8 @@ copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.ico" "$(ProjectDir)
 copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsdir" "$(ProjectDir)Resources\"
 copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsz" "$(ProjectDir)Resources\"
 copy /Y "$(SolutionDir)ProjectWizard\temp.xml" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\tempSubmodule.xml" "$(ProjectDir)Resources\"</PreBuildEvent>
+copy /Y "$(SolutionDir)ProjectWizard\tempSubmodule.xml" "$(ProjectDir)Resources\"
+copy /Y "$(SolutionDir)ProjectWizardUpdater\bin\$(ConfigurationName)\ProjectWizardUpdater.exe" "$(ProjectDir)Resources\UpdateScript\"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
