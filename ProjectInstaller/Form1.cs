@@ -26,6 +26,7 @@ namespace ProjectInstaller
 			string baseDir = /*Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3)*/progFiles + "\\OSBWizard\\";
 
 			// Delete old shit and re-create base directory
+			Console.WriteLine( "Creating OSBWizard directory in " + progFiles + "...");
 			try
 			{
 //				Directory.Delete( baseDir + "ProjectWizardBins", true );
@@ -35,6 +36,7 @@ namespace ProjectInstaller
 			Directory.CreateDirectory( baseDir );
 
 			// Dump Updater program:
+			Console.WriteLine( "Dumping OSBWizardUpdater..." );
 			Stream updaterProgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ProjectInstaller.Resources.UpdateScript.ProjectWizardUpdater.exe");
 			if( updaterProgStream != null )
 			{
@@ -48,6 +50,7 @@ namespace ProjectInstaller
 			}
 
 			// Clone ProjectWizardBins into C:\\OSBWizard\\ProjectWizardBins\\
+			Console.WriteLine( "Attempting to clone ProjectWizardBins..." );
 			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop(baseDir);
 			git.Git_Clone(binsURL, baseDir + "ProjectWizardBins");
 			bool installLocal = !Directory.Exists(baseDir + "ProjectWizardBins");
@@ -55,6 +58,7 @@ namespace ProjectInstaller
 			// If  the clone failed....
 			if( installLocal )
 			{
+				Console.WriteLine( "GIT has FAILED... resorting to internal backup copies..." );
 				Directory.CreateDirectory(baseDir + "ProjectWizardBins");
 				SortedDictionary<string, Stream> wizFiles = GetResources( "ProjectInstaller.Resources.ProjectWizardBins" );
 				foreach( var kvp in wizFiles )
@@ -73,11 +77,13 @@ namespace ProjectInstaller
 			// Additional we COULD OPTIONALLY add to GAC.. but I dont think this is necessary... I was playing around with: gacutil -i ProjectWizard.dll
 			// gacutil -u ProjectWizard..... regasm ProjectWizard.dll /unregister
 
+			Console.WriteLine( "Registering Assembly for access from Visual Studio..." );
 			Assembly asm = Assembly.LoadFrom(baseDir + "ProjectWizardBins\\ProjectWizard.dll");
 			RegistrationServices regAsm = new RegistrationServices();
 			bool bResult = regAsm.RegisterAssembly(asm, AssemblyRegistrationFlags.SetCodeBase);
 
 			// Supports up to VS 19.0 :)
+			Console.WriteLine( "Adding VS Config files to all versions of VS from 10.0+..." );
 			StringBuilder vs = new StringBuilder(progFiles + "\\Microsoft Visual Studio 10.0");
 			for( char i = '0'; i <= '9'; i++ )
 			{
@@ -104,10 +110,13 @@ namespace ProjectInstaller
 //				kvp.Value.Close();
 
 			if( !installLocal )
-//				SchedulePersistence("\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"git pull\"", baseDir + "ProjectWizardBins" );
-//				SchedulePersistence( "\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"'" + git.gitPath() + "bin\\git.exe' pull\"", baseDir + "ProjectWizardBins" );
-//				SchedulePersistence( "cmd.exe", "/C \"" + baseDir + "ProjectWizardUpdater.exe -q\"", baseDir + "ProjectWizardBins" );
+			{
+				Console.WriteLine( "Creating update task..." );
+				//				SchedulePersistence("\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"git pull\"", baseDir + "ProjectWizardBins" );
+				//				SchedulePersistence( "\"" + git.gitPath() + "bin\\sh.exe\"", "-c \"'" + git.gitPath() + "bin\\git.exe' pull\"", baseDir + "ProjectWizardBins" );
+				//				SchedulePersistence( "cmd.exe", "/C \"" + baseDir + "ProjectWizardUpdater.exe -q\"", baseDir + "ProjectWizardBins" );
 				SchedulePersistence( "\"" + baseDir + "ProjectWizardUpdater.exe\"", "-q", baseDir + "ProjectWizardBins" );
+			}
 
 			MessageBox.Show("Successfully loaded Wizard\n", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}

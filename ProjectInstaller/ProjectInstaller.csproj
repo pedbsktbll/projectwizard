@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FD61183E-4F4C-4E0E-BF7B-C846B8B19F72}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProjectInstaller</RootNamespace>
     <AssemblyName>ProjectInstaller</AssemblyName>
@@ -73,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="..\Access_Keys\osbprojectwizard">
+      <Link>Resources\Keys\osbprojectwizard</Link>
+    </None>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -87,29 +90,24 @@
     <EmbeddedResource Include="Resources\VS_Config\OSBWizard.vsz" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ProjectWizardBins\ProjectWizard.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\UpdateScript\ProjectWizardUpdater.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ProjectWizardBins\temp.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ProjectWizardBins\tempSubmodule.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\VS_Config\OSBWizard.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ProjectWizardUpdater\bin\Release\ProjectWizardUpdater.exe">
+      <Link>Resources\UpdateScript\ProjectWizardUpdater.exe</Link>
+    </Content>
+    <Content Include="..\ProjectWizard\bin\Release\ProjectWizard.dll">
+      <Link>Resources\ProjectWizardBins\ProjectWizard.dll</Link>
+    </Content>
+    <Content Include="..\ProjectWizard\bin\Release\temp.xml">
+      <Link>Resources\ProjectWizardBins\temp.xml</Link>
+    </Content>
+    <Content Include="..\ProjectWizard\bin\Release\tempSubmodule.xml">
+      <Link>Resources\ProjectWizardBins\tempSubmodule.xml</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>copy /Y "$(SolutionDir)ProjectWizard\bin\$(ConfigurationName)\ProjectWizard.dll" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.ico" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsdir" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\PutInVSFolder\OSBWizard.vsz" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\temp.xml" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizard\tempSubmodule.xml" "$(ProjectDir)Resources\"
-copy /Y "$(SolutionDir)ProjectWizardUpdater\bin\$(ConfigurationName)\ProjectWizardUpdater.exe" "$(ProjectDir)Resources\UpdateScript\"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
