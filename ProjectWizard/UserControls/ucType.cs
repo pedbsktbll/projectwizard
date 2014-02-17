@@ -90,7 +90,7 @@ namespace ProjectWizard
             }
             catch (SystemException e)
             {
-                MessageBox.Show("There was an error loading the custom templates.  The wizard will continue, but the templates will be unavailable.\r\n\r\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error loading the custom templates.  The wizard will continue, but the templates will be unavailable.\r\n\r\n" + e.Message, "Error Loading Custom Templates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 rbCUS.Enabled = false;
             }
         }
@@ -103,7 +103,7 @@ namespace ProjectWizard
             string e = Path.GetFileName(txtMain.Text);
             if (e != txtMain.Text)
             {
-                MessageBox.Show("Error Parsing Main Project File: Putting the main cpp file in a folder is not currently supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error Parsing Main Project File: Putting the main cpp file in a folder is not currently supported.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return false;
             }
 

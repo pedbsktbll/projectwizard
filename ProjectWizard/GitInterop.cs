@@ -242,11 +242,11 @@ namespace ProjectWizard
 // 			Proc.WaitForExit();
 // 			return true;
 
-			startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ) );
+			startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), true );
 
 			// On first failure, let's try plink...
 			if( !Directory.Exists( dirPath ) && plink != null )
-				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), false, true );
+				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), true, true );
 
 			// ... Try https?
 			if( !Directory.Exists( dirPath ) && ( repo.StartsWith( "git" ) || repo.StartsWith( "ssh" ) ) )
@@ -259,7 +259,7 @@ namespace ProjectWizard
 					url += ".git";
 
 				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url ) );
+				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url ), true );
 
 				if( !Directory.Exists( dirPath ) )
 				{
@@ -271,11 +271,12 @@ namespace ProjectWizard
 						url2 += ".git";
 
 					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-					startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url2 ) );
+					startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url2 ), true );
 				}
 			}
-
+			
 			// Still fails? IDK, try using different keys?
+			//Console.WriteLine("Alright well it looks like you fail at GIT and I can't find your ")
 			// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
 			// 			{
 			// 

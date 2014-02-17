@@ -79,12 +79,7 @@ namespace ProjectWizard
 
         private bool CheckExit()
         {
-            if( DialogResult.OK == MessageBox.Show("Wait!  Are you really sure you want to exit?  You won't have an awesome project to start with!", "Wait!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
-            {
-                return true;
-            }
-
-            return false;
+			return (MessageBox.Show("Wait!  Are you really sure you want to exit?  You won't have an awesome project to start with!", "Wait!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)  == DialogResult.OK ? true : false);
         }
               
         private void bNext_Click(object sender, EventArgs e)
@@ -103,7 +98,7 @@ namespace ProjectWizard
             }
             else
             {
-                MessageBox.Show("Something is wrong!", "Oh, Snap!");
+				MessageBox.Show( "Something is wrong!", "Oh, Snap!", MessageBoxButtons.OK, MessageBoxIcon.Stop );
             }
         }
 

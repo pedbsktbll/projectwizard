@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Drawing;
 
 namespace ProjectWizard
 {
@@ -17,35 +18,147 @@ namespace ProjectWizard
 
         public void PrintResults(WizardData wd)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Project Settings:\r\n");
-            sb.Append("Project Type - " + wd.Type.projectTemplateString + "\r\n");
-            sb.Append("Location of Main - " + wd.Type.MainLocation + "\r\n");
-            sb.Append("Location of Origin - " + wd.Type.OriginLocation + "\r\n");
+			Font titleFont = new Font( "Consolas", 15, FontStyle.Bold );
+			Font normalFont = new Font( "Consolas", 13, FontStyle.Regular );
+			Color titleColor = Color.FromArgb( 131, 208, 226 );  //Color.FromArgb( 53, 110, 137 );
+			Color normalColor = titleColor;//Color.Black;
 
-            sb.Append("\r\nDesired Submodules:\r\n");
-            bool bHasSubmodule = false;
-            foreach(WizData_Submodules i in wd.SubmodulesAr)
-            {
-                bHasSubmodule = true;
-                sb.Append("- " + i.Name + "\r\n");
-            }
+			txtConfirm.Clear();
+			lblConfirm.ForeColor = normalColor;
+			txtConfirm.BackColor = this.Parent.BackColor = Color.FromArgb( 28, 49, 66 );//Color.FromArgb( 48, 99, 130 );
+			this.BackColor = Color.Transparent;
 
-            if (!bHasSubmodule)
-                sb.Append("NONE\r\n");
+			txtConfirm.SelectionFont = titleFont;
+			txtConfirm.SelectionColor = titleColor;
+			txtConfirm.AppendText( "Project Settings:\r\n" );
 
-            sb.Append("\r\nAuthor Block:\r\n");
-            sb.Append("Project Name - " + wd.Author.ProjectName + "\r\n");
-            sb.Append("Requirement Number - " + wd.Author.RequirementNum + "\r\n");
-            sb.Append("Customer - " + wd.Author.Customer + "\r\n");
-            sb.Append("Office - " + wd.Author.Office + "\r\n");
-            sb.Append("Author - " + wd.Author.Author + "\r\n");
-            sb.Append("Version - " + wd.Author.Version + "\r\n");
-            sb.Append("Description - " + wd.Author.Description + "\r\n");
-            sb.Append("Status - " + wd.Author.Status + "\r\n");
-            sb.Append("Employee ID - " + wd.Author.EmpId);
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+ 			txtConfirm.AppendText( "Project Type - \t\t" );
 
-            this.txtConfirm.Text = sb.ToString();
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Type.projectTemplateString + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+ 			txtConfirm.AppendText( "Project Name - \t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Type.projectName + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Main cpp file - \t" );
+			
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Type.MainLocation + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Remote Repository - \t" );
+			
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Type.OriginLocation + "\r\n" );
+
+			txtConfirm.SelectionFont = titleFont;
+			txtConfirm.SelectionColor = titleColor;
+ 			txtConfirm.AppendText( "\r\nDesired Submodules: NOTE: MAY TAKE SEVERAL MINUTES TO CLONE\r\n" );
+
+			bool bHasSubmodule = false;
+			foreach( WizData_Submodules i in wd.SubmodulesAr )
+			{
+				bHasSubmodule = true;
+				txtConfirm.SelectionFont = normalFont;
+				txtConfirm.SelectionColor = Color.White;
+				txtConfirm.AppendText( "- " + i.Name + "\r\n" );
+			}
+
+			if( !bHasSubmodule )
+			{
+				txtConfirm.SelectionFont = normalFont;
+				txtConfirm.SelectionColor = Color.White;
+				txtConfirm.AppendText( "NONE\r\n" );
+			}
+
+			txtConfirm.SelectionFont = titleFont;
+			txtConfirm.SelectionColor = titleColor;
+			txtConfirm.AppendText( "\r\nAuthor Block:\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Project Name - \t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.ProjectName + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Version - \t\t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Version + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Author - \t\t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Author + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Requirement Number - \t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.RequirementNum + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Customer - \t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Customer + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Office - \t\t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Office + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Description - \r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Description + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Status - \t\t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.Status + "\r\n" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = normalColor;
+			txtConfirm.AppendText( "Employee ID - \t\t" );
+
+			txtConfirm.SelectionFont = normalFont;
+			txtConfirm.SelectionColor = Color.White;
+			txtConfirm.AppendText( wd.Author.EmpId );
         }
     }
 }

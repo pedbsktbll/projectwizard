@@ -104,7 +104,7 @@ namespace ProjectWizard
 			}
 			catch (System.Exception ex)
 			{
-				MessageBox.Show("Exception: " + ex.Message, "Error");
+				MessageBox.Show("Exception: " + ex.Message, "FATAL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				retval = wizardResult.wizardResultBackOut;
 			}
         }
@@ -205,8 +205,10 @@ namespace ProjectWizard
 				// Git exist?
 				if( !git.gitExists() )
 				{
-					MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error");
-					return false;
+					MessageBox.Show("Cannot find Git; No Git functions can be performed.", "Git Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					project.Save();
+					dte.Solution.SaveAs( this.dte.Solution.FullName );
+					return true;
 				}
 
 				// First let's see if git already exists in the solution, and initialize a repository if not
@@ -219,7 +221,7 @@ namespace ProjectWizard
 
 				// Save the solution and project and shit
 				project.Save();
-				dte.Solution.SaveAs(this.dte.Solution.FullName);    //this.solutionName );
+				dte.Solution.SaveAs(this.dte.Solution.FullName);
 //				FuckYouMicrosoftAndYourGodDamnFuckingPieceOfShitEnvDTECuntAssVSLibrary();
 
 				// Finally, commit and push to git:
@@ -239,7 +241,7 @@ namespace ProjectWizard
 			catch( System.Exception ex )
 			{
 				MessageBox.Show("Hmm.. Git probably fucked up somewhere.. Well, I guess it's not *critical* for project creation so let's proceed...." +
-					"\nERROR: " + ex.Message, "Git Error?");
+					"\nERROR: " + ex.Message, "Git Error?", MessageBoxButtons.OK, MessageBoxIcon.Warning );
 				project.Save();
 				this.dte.Solution.SaveAs(this.dte.Solution.FullName); 
 			}
@@ -359,29 +361,43 @@ namespace ProjectWizard
 					string path = @"./Submodules/" + item.Repo_Name;
 					if( !Directory.Exists( solutionPath + "\\Submodules\\" + item.Repo_Name ) )
 					{
-						// Clone submodule:
-						if( git.Submodule_Add( item.Location, path, solutionPath + "\\Submodules\\" + item.Repo_Name ) )
+						try
 						{
-							if( item.AddToSolution )
+							// Clone submodule:
+							if( git.Submodule_Add( item.Location, path, solutionPath + "\\Submodules\\" + item.Repo_Name ) )
 							{
-								// If submodulesDir doesn't exist, let's go ahead and create it
-								if( submodulesDir == null )
-									submodulesDir = sol2.AddSolutionFolder( "Submodules" ).Object;
+								if( item.AddToSolution )
+								{
+									// If submodulesDir doesn't exist, let's go ahead and create it
+									if( submodulesDir == null )
+										submodulesDir = sol2.AddSolutionFolder( "Submodules" ).Object;
 
-								// Add this specific submodule as a nested SolutionFolder and import all its projects:
-								string subDir = item.Repo_Name.Remove( item.Repo_Name.IndexOf( "_repo" ) );
-								SolutionFolder subProj = submodulesDir.AddSolutionFolder( item.Repo_Name ).Object;
-								subProj.AddFromFile( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + "\\" + subDir + ".sln" );
+									// Add this specific submodule as a nested SolutionFolder and import all its projects:
+									SolutionFolder subProj = submodulesDir.AddSolutionFolder( item.Repo_Name ).Object;
+
+									string subDir = item.Repo_Name.Remove( item.Repo_Name.IndexOf( "_repo" ) );
+									if( File.Exists( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + ".sln" ) )
+										subProj.AddFromFile( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + ".sln" );
+									else if( File.Exists( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + "\\" + subDir + ".sln" ) )
+										subProj.AddFromFile( solutionPath + "\\Submodules\\" + item.Repo_Name + "\\" + subDir + "\\" + subDir + ".sln" );
+									else
+										throw new Exception( "Error: Invalid Submodule" );
+								}
 							}
+							else
+								MessageBox.Show( "Submodule " + item.Name + " failed to clone", "Error Adding Submodule", MessageBoxButtons.OK, MessageBoxIcon.Warning );
 						}
-						else
-							MessageBox.Show( "Submodule " + item.Name + " failed to clone", "Error Adding Submodule" );
+						catch(System.Exception)
+						{
+							MessageBox.Show( "Error adding submodule: " + item.Repo_Name + "\nDoes it fail to meet the submodules specification?\nAttempting to recover...\n", "Error Adding Submodule", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+						}
+
 					}
 				}
 			}
 			catch( System.Exception ex )
 			{
-				MessageBox.Show("Error adding Git submodules: " + ex.Message, "Git Error");
+				MessageBox.Show("Error adding Git submodules: " + ex.Message, "Git Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			return true;
