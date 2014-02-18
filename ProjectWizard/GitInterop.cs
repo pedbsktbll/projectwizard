@@ -15,6 +15,7 @@ namespace ProjectWizard
         private StreamReader outputReader;
 		private string workingDirectory;
 		private string plink;
+		private string customHome;
 
         public GitInterop(string workingDirectory)
         {
@@ -36,6 +37,7 @@ namespace ProjectWizard
 			string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			if( Environment.GetEnvironmentVariable("HOME") == null )
 				Environment.SetEnvironmentVariable("HOME", userProfile);
+			customHome = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "\\OSBWizard";
 
 			// Should we also check if they're using Pageant and use those keys??
 			// ENV VAR: %GIT_SSH%
@@ -76,7 +78,9 @@ namespace ProjectWizard
 			return gitInstallPath;
 		}
 
-		private int startProc(string args, bool createWindow = false, bool usePlink = false)
+		// Unfortunately, this will ONLY work for projects which have the access keys added as it uses a custom
+		// .ssh directory for compatibility with supported submodules
+		private int startProc(string args, bool createWindow = false, bool useCustomHome = false, bool usePlink = false)
 		{
 			Process myProc = new Process();
 			ProcessStartInfo myProcInfo = new ProcessStartInfo();
@@ -91,10 +95,19 @@ namespace ProjectWizard
 			myProcInfo.WorkingDirectory = workingDirectory;
 			myProc.StartInfo = myProcInfo;
 
+			if( useCustomHome )
+				myProcInfo.EnvironmentVariables["HOME"] = customHome;
+
 			if( usePlink )
 				myProcInfo.EnvironmentVariables["GIT_SSH"] = plink;
 
 			myProc.Start();
+			if( !createWindow )
+			{
+				myProc.StandardInput.Close();
+				myProc.StandardOutput.Close();
+				myProc.StandardError.Close();
+			}
 			myProc.WaitForExit();
 			return myProc.ExitCode;
 		}
@@ -131,11 +144,16 @@ namespace ProjectWizard
 
         public bool Submodule_Add(string submoduleAddress, string submodulePath, string fullPath)
         {
-			startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", submoduleAddress, submodulePath), true);
+			// First let's try our custom home:
+			int retCode = startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", submoduleAddress, submodulePath), true, true);
 
-			// On first failure, let's try plink...
+			// Next, let's try it normally...
+			if( !Directory.Exists(fullPath) )
+				retCode = startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", submoduleAddress, submodulePath), true);
+
+			// Using plink?
 			if( !Directory.Exists(fullPath) && plink != null )
-				startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", submoduleAddress, submodulePath), true, true);
+				retCode = startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", submoduleAddress, submodulePath), true, false, true);
 
 			// ... Try https?
 			if( !Directory.Exists(fullPath) && (submoduleAddress.StartsWith("git") || submoduleAddress.StartsWith("ssh")) )
@@ -147,8 +165,7 @@ namespace ProjectWizard
 				if( !url.EndsWith( ".git" ) )
 					url += ".git";
 
-				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-				startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", url, submodulePath), true);
+				retCode = startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", url, submodulePath), true);
 
 				if( !Directory.Exists( fullPath ) )
 				{
@@ -159,17 +176,9 @@ namespace ProjectWizard
 					if( !url2.EndsWith( ".git" ) )
 						url2 += ".git";
 
-					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-					startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", url2, submodulePath), true);
+					retCode = startProc(String.Format("-c \"'{0}' submodule add {1} {2}\"", gitInstallPath + "bin\\git.exe", url2, submodulePath), true);
 				}
 			}
-
-			// Still fails? IDK, try using different keys?
-// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
-// 			{
-// 
-// 			}
-
 			return Directory.Exists( fullPath );
         }
 
@@ -231,22 +240,16 @@ namespace ProjectWizard
 
 		public bool Git_Clone(string repo, string dirPath)
 		{
-// 			Proc.Start();
-// 			inputWriter = Proc.StandardInput;
-// 			errorReader = Proc.StandardError;
-// 			outputReader = Proc.StandardOutput;
-// 			inputWriter.WriteLine( "git clone -q {0}", repo );
-// 			inputWriter.Flush();
-// 			inputWriter.WriteLine( "exit" );
-// 			inputWriter.Flush();
-// 			Proc.WaitForExit();
-// 			return true;
+			// First let's try our custom home:
+			int retCode = startProc( String.Format( "-c \"'{0}' clone {1} '{2}'\"", gitInstallPath + "bin\\git.exe", repo, dirPath ), true, true);
 
-			startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), true );
+			// Next, let's try it normally...
+			if( !Directory.Exists(dirPath) )
+				retCode = startProc(String.Format("-c \"'{0}' clone {1} '{2}'\"", gitInstallPath + "bin\\git.exe", repo, dirPath), true);
 
-			// On first failure, let's try plink...
+			// Using plink?
 			if( !Directory.Exists( dirPath ) && plink != null )
-				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", repo ), true, true );
+				retCode = startProc(String.Format("-c \"'{0}' clone {1} '{2}'\"", gitInstallPath + "bin\\git.exe", repo, dirPath), true, false, true);
 
 			// ... Try https?
 			if( !Directory.Exists( dirPath ) && ( repo.StartsWith( "git" ) || repo.StartsWith( "ssh" ) ) )
@@ -258,8 +261,7 @@ namespace ProjectWizard
 				if( !url.EndsWith( ".git" ) )
 					url += ".git";
 
-				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-				startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url ), true );
+				retCode = startProc(String.Format("-c \"'{0}' clone {1} '{2}'\"", gitInstallPath + "bin\\git.exe", url, dirPath), true);
 
 				if( !Directory.Exists( dirPath ) )
 				{
@@ -270,64 +272,25 @@ namespace ProjectWizard
 					if( !url2.EndsWith( ".git" ) )
 						url2 += ".git";
 
-					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-					startProc( String.Format( "-c \"'{0}' clone -q {1}\"", gitInstallPath + "bin\\git.exe", url2 ), true );
+					retCode = startProc(String.Format("-c \"'{0}' clone {1} '{2}'\"", gitInstallPath + "bin\\git.exe", url2, dirPath), true);
 				}
 			}
-			
-			// Still fails? IDK, try using different keys?
-			//Console.WriteLine("Alright well it looks like you fail at GIT and I can't find your ")
-			// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
-			// 			{
-			// 
-			// 			}
-
 			return Directory.Exists( dirPath );
 		}
 
 		public bool Git_Pull(bool quiet = true)
 		{
-			//int retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ) );
-			int retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ), !quiet );
+			// First let's try our custom home:
+			int retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ), !quiet, true );
 
-			// On first failure, let's try plink...
+			// Next, let's try it normally...
+			if( retCode != 0 )
+				retCode = startProc(String.Format("-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe"), !quiet);
+
+			// Using plink?
 			if( retCode != 0 && plink != null )
-				retCode = startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe" ), !quiet, true );
+				retCode = startProc(String.Format("-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe"), !quiet, false, true);
 
-			// ... Try https?
-// 			if( retCode != 0 && ( repo.StartsWith( "git" ) || repo.StartsWith( "ssh" ) ) )
-// 			{
-// 				// Attempt #1: This is the way stash handles it
-// 				string url = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
-// 					repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/scm" +
-// 					repo.Substring( repo.LastIndexOf( ":" ) + 5 );
-// 				if( !url.EndsWith( ".git" ) )
-// 					url += ".git";
-// 
-// 				//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-// 				startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe", url ) );
-// 
-// 				if( !Directory.Exists( dirPath ) )
-// 				{
-// 					// Attempt #2: This is the way bitbucket handles it
-// 					string url2 = "https://" + repo.Substring( repo.IndexOf( "@" ) + 1,
-// 						repo.LastIndexOf( ":" ) - repo.IndexOf( "@" ) - 1 ) + "/" +
-// 						repo.Substring( repo.LastIndexOf( ":" ) + 1 );
-// 					if( !url2.EndsWith( ".git" ) )
-// 						url2 += ".git";
-// 
-// 					//startProc( String.Format( "-c \"git submodule add {0} {1}\"", url, submodulePath ), true );
-// 					startProc( String.Format( "-c \"'{0}' pull\"", gitInstallPath + "bin\\git.exe", url2 ) );
-// 				}
-// 			}
-
-			// Still fails? IDK, try using different keys?
-			// 			if( !Directory.Exists(submodulePath) && Directory.Exists(Environment.SpecialFolder.Personal + ".ssh") )
-			// 			{
-			// 
-			// 			}
-
-//			return Directory.Exists( dirPath );
 			return retCode == 0 ? true : false;
 		}
     }

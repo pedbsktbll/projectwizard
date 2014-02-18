@@ -85,25 +85,27 @@
     </Compile>
     <EmbeddedResource Include="Resources\VS_Config\OSBWizard.vsdir" />
     <EmbeddedResource Include="Resources\VS_Config\OSBWizard.vsz" />
-    <EmbeddedResource Include="Resources\Access_Keys\osbprojectwizard" />
+    <EmbeddedResource Include="Resources\Access_Keys\id_rsa" />
+    <EmbeddedResource Include="Resources\Access_Keys\known_hosts" />
+    <None Include="Resources\Access_Keys\osbprojectwizard" />
     <None Include="Resources\Access_Keys\osbprojectwizard.pub" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\VS_Config\OSBWizard.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\ProjectWizardUpdater\bin\Release\ProjectWizardUpdater.exe">
+    <EmbeddedResource Include="..\ProjectWizardUpdater\bin\Release\ProjectWizardUpdater.exe">
       <Link>Resources\UpdateScript\ProjectWizardUpdater.exe</Link>
-    </Content>
-    <Content Include="..\ProjectWizard\bin\Release\ProjectWizard.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\ProjectWizard\bin\Release\ProjectWizard.dll">
       <Link>Resources\ProjectWizardBins\ProjectWizard.dll</Link>
-    </Content>
-    <Content Include="..\ProjectWizard\bin\Release\temp.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\ProjectWizard\bin\Release\temp.xml">
       <Link>Resources\ProjectWizardBins\temp.xml</Link>
-    </Content>
-    <Content Include="..\ProjectWizard\bin\Release\tempSubmodule.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\ProjectWizard\bin\Release\tempSubmodule.xml">
       <Link>Resources\ProjectWizardBins\tempSubmodule.xml</Link>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,9 +19,12 @@ namespace ProjectInstaller
 
 		public ProjInstaller()
 		{
+		}
+
+		public void InstallProjectWizard()
+		{
 			string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 			string projDir = "\\VC\\vcprojects\\";
-//			string wizDir = projDir + "OSBWizard\\";
 
 			string baseDir = /*Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 3)*/progFiles + "\\OSBWizard\\";
 
@@ -29,54 +32,57 @@ namespace ProjectInstaller
 			Console.WriteLine( "Creating OSBWizard directory in " + progFiles + "...");
 			try
 			{
-//				Directory.Delete( baseDir + "ProjectWizardBins", true );
-				DeleteDirectoryBecauseCSharpIsFuckingRetardedAndSucksAss( baseDir + "ProjectWizardBins", true );
+				if( Directory.Exists(baseDir + ".ssh") )
+					Directory.Delete(baseDir + ".ssh", true);
+				if( Directory.Exists(baseDir + "ProjectWizardBins") )
+				{
+					DeleteDirectoryBecauseCSharpIsFuckingRetardedAndSucksAss(baseDir + "ProjectWizardBins", true);
+					if( Directory.Exists(baseDir + "ProjectWizardBins") )
+						Directory.Delete(baseDir + "ProjectWizardBins", true);
+				}
 			}
-			catch( System.Exception /*e*/ ) { /*MessageBox.Show( e.Message );*/ }
+			catch( System.Exception ex )
+			{
+				Console.WriteLine("Exception Thrown deleting directory: \n\t" + ex.Message +
+					"\n\tThis is likely the result of TortoiseGIT or other process locking it." +
+					"\n\tPLEASE MANUALLY REMOVE IT, THEN HIT ENTER TO CONTINUE.");
+				Console.ReadLine();
+				Console.WriteLine("Continuing...\n");
+			}
 			Directory.CreateDirectory( baseDir );
+			Directory.CreateDirectory(baseDir + ".ssh");
 
 			// Dump Updater program:
 			Console.WriteLine( "Dumping OSBWizardUpdater..." );
-			Stream updaterProgStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ProjectInstaller.Resources.UpdateScript.ProjectWizardUpdater.exe");
-			if( updaterProgStream != null )
-			{
-				Stream output = File.OpenWrite( baseDir + "ProjectWizardUpdater.exe" );
-				if( output != null )
-				{
-					updaterProgStream.CopyTo( output );
-					output.Close();
-				}
-				updaterProgStream.Close();
-			}
+			DumpResources("ProjectInstaller.Resources.UpdateScript", baseDir);
+
+			// Dump submodules private access key:
+			Console.WriteLine("Dumping submodules private access key...");
+			DumpResources("ProjectInstaller.Resources.Access_Keys"/*.osbprojectwizard*/, baseDir + ".ssh\\");
+
+			// Add submodules private access key to GIT using ssh-add.exe
+			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop(baseDir);
+//			git.addKey(baseDir + "osbprojectwizard");
 
 			// Clone ProjectWizardBins into C:\\OSBWizard\\ProjectWizardBins\\
-			Console.WriteLine( "Attempting to clone ProjectWizardBins..." );
-			ProjectWizard.GitInterop git = new ProjectWizard.GitInterop(baseDir);
+			Console.WriteLine( "Attempting to clone ProjectWizardBins...\n" );
 			git.Git_Clone(binsURL, baseDir + "ProjectWizardBins");
+			Console.WriteLine();
 			bool installLocal = !Directory.Exists(baseDir + "ProjectWizardBins");
 
 			// If  the clone failed....
 			if( installLocal )
 			{
+				// Dump local copies of the bins to disk.
 				Console.WriteLine( "GIT has FAILED... resorting to internal backup copies..." );
-				Directory.CreateDirectory(baseDir + "ProjectWizardBins");
-				SortedDictionary<string, Stream> wizFiles = GetResources( "ProjectInstaller.Resources.ProjectWizardBins" );
-				foreach( var kvp in wizFiles )
-				{
-					Stream output = File.OpenWrite(baseDir + "ProjectWizardBins\\" + kvp.Key);
-					if( output != null )
-					{
-						kvp.Value.CopyTo(output);
-						output.Close();
-					}
-					kvp.Value.Close();
-				}
+				string localsBinDir = baseDir + "ProjectWizardBins\\";
+				Directory.CreateDirectory(localsBinDir);
+				DumpResources("ProjectInstaller.Resources.ProjectWizardBins", localsBinDir);
 			}
 
 			// FIGURED IT OUTTTTTTTT!!!!!!!!!!!!!!!!!!! From Visual Studio Command Prompt, run regasm ProjectWizard.dll / codebase C:\OSBWizard\ProjectWizard.dll
 			// Additional we COULD OPTIONALLY add to GAC.. but I dont think this is necessary... I was playing around with: gacutil -i ProjectWizard.dll
 			// gacutil -u ProjectWizard..... regasm ProjectWizard.dll /unregister
-
 			Console.WriteLine( "Registering Assembly for access from Visual Studio..." );
 			Assembly asm = Assembly.LoadFrom(baseDir + "ProjectWizardBins\\ProjectWizard.dll");
 			RegistrationServices regAsm = new RegistrationServices();
@@ -90,24 +96,8 @@ namespace ProjectInstaller
 				vs[vs.Length - 3] = i;
 				if( !Directory.Exists(vs.ToString()) )
 					continue;
-//				Directory.CreateDirectory(vs.ToString() + wizDir);
-
-				SortedDictionary<string, Stream> vsConfigFiles = GetResources( "ProjectInstaller.Resources.VS_Config" );
-				foreach( var kvp in vsConfigFiles )
-				{
-					Stream output = File.OpenWrite( /*kvp.Key.StartsWith("OSBWizard") ? */vs.ToString() + projDir + kvp.Key /*: vs.ToString() + wizDir + kvp.Key*/  );
-					if( output != null )
-					{
-						kvp.Value.CopyTo(output);
-						kvp.Value.Seek(0, SeekOrigin.Begin);
-						output.Close();
-					}
-					kvp.Value.Close();
-				}
+				DumpResources("ProjectInstaller.Resources.VS_Config", vs.ToString() + projDir);
 			}
-
-//			foreach( var kvp in wizFiles )
-//				kvp.Value.Close();
 
 			if( !installLocal )
 			{
@@ -119,6 +109,21 @@ namespace ProjectInstaller
 			}
 
 			MessageBox.Show("Successfully loaded Wizard\n", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void DumpResources(string filter, string destination)
+		{
+			SortedDictionary<string, Stream> files = GetResources(filter);
+			foreach( var kvp in files )
+			{
+				Stream output = File.OpenWrite(destination + kvp.Key);
+				if( output != null )
+				{
+					kvp.Value.CopyTo(output);
+					output.Close();
+				}
+				kvp.Value.Close();
+			}
 		}
 
 		// This function will return a filtered list of embedded resources to do work on.
@@ -201,7 +206,7 @@ namespace ProjectInstaller
 					File.SetAttributes( f, attr ^ FileAttributes.ReadOnly );
 				File.Delete( f );
 			}
-			Directory.Delete( path );
+			Directory.Delete( path, true );
 		}
 	}
 }
