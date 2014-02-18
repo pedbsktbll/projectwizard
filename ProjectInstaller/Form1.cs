@@ -94,7 +94,7 @@ namespace ProjectInstaller
 			for( char i = '0'; i <= '9'; i++ )
 			{
 				vs[vs.Length - 3] = i;
-				if( !Directory.Exists(vs.ToString()) )
+				if( !Directory.Exists(vs.ToString() + projDir) )
 					continue;
 				DumpResources("ProjectInstaller.Resources.VS_Config", vs.ToString() + projDir);
 			}

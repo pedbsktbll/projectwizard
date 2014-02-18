@@ -67,7 +67,7 @@ namespace ProjectWizard
 				string test = Assembly.GetExecutingAssembly().Location;
                 XmlSerializer serializer = new XmlSerializer(typeof(ProjectType_Data[]));
 
-				StreamReader reader = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\temp.xml");
+				StreamReader reader = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\PWTemplates.xml");
                 ProjectType_Data[] temp = (ProjectType_Data[])serializer.Deserialize(reader);
                 reader.Close();
                 foreach (ProjectType_Data d in temp)

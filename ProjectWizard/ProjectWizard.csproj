@@ -235,10 +235,10 @@
     <EmbeddedResource Include="Resources\base\WINApp\_____SRCFILE_____.cpp" />
     <EmbeddedResource Include="Resources\base\WINApp\_____SRCFILE_____.h" />
     <EmbeddedResource Include="Resources\base\WTLApp\_____SRCFILE_____.cpp" />
-    <Content Include="temp.xml">
+    <Content Include="PWTemplates.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="tempSubmodule.xml">
+    <Content Include="PWSubmodules.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>

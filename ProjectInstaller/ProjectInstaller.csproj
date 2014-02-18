@@ -100,11 +100,11 @@
     <EmbeddedResource Include="..\ProjectWizard\bin\Release\ProjectWizard.dll">
       <Link>Resources\ProjectWizardBins\ProjectWizard.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\ProjectWizard\bin\Release\temp.xml">
-      <Link>Resources\ProjectWizardBins\temp.xml</Link>
+    <EmbeddedResource Include="..\ProjectWizard\bin\Release\PWTemplates.xml">
+      <Link>Resources\ProjectWizardBins\PWTemplates</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\ProjectWizard\bin\Release\tempSubmodule.xml">
-      <Link>Resources\ProjectWizardBins\tempSubmodule.xml</Link>
+    <EmbeddedResource Include="..\ProjectWizard\bin\Release\PWSubmodules.xml">
+      <Link>Resources\ProjectWizardBins\PWSubmodules.xml</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

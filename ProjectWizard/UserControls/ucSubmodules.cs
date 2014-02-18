@@ -21,7 +21,7 @@ namespace ProjectWizard
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Submodules_Data[]));
 
-				StreamReader reader = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\tempSubmodule.xml");
+				StreamReader reader = new StreamReader(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\PWSubmodules.xml");
                 Submodules_Data[] temp = (Submodules_Data[])serializer.Deserialize(reader);
                 reader.Close();
                 foreach (Submodules_Data d in temp)
